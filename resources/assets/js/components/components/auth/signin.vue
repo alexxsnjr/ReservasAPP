@@ -40,7 +40,11 @@
         }
         console.log(formData)
         this.$store.dispatch('login', {email: formData.email, password: formData.password})
-      }
+        console.log(this.$store.getters.isAuthenticated);
+
+
+      },
+
     },
 
   }

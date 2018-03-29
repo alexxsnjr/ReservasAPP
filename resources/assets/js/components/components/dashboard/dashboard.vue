@@ -19,8 +19,10 @@
 <script>
     import Question from './formulario/Question.vue';
     import Answer from './formulario/Answer.vue';
+    import router from '../../router'
 
-  export default {
+
+    export default {
       data() {
           return {
               mode: 'app-question'
@@ -40,13 +42,14 @@
           appQuestion: Question,
           appAnswer: Answer
       },
-      /*beforeCreate() {
+      beforeCreate() {
 
         if(!this.$store.getters.isAuthenticated){
+            router.replace('/')
 
         }
 
-      },*/
+      },
 
   }
 </script>

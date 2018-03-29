@@ -14,6 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/signin', function () {
+    return view('welcome');
+});
+Route::get('/dashboard', function () {
+    return view('welcome');
+});
 
 // Admin rutas
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -24,5 +30,3 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/admin', 'HomeController@index')->name('admin');
 
 
-//Aulas
-Route::get('/cargar-xml','');

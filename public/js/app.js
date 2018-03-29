@@ -12429,41 +12429,17 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
           token: res.data.idToken
 
         });
+        localStorage.setItem('token', res.data.idToken);
+
         __WEBPACK_IMPORTED_MODULE_4__router__["a" /* default */].replace('/dashboard');
-      }).catch(function (error) {
-        return console.log(error);
       });
     },
     logout: function logout(_ref2) {
       var commit = _ref2.commit;
 
-      commit('clearAuthData');
 
       localStorage.removeItem('token');
-
       __WEBPACK_IMPORTED_MODULE_4__router__["a" /* default */].replace('/signin');
-    },
-    fetchUser: function fetchUser(_ref3) {
-      var commit = _ref3.commit,
-          state = _ref3.state;
-
-      if (!state.idToken) {
-        return;
-      }
-      __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/users.json' + '?auth=' + state.idToken).then(function (res) {
-        console.log(res);
-        var data = res.data;
-        var users = [];
-        for (var key in data) {
-          var user = data[key];
-          user.id = key;
-          users.push(user);
-        }
-        console.log(users);
-        commit('storeUser', users[0]);
-      }).catch(function (error) {
-        return console.log(error);
-      });
     }
   },
   getters: {
@@ -30373,6 +30349,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__formulario_Question_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__formulario_Question_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formulario_Answer_vue__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formulario_Answer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__formulario_Answer_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__(14);
 //
 //
 //
@@ -30391,6 +30368,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -30415,12 +30393,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         appQuestion: __WEBPACK_IMPORTED_MODULE_0__formulario_Question_vue___default.a,
         appAnswer: __WEBPACK_IMPORTED_MODULE_1__formulario_Answer_vue___default.a
-    }
-    /*beforeCreate() {
-       if(!this.$store.getters.isAuthenticated){
-       }
-     },*/
+    },
+    beforeCreate: function beforeCreate() {
 
+        if (!this.$store.getters.isAuthenticated) {
+            __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */].replace('/');
+        }
+    }
 });
 
 /***/ }),
@@ -30564,6 +30543,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
       console.log(formData);
       this.$store.dispatch('login', { email: formData.email, password: formData.password });
+      console.log(this.$store.getters.isAuthenticated);
     }
   }
 
