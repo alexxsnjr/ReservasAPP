@@ -25,4 +25,6 @@ Route::get('/admin', 'HomeController@index')->name('admin');
 
 
 //Aulas
-Route::get('/cargar-xml','');
+Route::get('/aulas/importar-xml','XMLController@index')->name('importarXML');
+Route::post('/aulas/importar-xml','XMLController@importar')->name('importar');
+Route::post('/aulas/subir-xml','XMLController@subir')->name('subirXML');
