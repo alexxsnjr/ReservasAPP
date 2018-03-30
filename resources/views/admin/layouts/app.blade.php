@@ -33,7 +33,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <link rel="stylesheet" href="/open-iconic-master/font/css/open-iconic-bootstrap.css">
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -144,13 +143,12 @@ desired effect
             @yield('header')
         </section>
         <!-- Main content -->
-        <section class="content container-fluid">
 
+        <div class="container">
             @include('admin.partials.mensajes')
 
             @yield('content')
-
-        </section>
+        </div>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->

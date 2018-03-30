@@ -32,7 +32,6 @@ const app = new Vue({
 
 
 axios.defaults.baseURL = 'http://aulas.app'
-// axios.defaults.headers.common['Authorization'] = 'fasfdsa'
 axios.defaults.headers.get['Accepts'] = 'application/json'
 
 

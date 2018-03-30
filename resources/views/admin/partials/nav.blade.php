@@ -13,8 +13,8 @@
               </span>
         </a>
         <ul class="treeview-menu">
-            <li {{ request()->is('aulas/cargar-xml') ? 'class=active' : '' }}>
-                <a href="#">
+            <li {{ request()->is('aulas/importar-xml') ? 'class=active' : '' }}>
+                <a href="{{ route('importarXML') }}">
                     <i class="fa fa-folder-open"></i>
                     Cargar XML
                 </a>
