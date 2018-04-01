@@ -9,17 +9,17 @@ class Aula extends Model
 
     protected $fillable = ['nombre','edificio_id','planta_id','nombre','tipo','aforo'];
 
-    public function edificios()
+    public function edificio()
     {
         return $this->belongsTo(Edificio::class);
     }
 
-    public function plantas()
+    public function planta()
     {
         return $this->belongsTo(Planta::class);
     }
 
-    public function reservas()
+    public function reserva()
     {
         return $this->hasMany(Reserva::class);
     }

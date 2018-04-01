@@ -14,14 +14,19 @@ use Illuminate\Support\Facades\Storage;
 class XMLController extends Controller
 {
 
-    public function index()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function aulas()
     {
 
-        return view('admin/xml');
+        return view('admin/aulas/xml');
 
     }
 
-    public function subir(Request $request)
+    public function subirAulas(Request $request)
     {
 
         $this->validate(request(), [
@@ -44,14 +49,14 @@ class XMLController extends Controller
 
     }
 
-    public function importar()
+    public function importarAulas()
     {
 
         $xmlPath = str_replace('storage', 'public', auth()->user()->xml);
         //Lectura fichero XML del servidor
         $contents = File::get(public_path().'/../storage/app'.$xmlPath);
         //Conversion a array
-        $xml=simplexml_load_string($contents);
+        $xml = simplexml_load_string($contents);
         //Algoritmo de almacenamiento en BD
         foreach ($xml->edificio as $edificioXML) {
 

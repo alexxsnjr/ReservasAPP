@@ -2,7 +2,7 @@
 
 @section('content')
         <div class="row">
-            <form action="{{ route('importar') }}" method="POST">
+            <form action="{{ route('aulas.importar') }}" method="POST">
                 {{ csrf_field() }}
                 <div class="col-md-12">
                     <div class="box box-primary">
@@ -33,7 +33,7 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            dictDefaultMessage: 'Arrastra aquí tu documento XML para importar'
+            dictDefaultMessage: 'Arrastra aquí tu documento XML para importar las aulas'
         });
         Dropzone.autoDiscover = false;
     </script>
