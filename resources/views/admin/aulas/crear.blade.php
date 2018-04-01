@@ -14,60 +14,74 @@
                         <div class="box-body">
 
                             <div class="form-group">
-                            <label class="col-sm-2 control-label">Edificio</label>
+                                <label class="col-sm-2 control-label">Edificio</label>
 
-                            <div class="col-sm-10">
-                                <select name="edificio[]"
-                                        class="form-control"
-                                        id="edificio"
-                                        style="width: 100%;">
-                                    <option value="">Selecciona un edificio</option>
-                                    @foreach($edificios as $edificio)
-                                        <option {{ collect(old('edificio'))->contains($edificio->id) ? 'selected' : '' }}
-                                                value="{{ $edificio->id }}"
-                                                {{ old('edificio') == $edificio->id ? 'selected' : '' }}
-                                        >{{ $edificio->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="col-sm-10">
+                                    <select name="edificio[]"
+                                            class="form-control"
+                                            id="edificio"
+                                            style="width: 100%;">
+                                        <option>Selecciona un edificio</option>
+                                        @foreach($edificios as $edificio)
+                                            <option {{ collect(old('edificio'))->contains($edificio->id) ? 'selected' : '' }}
+                                                    value="{{ $edificio->id }}"
+                                                    {{ old('edificio') == $edificio->id ? 'selected' : '' }}
+                                            >{{ $edificio->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Planta</label>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Planta</label>
 
-                            <div class="col-sm-10">
-                                <select name="planta[]"
-                                        class="form-control"
-                                        style="width: 100%;">
-                                    <option value="">Selecciona una planta</option>
-                                    @foreach($edificios as $edificio)
-                                        <option {{ collect(old('edificio'))->contains($edificio->id) ? 'selected' : '' }}
-                                                value="{{ $edificio->id }}"
-                                                {{ old('edificio') == $edificio->id ? 'selected' : '' }}
-                                        >{{ $edificio->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="col-sm-10">
+                                    <select name="planta[]"
+                                            id="planta"
+                                            class="form-control"
+                                            style="width: 100%;">
+                                        <option value="">Selecciona un edificio</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Nombre del aula</label>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Nombre del aula</label>
 
-                            <div class="col-sm-10">
-                                <input type="text" name="nombre" class="form-control"
-                                       value="{{ old('nombre') }}"
-                                       placeholder="Escribe el nombre del aula">
+                                <div class="col-sm-10">
+                                    <input type="text" name="nombre" class="form-control"
+                                           value="{{ old('nombre') }}"
+                                           placeholder="Escribe el nombre del aula">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Aforo del aula</label>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Tipo de aula</label>
 
-                            <div class="col-sm-10">
-                                <input type="number" name="aforo" class="form-control"
-                                       value="{{ old('aforo') }}">
+                                <div class="col-sm-10">
+                                    <select name="tipo[]"
+                                            class="form-control"
+                                            id="tipo"
+                                            style="width: 100%;">
+                                        <option selected value="">Selecciona un tipo</option>
+                                        @foreach($tipos as $tipo)
+                                            <option {{ collect(old('tipo'))->contains($tipo->tipo) ? 'selected' : '' }}
+                                                    value="{{ $tipo->tipo }}"
+                                                    {{ old('tipo') == $tipo->id ? 'selected' : '' }}
+                                            >{{ $tipo->tipo }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Aforo del aula</label>
+
+                                <div class="col-sm-10">
+                                    <input type="number" name="aforo" class="form-control"
+                                           value="{{ old('aforo') }}">
+                                </div>
+                            </div>
 
                         </div>
                         <div class="box-footer">
@@ -88,18 +102,34 @@
         $('#edificio').change(function() {
 
             var edificio_seleccionado = $('#edificio').val();
-            console.log(edificio_seleccionado);
+            //console.log(edificio_seleccionado);
 
             $.ajax({
-            //URL para la petición
-            url : '/aulas/sacarPisos',
+                //URL para la petición
+                url : '/sacarPisos',
 
-            data : { edificio_id : edificio_seleccionado },
-                
-            type : 'POST',
+                data : { edificio_id : edificio_seleccionado },
 
-            // el tipo de información que se espera de respuesta
-            dataType : 'json',
+                type : 'POST',
+
+                // el tipo de información que se espera de respuesta
+                dataType : 'json',
+
+                beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
+
+                success : function(json) {
+
+                    $('#planta').html('');
+                    $('#planta').append('<option value="">Selecciona una planta</option>');
+
+                    for (var i = 0; i < json.length; i++) {
+
+                        console.log(json[i].piso);
+                        $('#planta').append('<option value="'+json[i].id+'">'+json[i].piso+'</option>');
+
+                    }
+                },
+
             });
 
         });

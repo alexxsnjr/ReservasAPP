@@ -39,7 +39,7 @@ Route::post('/aulas/store','AulasController@store')->name('aulas.store');
 Route::get('/aulas/{id}/editar','AulasController@editar')->name('aulas.editar');
 Route::put('/aulas/{id}', 'AulasController@update')->name('aulas.update');
 Route::delete('/aulas/{id}/borrar','AulasController@borrar')->name('aulas.borrar');
-Route::get('/aulas/sacarPisos/{edificio_id}','AulasController@sacarPisos')->name('aulas.sacarPisos');
+Route::post('/sacarPisos','AulasController@sacarPisos')->name('aulas.sacarPisos');
 
 
 //XML AULAS

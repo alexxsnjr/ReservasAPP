@@ -27,44 +27,40 @@ class AulasController extends Controller
     {
 
         $edificios = Edificio::all();
+        $tipos = Aula::select('tipo')->distinct()->get();
 
-        return view('admin.aulas.crear')->with('edificios', $edificios);
+        return view('admin.aulas.crear')->with('edificios', $edificios)->with('tipos', $tipos);
 
     }
 
-    public function sacarPisos($edidicio_id)
+    public function sacarPisos(Request $request)
     {
 
-        $plantas = Planta::where('edificio_id',$edidicio_id);
+        $plantas = Planta::where('edificio_id','=',$request->edificio_id)->get();
 
-        dd($plantas);
+        return response()->json($plantas);
 
     }
 
     public function store(Request $request)
     {
 
-            $this->validate($request, [
-                'titulo' => 'required|string|min: 3',
-                'extracto' => 'required|min: 5|max: 120',
-                'contenido' => 'required|min: 10|max: 1000',
-            ]);
+        $this->validate($request, [
+            'edificio' => 'required',
+            'planta' => 'required',
+            'nombre' => 'required|string|max: 20',
+            'aforo' => 'required|integer',
+        ]);
 
-            $posts = new Post;
-            $posts->titulo = $request->titulo;
-            $posts->slug = str_slug($request->titulo);
-            $posts->extracto = $request->extracto;
-            $posts->contenido = $request->contenido;
-            $posts->user_id = auth()->user()->id;
-            $posts->save();
+        $aula = new Aula;
+        $aula->edificio_id = $request->edificio[0];
+        $aula->planta_id = $request->planta[0];
+        $aula->nombre = $request->nombre;
+        $aula->tipo = $request->tipo[0];
+        $aula->aforo = $request->aforo;
+        $aula->save();
 
-            $categorias = collect($request->categoria)->map(function ($categoria){
-                return Categoria::find($categoria) ? $categoria : Categoria::create(['name' => $categoria])->id;
-            });
-
-            $posts->categoria()->sync($categorias);
-
-            return redirect('/post/listar')->with('success', 'Post creado con exito!');
+        return redirect('/aulas/listar')->with('success', 'Aula creada con exito!');
 
     }
 

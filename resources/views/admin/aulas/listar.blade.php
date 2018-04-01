@@ -28,7 +28,7 @@
                                     <td>{{ $aula->edificio->nombre }}</td>
                                     <td>{{ $aula->planta->piso }}</td>
                                     <td>{{ $aula->nombre }}</td>
-                                    <td>{!! $aula->tipo !!}</td>
+                                    <td>{{ $aula->tipo }}</td>
                                     <td>{{ $aula->aforo }}</td>
                                     <td>
 
