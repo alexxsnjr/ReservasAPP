@@ -1,8 +1,8 @@
 <template>
     <div class="alert alert-success text-center">
-        <h1>That's Correct!</h1>
+        <h1>Disponible o no disponible !!</h1>
         <hr>
-        <button class="btn btn-primary" @click="onNextQuestion">Next Question</button>
+        <button class="btn btn-primary"> Reservar </button>
     </div>
 </template>
 <style>
@@ -12,9 +12,12 @@
 
     export default{
         methods: {
-            onNextQuestion() {
-                this.$emit('confirmed');
-            }
+            answered(param) {
+
+                    console.log(param)
+
+                }
+
         }
     }
 </script>

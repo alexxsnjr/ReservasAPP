@@ -2,14 +2,16 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-        <h1 class="text-center">The Super Quiz</h1>
+        <h1 class="text-center">Reserva de Aula</h1>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <transition name="flip" mode="out-in">
-          <component :is="mode" @answered="answered($event)" @confirmed="mode = 'app-question'"></component>
+          <keep-alive>
+            <component :is="mode" @answered="answered($event)" @confirmed="mode = 'app-question'"></component>
+          </keep-alive>
         </transition>
       </div>
     </div>
@@ -19,6 +21,7 @@
 <script>
     import Question from './formulario/Question.vue';
     import Answer from './formulario/Answer.vue';
+    import Transit from './formulario/Transit.vue';
     import router from '../../router'
 
 
@@ -31,16 +34,17 @@
       methods: {
           answered(isCorrect) {
               if (isCorrect) {
-                  this.mode = 'app-answer';
+                  this.mode = 'app-transit';
               } else {
-                  this.mode = 'app-question';
-                  alert('Wrong, try again!');
+                  this.mode = 'app-answer';
+
               }
           }
       },
       components: {
           appQuestion: Question,
-          appAnswer: Answer
+          appAnswer: Answer,
+          appTransit: Transit,
       },
       beforeCreate() {
 
@@ -60,7 +64,7 @@
   }
 
   .flip-enter-active {
-    animation: flip-in  0.5s ease-out forwards;
+    animation: flip-in  0.7s ease-out forwards;
   }
 
   .flip-leave {
@@ -68,7 +72,7 @@
   }
 
   .flip-leave-active {
-    animation: flip-out 0.5s ease-out forwards;
+    animation: flip-out 0s ease-out forwards;
   }
 
   @keyframes flip-out {

@@ -17,6 +17,10 @@ export default new Vuex.Store({
       state.idToken = userData.token
 
     },
+    clearAuthData (state) {
+      state.idToken = null
+
+    }
 
   },
   actions: {
@@ -40,7 +44,7 @@ export default new Vuex.Store({
 
     },
       logout ({commit}) {
-
+          commit('clearAuthData')
           localStorage.removeItem('token')
           router.replace('/signin')
       },
