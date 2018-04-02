@@ -23,7 +23,9 @@ Route::group([
     ],
     function () {
 
-
+        Route::get('tipos' , 'GetInfoController@getTipo');
     });
 
 Route::post('login' , 'Api\AuthenticateController@authenticate')->name('login');
+Route::post('user' , 'Api\AuthenticateController@getUser')->name('user');
+

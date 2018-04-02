@@ -58,7 +58,7 @@
                     {
                         pregunta: 'Seleccione el tipo de aula requerida',
                         respondida : false,
-                        respuesta: ['taller' , 'informatica' , 'otros'],
+                        respuesta: this.$store.getters.getTiposAula,
                     },
                     {
                         pregunta: 'Seleccione otros requerimientos' ,
@@ -85,7 +85,7 @@
 
             }
         },
-
+        
         activated(){
 
             this.question[this.countQuestion].respondida = true;

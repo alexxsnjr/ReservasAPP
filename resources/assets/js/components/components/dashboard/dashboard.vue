@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-        <h1 class="text-center">Reserva de Aula</h1>
+        <h1 class="text-center">Bienvenido {{this.$store.getters.getUserName}}</h1>
       </div>
     </div>
     <hr>
@@ -28,7 +28,8 @@
     export default {
       data() {
           return {
-              mode: 'app-question'
+              mode: 'app-question',
+
           }
       },
       methods: {
@@ -52,7 +53,6 @@
             router.replace('/')
 
         }
-
       },
 
   }
