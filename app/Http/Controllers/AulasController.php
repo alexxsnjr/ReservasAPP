@@ -67,11 +67,11 @@ class AulasController extends Controller
     public function editar($id)
     {
 
-            $post = Post::where('slug', $slug)->firstOrFail();
+        $aula = Aula::find($id);
+        $edificios = Edificio::all();
+        $tipos = Aula::select('tipo')->distinct()->get();
 
-            $categorias = Categoria::all();
-
-            return view('admin.post.edit')->with('post', $post)->with('categorias', $categorias);
+        return view('admin.aulas.editar')->with('edificios', $edificios)->with('aula', $aula)->with('tipos', $tipos);
 
     }
 

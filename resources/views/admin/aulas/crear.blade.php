@@ -86,7 +86,7 @@
                         </div>
                         <div class="box-footer">
 
-                            <button type="submit" class="btn btn-danger">Volver</button>
+                            <a href="{{ route('aulas.listar') }}" class="btn btn-danger">Volver</a>
                             <button type="submit" class="btn btn-info pull-right">Guardar aula</button>
 
                         </div>
