@@ -24,4 +24,9 @@ class Aula extends Model
         return $this->hasMany(Reserva::class);
     }
 
+    public function equipamiento()
+    {
+        return $this->hasMany(Equipamiento::class);
+    }
+
 }
