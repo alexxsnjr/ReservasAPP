@@ -52,6 +52,9 @@
         if(!this.$store.getters.isAuthenticated){
             router.replace('/')
 
+        }else {
+            this.$store.dispatch('fetchTipos');
+            this.$store.dispatch('fetchEquipamiento');
         }
       },
 

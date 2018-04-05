@@ -12402,110 +12402,143 @@ module.exports = Cancel;
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
-  state: {
-    idToken: null,
-    userId: null,
-    userName: null,
-    tipos: [],
-    requerimientos: null
-  },
-  mutations: {
-    tokenUser: function tokenUser(state, userData) {
-      state.idToken = userData.token;
+    state: {
+        idToken: null,
+        userId: null,
+        userName: null,
+        tipos: [],
+        equipamientos: []
     },
-    authUser: function authUser(state, userData) {
-      state.userId = userData.userID, state.userName = userData.userName;
-    },
-    tipos: function tipos(state, _tipos) {
-      state.tipos = _tipos;
-    },
-    clearAuthData: function clearAuthData(state) {
-      state.idToken = null;
-    }
-  },
-  actions: {
-    login: function login(_ref, authData) {
-      var commit = _ref.commit,
-          dispatch = _ref.dispatch;
-
-      __WEBPACK_IMPORTED_MODULE_2__axios_auth__["a" /* default */].post('/login', {
-        email: authData.email,
-        password: authData.password
-
-      }).then(function (res) {
-
-        commit('tokenUser', {
-          token: res.data.token
-
-        });
-
-        dispatch('fetchUser');
-        dispatch('fetchInfo');
-      });
-    },
-    logout: function logout(_ref2) {
-      var commit = _ref2.commit;
-
-      commit('clearAuthData');
-      localStorage.removeItem('token');
-      __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].replace('/signin');
-    },
-    fetchUser: function fetchUser(_ref3) {
-      var commit = _ref3.commit,
-          state = _ref3.state;
-
-
-      if (!state.idToken) {
-
-        return;
-      }
-      __WEBPACK_IMPORTED_MODULE_2__axios_auth__["a" /* default */].post('/user', {
-        token: state.idToken
-      }).then(function (res) {
-
-        commit('authUser', {
-          userID: res.data.user.id,
-          userName: res.data.user.name
-
-        });
-        __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].replace('/dashboard');
-      }).catch(function (error) {
-        return console.log(error);
-      });
-    },
-    fetchInfo: function fetchInfo(_ref4) {
-      var commit = _ref4.commit,
-          state = _ref4.state;
-
-
-      __WEBPACK_IMPORTED_MODULE_2__axios_auth__["a" /* default */].get('/tipos', { headers: { Authorization: 'Bearer ' + state.idToken } }).then(function (res) {
-
-        var data = [];
-
-        for (var i = 0; i < res.data.tipos.length; i++) {
-          data.push(res.data.tipos[i].tipo);
+    mutations: {
+        tokenUser: function tokenUser(state, userData) {
+            state.idToken = userData.token;
+        },
+        authUser: function authUser(state, userData) {
+            state.userId = userData.userID, state.userName = userData.userName;
+        },
+        tipos: function tipos(state, _tipos) {
+            state.tipos = _tipos;
+        },
+        equipamientos: function equipamientos(state, _equipamientos) {
+            state.equipamientos = _equipamientos;
+        },
+        clearAuthData: function clearAuthData(state) {
+            state.idToken = null;
         }
-
-        commit('tipos', data);
-      });
-    }
-  },
-  getters: {
-    isAuthenticated: function isAuthenticated(state) {
-      if (state.idToken !== null) {
-        return true;
-      } else {
-        return false;
-      }
     },
-    getUserName: function getUserName(state) {
-      return state.userName;
-    },
-    getTiposAula: function getTiposAula(state) {
+    actions: {
+        login: function login(_ref, authData) {
+            var commit = _ref.commit,
+                dispatch = _ref.dispatch;
 
-      return state.tipos;
+            console.log(authData);
+            __WEBPACK_IMPORTED_MODULE_2__axios_auth__["a" /* default */].post('/login', {
+                email: authData.email,
+                password: authData.password
+
+            }).then(function (res) {
+
+                commit('tokenUser', {
+                    token: res.data.token
+
+                });
+                dispatch('fetchUser');
+            });
+        },
+        logout: function logout(_ref2) {
+            var commit = _ref2.commit;
+
+            commit('clearAuthData');
+            localStorage.removeItem('token');
+            __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].replace('/signin');
+        },
+        reservar: function reservar(_ref3, data) {
+            var commit = _ref3.commit,
+                state = _ref3.state;
+
+
+            __WEBPACK_IMPORTED_MODULE_2__axios_auth__["a" /* default */].post('/reservar', data, {
+                headers: { Authorization: 'Bearer ' + state.idToken }
+            }).then(function (res) {
+                console.log(res);
+            });
+        },
+        fetchUser: function fetchUser(_ref4) {
+            var commit = _ref4.commit,
+                state = _ref4.state;
+
+
+            if (!state.idToken) {
+
+                return;
+            }
+            __WEBPACK_IMPORTED_MODULE_2__axios_auth__["a" /* default */].post('/user', {
+                token: state.idToken
+            }).then(function (res) {
+
+                commit('authUser', {
+                    userID: res.data.user.id,
+                    userName: res.data.user.name
+
+                });
+                __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].replace('/dashboard');
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        },
+        fetchTipos: function fetchTipos(_ref5) {
+            var commit = _ref5.commit,
+                state = _ref5.state;
+
+
+            __WEBPACK_IMPORTED_MODULE_2__axios_auth__["a" /* default */].get('/tipos', { headers: { Authorization: 'Bearer ' + state.idToken } }).then(function (res) {
+                console.log(res);
+                var data = [];
+
+                for (var i = 0; i < res.data.tipos.length; i++) {
+                    data.push(res.data.tipos[i].tipo);
+                }
+
+                commit('tipos', data);
+            });
+        },
+        fetchEquipamiento: function fetchEquipamiento(_ref6) {
+            var commit = _ref6.commit,
+                state = _ref6.state;
+
+
+            __WEBPACK_IMPORTED_MODULE_2__axios_auth__["a" /* default */].get('/equipamiento', { headers: { Authorization: 'Bearer ' + state.idToken } }).then(function (res) {
+                console.log(res);
+                var data = [];
+
+                for (var i = 0; i < res.data.equipamientos.length; i++) {
+                    data.push(res.data.equipamientos[i].nombre);
+                }
+
+                commit('equipamientos', data);
+            });
+        }
+    },
+    getters: {
+        isAuthenticated: function isAuthenticated(state) {
+            if (state.idToken !== null) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        getUserName: function getUserName(state) {
+            return state.userName;
+        },
+        getTiposAula: function getTiposAula(state) {
+
+            return state.tipos;
+        },
+        getEquipamientosAula: function getEquipamientosAula(state) {
+
+            return state.equipamientos;
+        }
     }
-  }
 }));
 
 /***/ }),
@@ -30496,6 +30529,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         if (!this.$store.getters.isAuthenticated) {
             __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].replace('/');
+        } else {
+            this.$store.dispatch('fetchTipos');
+            this.$store.dispatch('fetchEquipamiento');
         }
     }
 });
@@ -30586,7 +30622,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -30624,6 +30660,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -30632,55 +30679,93 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             question: [{
                 pregunta: 'Seleccione el Dia de la reserva',
                 respondida: false,
+                nombre: 'dia',
                 respuesta: []
 
             }, {
                 pregunta: 'Seleccione el turno ',
                 respondida: false,
+                nombre: 'turno',
                 respuesta: ['Mañana', 'Tarde']
 
             }, {
                 pregunta: 'Seleccione la hora ',
                 respondida: false,
+                nombre: 'hora',
                 respuesta: ['1º hora', '2º hora', '3º hora', '4º hora', '5º hora', '6º hora']
 
             }, {
                 pregunta: 'Seleccione el numero de sitios necesarios',
                 respondida: false,
+                nombre: 'aforo',
                 respuesta: ['Menos de 10', 'menos de 20', 'menos de 30', ' mas de 30 ']
 
             }, {
                 pregunta: 'Seleccione el tipo de aula requerida',
                 respondida: false,
-                respuesta: this.$store.getters.getTiposAula
+                nombre: 'tipo',
+                respuesta: []
             }, {
                 pregunta: 'Seleccione otros requerimientos',
                 respondida: false,
-                respuesta: ['requ1', 'req2', 'req3']
+                nombre: 'equipamiento',
+                respuesta: []
             }],
             countQuestion: 0,
             dia: null,
-            respuestas: []
+            equipamientos: [],
+            formData: {}
+
         };
     },
 
     methods: {
-        responder: function responder(respuesta) {
+        responder: function responder(respuesta, nombre) {
+
             this.question[this.countQuestion].respondida = false;
+
+            switch (nombre) {
+                case "dia":
+                    this.formData.dia = respuesta;
+                    break;
+                case "turno":
+                    this.formData.turno = respuesta;
+                    break;
+                case "hora":
+                    this.formData.hora = respuesta;
+                    break;
+                case "aforo":
+                    this.formData.aforo = respuesta;
+                    break;
+                case "tipo":
+                    this.formData.tipo = respuesta;
+                    break;
+                case "equipamiento":
+                    this.formData.equipamiento = this.equipamientos;
+                    break;
+
+            }
+
             this.countQuestion++;
-            this.respuestas.push(respuesta);
+            console.log(this.formData);
             if (this.countQuestion >= this.question.length) {
-                console.log(this.respuestas);
+                this.$store.dispatch('reservar', this.formData);
                 this.$emit('answered', false);
             } else {
+
                 this.$emit('answered', true);
             }
         }
     },
 
     activated: function activated() {
-
+        console.log(this.countQuestion);
         this.question[this.countQuestion].respondida = true;
+
+        if (this.countQuestion >= 4) {
+            this.question[4].respuesta = this.$store.getters.getTiposAula;
+            this.question[5].respuesta = this.$store.getters.getEquipamientosAula;
+        }
     }
 });
 
@@ -30703,33 +30788,8 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm.countQuestion != 0
-              ? _c(
-                  "div",
-                  { staticClass: "panel-body" },
-                  _vm._l(pregunta.respuesta, function(respuesta) {
-                    return _c(
-                      "div",
-                      { staticClass: "col-xs-12 col-sm-6 text-center" },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary btn-lg",
-                            staticStyle: { margin: "10px" },
-                            on: {
-                              click: function($event) {
-                                _vm.responder(respuesta)
-                              }
-                            }
-                          },
-                          [_vm._v(_vm._s(respuesta))]
-                        )
-                      ]
-                    )
-                  })
-                )
-              : _c("div", { staticClass: "panel-body" }, [
+            _vm.countQuestion == 0
+              ? _c("div", { staticClass: "panel-body" }, [
                   _c("div", { staticClass: "col-xs-12 col-sm-6 text-center" }, [
                     _c("input", {
                       directives: [
@@ -30759,7 +30819,7 @@ var render = function() {
                         staticStyle: { margin: "10px" },
                         on: {
                           click: function($event) {
-                            _vm.responder(_vm.dia)
+                            _vm.responder(_vm.dia, pregunta.nombre)
                           }
                         }
                       },
@@ -30767,6 +30827,110 @@ var render = function() {
                     )
                   ])
                 ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.countQuestion > 0 && _vm.countQuestion < 5
+              ? _c(
+                  "div",
+                  { staticClass: "panel-body" },
+                  _vm._l(pregunta.respuesta, function(respuesta) {
+                    return _c(
+                      "div",
+                      { staticClass: "col-xs-12 col-sm-6 text-center" },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary btn-lg",
+                            staticStyle: { margin: "10px" },
+                            on: {
+                              click: function($event) {
+                                _vm.responder(respuesta, pregunta.nombre)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(respuesta))]
+                        )
+                      ]
+                    )
+                  })
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.countQuestion == 5
+              ? _c(
+                  "div",
+                  { staticClass: "panel-body" },
+                  [
+                    _vm._l(pregunta.respuesta, function(respuesta) {
+                      return _c(
+                        "div",
+                        { staticClass: "col-xs-12 col-sm-6 text-center" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.equipamientos,
+                                expression: "equipamientos"
+                              }
+                            ],
+                            attrs: { type: "checkbox", id: respuesta },
+                            domProps: {
+                              value: respuesta,
+                              checked: Array.isArray(_vm.equipamientos)
+                                ? _vm._i(_vm.equipamientos, respuesta) > -1
+                                : _vm.equipamientos
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.equipamientos,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = respuesta,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.equipamientos = $$a.concat([$$v]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.equipamientos = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.equipamientos = $$c
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: respuesta } }, [
+                            _vm._v(_vm._s(respuesta))
+                          ])
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary btn-lg",
+                        staticStyle: { margin: "10px" },
+                        on: {
+                          click: function($event) {
+                            _vm.responder(this.equipamientos, pregunta.nombre)
+                          }
+                        }
+                      },
+                      [_vm._v("Siguiente")]
+                    )
+                  ],
+                  2
+                )
+              : _vm._e()
           ])
         : _vm._e()
     })

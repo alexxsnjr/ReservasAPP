@@ -13,7 +13,7 @@ export default new Vuex.Store({
     userId: null,
     userName: null,
     tipos: [],
-    requerimientos: null,
+    equipamientos: [],
   },
   mutations: {
     tokenUser (state, userData) {
@@ -29,6 +29,10 @@ export default new Vuex.Store({
         state.tipos = tipos;
 
     },
+    equipamientos (state, equipamientos){
+      state.equipamientos = equipamientos;
+
+    },
     clearAuthData (state) {
       state.idToken = null
     }
@@ -36,6 +40,7 @@ export default new Vuex.Store({
   },
   actions: {
     login ({commit, dispatch}, authData) {
+        console.log(authData)
       axios.post('/login', {
         email: authData.email,
         password: authData.password,
@@ -47,9 +52,7 @@ export default new Vuex.Store({
                 token: res.data.token,
 
             });
-
-            dispatch('fetchUser')
-            dispatch('fetchInfo')
+            dispatch('fetchUser');
 
 
         })
@@ -58,6 +61,15 @@ export default new Vuex.Store({
           commit('clearAuthData')
           localStorage.removeItem('token')
           router.replace('/signin')
+      },
+      reservar ({commit, state},  data) {
+
+          axios.post('/reservar', data , {
+              headers: { Authorization: `Bearer ${state.idToken}` }
+          } )
+              .then(res => {
+                  console.log(res);
+              })
       },
       fetchUser ({commit, state}) {
 
@@ -81,11 +93,11 @@ export default new Vuex.Store({
               })
               .catch(error => console.log(error))
       },
-      fetchInfo({commit , state}){
+      fetchTipos({commit , state}){
 
         axios.get('/tipos', { headers: { Authorization: `Bearer ${state.idToken}` } })
         .then(res=>{
-
+            console.log(res);
             const data = [];
 
             for (var i = 0 ; i < res.data.tipos.length ; i++){
@@ -95,6 +107,21 @@ export default new Vuex.Store({
             commit('tipos', data);
 
         })
+      },
+      fetchEquipamiento({commit , state}){
+
+          axios.get('/equipamiento', { headers: { Authorization: `Bearer ${state.idToken}` } })
+              .then(res=>{
+                  console.log(res);
+                  const data = [];
+
+                  for (var i = 0 ; i < res.data.equipamientos.length ; i++){
+                      data.push( res.data.equipamientos[i].nombre);
+                  }
+
+                  commit('equipamientos', data);
+
+              })
       }
 
   },
@@ -112,6 +139,10 @@ export default new Vuex.Store({
       getTiposAula(state) {
 
            return state.tipos;
+      },
+      getEquipamientosAula(state) {
+
+          return state.equipamientos;
       }
 
   }

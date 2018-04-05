@@ -24,6 +24,10 @@ Route::group([
     function () {
 
         Route::get('tipos' , 'GetInfoController@getTipo');
+        Route::get('equipamiento' , 'GetInfoController@getEquipamiento');
+        Route::post('reservar' , 'ReservaController@comprobarDisponibilidad');
+
+
     });
 
 Route::post('login' , 'Api\AuthenticateController@authenticate')->name('login');
