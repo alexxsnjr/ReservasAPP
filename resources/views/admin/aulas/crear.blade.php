@@ -1,5 +1,9 @@
 @extends('admin.layouts.app')
 
+@push('token')
+    <meta id="token" name="token" content="{{ csrf_token() }}">
+@endpush
+
 @section('content')
 
             <div class="col-md-12">
@@ -99,7 +103,10 @@
 @push('scripts')
     <script>
 
-        $('#edificio').change(function() {
+        $('#edificio').ready(sacarPisos).change(sacarPisos);
+
+
+        function sacarPisos() {
 
             var edificio_seleccionado = $('#edificio').val();
             //console.log(edificio_seleccionado);
@@ -124,7 +131,6 @@
 
                     for (var i = 0; i < json.length; i++) {
 
-                        console.log(json[i].piso);
                         $('#planta').append('<option value="'+json[i].id+'">'+json[i].piso+'</option>');
 
                     }
@@ -132,7 +138,7 @@
 
             });
 
-        });
+        };
 
     </script>
 @endpush

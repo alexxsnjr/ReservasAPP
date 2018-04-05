@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Aula;
 use App\Edificio;
+use App\Equipamiento;
 use App\Planta;
 use App\User;
 use Illuminate\Http\Request;
@@ -77,9 +78,21 @@ class XMLController extends Controller
                     $aula->edificio_id = $edificio->id;
                     $aula->planta_id = $planta->id;
                     $aula->nombre = $aulaXML->nombre;
-                    $aula->tipo = $aulaXML->tipo;
+                    $aula->tipo = $aulaXML[@tipo];
                     $aula->aforo = $aulaXML->aforo;
                     $aula->save();
+
+                    if (is_array($aulaXML->equipamientos->equipamiento) || is_object($aulaXML->equipamientos->equipamiento)) {
+                        foreach ($aulaXML->equipamientos->equipamiento as $equipamientoXML) {
+
+                            $equipamiento = new Equipamiento;
+                            $equipamiento->aula_id = $aula->id;
+                            $equipamiento->nombre = $equipamientoXML;
+                            $equipamiento->cantidad = $equipamientoXML[@cantidad];
+                            $equipamiento->save();
+
+                        }
+                    }
 
                 }
 

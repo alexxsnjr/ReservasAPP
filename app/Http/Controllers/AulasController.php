@@ -46,9 +46,10 @@ class AulasController extends Controller
     {
 
         $this->validate($request, [
-            'edificio' => 'required',
-            'planta' => 'required',
+            'edificio[]' => 'required',
+            'planta[]' => 'required',
             'nombre' => 'required|string|max: 20',
+            'tipo[]' => 'required',
             'aforo' => 'required|integer',
         ]);
 
@@ -78,26 +79,23 @@ class AulasController extends Controller
     public function update(Request $request, $id)
     {
 
-            $this->validate($request, [
-                'titulo' => 'required|string|min: 3|unique:posts,slug,'.$slug,
-                'extracto' => 'required|min: 5|max: 120',
-                'contenido' => 'required|min: 10|max: 1000',
-            ]);
+        $this->validate($request, [
+            'edificio[]' => 'required',
+            'planta[]' => 'required',
+            'nombre' => 'required|string|max: 20',
+            'tipo[]' => 'required',
+            'aforo' => 'required|positiveInteger',
+        ]);
 
-            $posts = Post::where('slug', $slug)->firstOrFail();
-            $posts->titulo = $request->titulo;
-            $posts->slug = str_slug($request->titulo);
-            $posts->extracto = $request->extracto;
-            $posts->contenido = $request->contenido;
-            $posts->save();
+        $aula = Aula::where('id', $id);
+        $aula->edificio_id = $request->edificio[0];
+        $aula->planta_id = $request->planta[0];
+        $aula->nombre = $request->nombre;
+        $aula->tipo = $request->tipo[0];
+        $aula->aforo = $request->aforo;
+        $aula->save();
 
-        $categorias = collect($request->categoria)->map(function ($categoria){
-           return Categoria::find($categoria) ? $categoria : Categoria::create(['name' => $categoria])->id;
-        });
-
-        $posts->categoria()->sync($categorias);
-
-        return redirect('/post/listar')->with('success', 'Post editado con exito!');
+        return redirect('/aulas/listar')->with('success', 'Aula editada con exito!');
 
 
     }

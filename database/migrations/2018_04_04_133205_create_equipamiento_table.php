@@ -13,7 +13,7 @@ class CreateEquipamientoTable extends Migration
      */
     public function up()
     {
-        Schema::create('equipamiento', function (Blueprint $table) {
+        Schema::create('equipamientos', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('aula_id');
             $table->string('nombre');

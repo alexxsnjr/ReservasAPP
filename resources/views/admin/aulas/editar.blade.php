@@ -1,7 +1,144 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: alejandro
- * Date: 2/04/18
- * Time: 20:48
- */
+@extends('admin.layouts.app')
+
+@push('token')
+    <meta id="token" name="token" content="{{ csrf_token() }}">
+@endpush
+
+@section('content')
+
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">Crea aula</h3>
+            </div>
+
+            <form class="form-horizontal" action="{{ route('aulas.update' , $aula->id)}}" method="POST">
+                {{ csrf_field() }}{{ method_field('PUT') }}
+
+                <div class="box-body">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Edificio</label>
+
+                        <div class="col-sm-10">
+                            <select name="edificio[]"
+                                    class="form-control"
+                                    id="edificio"
+                                    style="width: 100%;">
+                                <option>Selecciona un edificio</option>
+                                @foreach($edificios as $edificio)
+                                    <option {{ collect(old('edificio',$aula->edificio_id))->contains($edificio->id) ? 'selected' : '' }}
+                                            value="{{ $edificio->id }}"
+                                            {{ old('edificio',$aula->edificio_id) == $edificio->id ? 'selected' : '' }}
+                                    >{{ $edificio->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Planta</label>
+
+                        <div class="col-sm-10">
+                            <select name="planta[]"
+                                    id="planta"
+                                    class="form-control"
+                                    style="width: 100%;">
+                                <option value="">Selecciona un edificio</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Nombre del aula</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" name="nombre" class="form-control"
+                                   value="{{ old('nombre',$aula->nombre) }}"
+                                   placeholder="Escribe el nombre del aula">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Tipo de aula</label>
+
+                        <div class="col-sm-10">
+                            <select name="tipo[]"
+                                    class="form-control"
+                                    id="tipo"
+                                    style="width: 100%;">
+                                <option selected value="">Selecciona un tipo</option>
+                                @foreach($tipos as $tipo)
+                                    <option {{ collect(old('tipo',$aula->tipo))->contains($tipo->tipo) ? 'selected' : '' }}
+                                            value="{{ $tipo->tipo }}"
+                                            {{ old('tipo',$aula->tipo) == $tipo->id ? 'selected' : '' }}
+                                    >{{ $tipo->tipo }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Aforo del aula</label>
+
+                        <div class="col-sm-10">
+                            <input type="number" name="aforo" class="form-control"
+                                   value="{{ old('aforo',$aula->aforo) }}">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="box-footer">
+
+                    <a href="{{ route('aulas.listar') }}" class="btn btn-danger">Volver</a>
+                    <button type="submit" class="btn btn-info pull-right">Guardar aula</button>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+@endsection
+@push('scripts')
+    <script>
+
+        $('#edificio').ready(sacarPisos).change(sacarPisos);
+
+
+        function sacarPisos() {
+
+            var edificio_seleccionado = $('#edificio').val();
+            //console.log(edificio_seleccionado);
+
+            $.ajax({
+                //URL para la petición
+                url : '/sacarPisos',
+
+                data : { edificio_id : edificio_seleccionado },
+
+                type : 'POST',
+
+                // el tipo de información que se espera de respuesta
+                dataType : 'json',
+
+                beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
+
+                success : function(json) {
+
+                    $('#planta').html('');
+                    $('#planta').append('<option value="">Selecciona una planta</option>');
+
+                    for (var i = 0; i < json.length; i++) {
+
+                        $('#planta').append('<option value="'+json[i].id+'">'+json[i].piso+'</option>');
+
+                    }
+                },
+
+            });
+
+        };
+
+    </script>
+@endpush
