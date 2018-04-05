@@ -29,4 +29,15 @@ class Aula extends Model
         return $this->hasMany(Equipamiento::class);
     }
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($aula) {
+
+            $aula->equipamiento->each->delete();
+
+        });
+    }
+
 }

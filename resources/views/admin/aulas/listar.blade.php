@@ -1,5 +1,18 @@
 @extends('admin.layouts.app')
 
+@section('header')
+
+        <h1>
+            Aulas
+            <small>Todas</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-university"></i> Aulas</a></li>
+            <li><a href="{{ route('aulas.listar') }}">Listado</a></li>
+        </ol>
+
+@endsection
+
 @section('content')
             <div class="col-md-12">
                 <div class="box">
@@ -14,12 +27,12 @@
                                     <table id="posts-table" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                         <thead>
                                         <tr>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" style="width: 295px;" aria-sort="ascending">ID</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" style="width: 295px;" aria-sort="ascending">Edificio</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" style="width: 295px;" aria-sort="ascending">Planta</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" style="width: 295px;" aria-sort="ascending">Nombre</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" style="width: 295px;" aria-sort="ascending">Tipo</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" style="width: 295px;" aria-sort="ascending">Aforo</th>
+                                            <th rowspan="1" colspan="1">ID</th>
+                                            <th>Edificio</th>
+                                            <th>Planta</th>
+                                            <th>Nombre</th>
+                                            <th>Tipo</th>
+                                            <th>Aforo</th>
                                             <th>Acciones</th>
                                         </tr>
                                         </thead>
@@ -34,12 +47,13 @@
                                                 <td>{{ $aula->aforo }}</td>
                                                 <td>
 
+                                                    <a href="{{ route('aulas.ver',$aula->id) }}" class="btn btn-sm btn-success"><span class="fa fa-eye"></span></a>
                                                     <a href="{{ route('aulas.editar',$aula->id) }}" class="btn btn-sm btn-primary"><span class="fa fa-pencil"></span></a>
 
                                                     {!! Form::open(['action' => ['AulasController@borrar', $aula->id], 'method' => 'DELETE', 'style' => 'display:inline;']) !!}
 
                                                     <button class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('¿Seguro que quiere eliminar esta aula?')">
+                                                            onclick="return confirm('¿Seguro que quiere eliminar esta aula? Se eliminaran tanto sus equipaciones como sus reservas.')">
                                                         <span class="fa fa-trash"></span>
                                                     </button>
 

@@ -101,10 +101,14 @@ desired effect
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default">Editar usuario</a>
+                                </div>
+
                                 <form action="{{ route('logout') }}" method="POST">
                                     {{ csrf_field() }}
                                     <div class="pull-right">
-                                        <button class="btn btn-default btn-block">Cerrar Sesión</button>
+                                        <button class="btn btn-default">Cerrar Sesión</button>
                                     </div>
                                 </form>
                             </li>
@@ -145,11 +149,14 @@ desired effect
         </section>
         <!-- Main content -->
 
-        <div class="container">
+        <section class="content">
+
             @include('admin.partials.mensajes')
 
             @yield('content')
-        </div>
+
+        </section>
+
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
