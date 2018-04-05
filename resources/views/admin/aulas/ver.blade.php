@@ -83,7 +83,7 @@
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Equipamientos del aula</h3>
-                <a class="btn btn-success btn-sm pull-right" href="#"><span class="fa fa-plus"></span>  Añadir nuevo equipamiento</a>
+                <a class="btn btn-success btn-sm pull-right" href="{{ route('equipamiento.crear',$aula->id) }}"><span class="fa fa-plus"></span>  Añadir nuevo equipamiento</a>
             </div>
             <div class="box-body">
                 <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -106,12 +106,12 @@
                                         <td>{{ $equipamiento->cantidad }}</td>
                                         <td>
 
-                                            <a href="{{ route('aulas.editar',$equipamiento->id) }}" class="btn btn-sm btn-primary"><span class="fa fa-pencil"></span></a>
+                                            <a href="{{ route('equipamiento.editar',$equipamiento->id) }}" class="btn btn-sm btn-primary"><span class="fa fa-pencil"></span></a>
 
-                                            {!! Form::open(['action' => ['AulasController@borrar', $equipamiento->id], 'method' => 'DELETE', 'style' => 'display:inline;']) !!}
+                                            {!! Form::open(['action' => ['EquipamientosController@borrar', $equipamiento->id], 'method' => 'DELETE', 'style' => 'display:inline;']) !!}
 
                                             <button class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('¿Seguro que quiere eliminar esta aula? Se eliminaran tanto sus equipaciones como sus reservas.')">
+                                                    onclick="return confirm('¿Seguro que quiere eliminar este equipamiento?')">
                                                 <span class="fa fa-trash"></span>
                                             </button>
 
