@@ -1,6 +1,6 @@
 <template>
   <div id="signin">
-    <div class="signin-form">
+    <div class="box-center col-xs-12 col-sm-8 col-sm-2 col-md-6 col-md-3">
       <form @submit.prevent="onSubmit">
         <div class="input">
           <label for="email">Mail</label>
@@ -51,8 +51,7 @@
 </script>
 
 <style scoped>
-  .signin-form {
-    width: 400px;
+  .box-center {
     margin: 30px auto;
     border: 1px solid #eee;
     padding: 20px;

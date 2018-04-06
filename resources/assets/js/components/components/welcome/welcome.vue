@@ -11,7 +11,7 @@
 
 <style scoped>
   #welcome {
-    width: 80%;
+    width: 100%;
     margin: auto;
   }
 

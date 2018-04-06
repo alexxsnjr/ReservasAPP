@@ -30306,7 +30306,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#welcome[data-v-0c93aa13] {\n  width: 80%;\n  margin: auto;\n}\nh1[data-v-0c93aa13] {\n  text-align: center;\n}\np[data-v-0c93aa13] {\n  text-align: center;\n}\n.cta[data-v-0c93aa13] {\n  width: 300px;\n  margin: auto;\n  text-align: center;\n}\n.cta a[data-v-0c93aa13] {\n  margin: 10px;\n  text-decoration: none;\n  display: inline-block;\n  border: 1px solid #521751;\n  border-radius: 3px;\n  width: 100px;\n  padding: 10px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  color: #521751;\n}\n.cta a[data-v-0c93aa13]:hover,\n.cta a[data-v-0c93aa13]:active {\n  background-color: #521751;\n  color: white;\n}\n", ""]);
+exports.push([module.i, "\n#welcome[data-v-0c93aa13] {\n  width: 100%;\n  margin: auto;\n}\nh1[data-v-0c93aa13] {\n  text-align: center;\n}\np[data-v-0c93aa13] {\n  text-align: center;\n}\n.cta[data-v-0c93aa13] {\n  width: 300px;\n  margin: auto;\n  text-align: center;\n}\n.cta a[data-v-0c93aa13] {\n  margin: 10px;\n  text-decoration: none;\n  display: inline-block;\n  border: 1px solid #521751;\n  border-radius: 3px;\n  width: 100px;\n  padding: 10px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  color: #521751;\n}\n.cta a[data-v-0c93aa13]:hover,\n.cta a[data-v-0c93aa13]:active {\n  background-color: #521751;\n  color: white;\n}\n", ""]);
 
 // exports
 
@@ -30459,7 +30459,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.flip-enter {\n  /*transform: rotateY(0deg);*/\n}\n.flip-enter-active {\n  -webkit-animation: flip-in  0.7s ease-out forwards;\n          animation: flip-in  0.7s ease-out forwards;\n}\n.flip-leave {\n  /*transform: rotateY(0deg);*/\n}\n.flip-leave-active {\n  -webkit-animation: flip-out 0s ease-out forwards;\n          animation: flip-out 0s ease-out forwards;\n}\n@-webkit-keyframes flip-out {\nfrom {\n    -webkit-transform: rotateY(0deg);\n            transform: rotateY(0deg);\n}\nto {\n    -webkit-transform: rotateY(90deg);\n            transform: rotateY(90deg);\n}\n}\n@keyframes flip-out {\nfrom {\n    -webkit-transform: rotateY(0deg);\n            transform: rotateY(0deg);\n}\nto {\n    -webkit-transform: rotateY(90deg);\n            transform: rotateY(90deg);\n}\n}\n@-webkit-keyframes flip-in {\nfrom {\n    -webkit-transform: rotateY(90deg);\n            transform: rotateY(90deg);\n}\nto {\n    -webkit-transform: rotateY(0deg);\n            transform: rotateY(0deg);\n}\n}\n@keyframes flip-in {\nfrom {\n    -webkit-transform: rotateY(90deg);\n            transform: rotateY(90deg);\n}\nto {\n    -webkit-transform: rotateY(0deg);\n            transform: rotateY(0deg);\n}\n}\n", ""]);
+exports.push([module.i, "\n.box-center {\n  margin: 30px auto;\n  border: 1px solid #eee;\n  padding: 20px;\n  -webkit-box-shadow: 0 2px 3px #ccc;\n          box-shadow: 0 2px 3px #ccc;\n}\nh1 {\n  text-align: center;\n}\n.center {\n  margin: auto;\n}\n.flip-enter {\n  /*transform: rotateY(0deg);*/\n}\n.flip-enter-active {\n  -webkit-animation: flip-in  0.7s ease-out forwards;\n          animation: flip-in  0.7s ease-out forwards;\n}\n.flip-leave {\n  /*transform: rotateY(0deg);*/\n}\n.flip-leave-active {\n  -webkit-animation: flip-out 0s ease-out forwards;\n          animation: flip-out 0s ease-out forwards;\n}\n@-webkit-keyframes flip-out {\nfrom {\n    -webkit-transform: rotateY(0deg);\n            transform: rotateY(0deg);\n}\nto {\n    -webkit-transform: rotateY(90deg);\n            transform: rotateY(90deg);\n}\n}\n@keyframes flip-out {\nfrom {\n    -webkit-transform: rotateY(0deg);\n            transform: rotateY(0deg);\n}\nto {\n    -webkit-transform: rotateY(90deg);\n            transform: rotateY(90deg);\n}\n}\n@-webkit-keyframes flip-in {\nfrom {\n    -webkit-transform: rotateY(90deg);\n            transform: rotateY(90deg);\n}\nto {\n    -webkit-transform: rotateY(0deg);\n            transform: rotateY(0deg);\n}\n}\n@keyframes flip-in {\nfrom {\n    -webkit-transform: rotateY(90deg);\n            transform: rotateY(90deg);\n}\nto {\n    -webkit-transform: rotateY(0deg);\n            transform: rotateY(0deg);\n}\n}\n", ""]);
 
 // exports
 
@@ -30544,6 +30544,7 @@ var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(53)
+  __webpack_require__(94)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -30781,16 +30782,20 @@ var render = function() {
     "div",
     _vm._l(_vm.question, function(pregunta, index) {
       return pregunta.respondida
-        ? _c("div", { staticClass: "panel panel-default" }, [
-            _c("div", { staticClass: "panel-heading" }, [
-              _c("h3", { staticClass: "panel-title text-center" }, [
-                _vm._v(_vm._s(pregunta.pregunta))
-              ])
-            ]),
+        ? _c("div", { staticClass: "card " }, [
+            _c(
+              "div",
+              { staticClass: "card-header col-xs-12 col-sm-6 center" },
+              [
+                _c("h3", { staticClass: "panel-title text-justify" }, [
+                  _vm._v(_vm._s(pregunta.pregunta))
+                ])
+              ]
+            ),
             _vm._v(" "),
             _vm.countQuestion == 0
-              ? _c("div", { staticClass: "panel-body" }, [
-                  _c("div", { staticClass: "col-xs-12 col-sm-6 text-center" }, [
+              ? _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "col-xs-12 col-sm-6 center" }, [
                     _c("input", {
                       directives: [
                         {
@@ -30815,7 +30820,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary btn-lg",
+                        staticClass: "btn btn-primary btn-sm",
                         staticStyle: { margin: "10px" },
                         on: {
                           click: function($event) {
@@ -30832,11 +30837,11 @@ var render = function() {
             _vm.countQuestion > 0 && _vm.countQuestion < 5
               ? _c(
                   "div",
-                  { staticClass: "panel-body" },
+                  { staticClass: "card-body" },
                   _vm._l(pregunta.respuesta, function(respuesta) {
                     return _c(
                       "div",
-                      { staticClass: "col-xs-12 col-sm-6 text-center" },
+                      { staticClass: "col-xs-12 col-sm-6 center" },
                       [
                         _c(
                           "button",
@@ -30860,12 +30865,12 @@ var render = function() {
             _vm.countQuestion == 5
               ? _c(
                   "div",
-                  { staticClass: "panel-body" },
+                  { staticClass: "card-body" },
                   [
                     _vm._l(pregunta.respuesta, function(respuesta) {
                       return _c(
                         "div",
-                        { staticClass: "col-xs-12 col-sm-6 text-center" },
+                        { staticClass: "col-xs-12 col-sm-6 center" },
                         [
                           _c("input", {
                             directives: [
@@ -30917,7 +30922,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary btn-lg",
+                        staticClass: "btn btn-primary btn-sm",
                         staticStyle: { margin: "10px" },
                         on: {
                           click: function($event) {
@@ -31079,7 +31084,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "alert alert-success text-center" }, [
+    return _c("div", { staticClass: "alert alert-success text-justify" }, [
       _c("h1", [_vm._v("Disponible o no disponible !!")]),
       _vm._v(" "),
       _c("hr"),
@@ -31237,16 +31242,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container box-center" }, [
     _c("div", { staticClass: "row" }, [
       _c(
         "div",
-        {
-          staticClass:
-            "col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"
-        },
+        { staticClass: "col-xs-12 col-sm-8 col-sm-2 col-md-6 col-md-3 center" },
         [
-          _c("h1", { staticClass: "text-center" }, [
+          _c("h1", [
             _vm._v("Bienvenido " + _vm._s(this.$store.getters.getUserName))
           ])
         ]
@@ -31258,10 +31260,7 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c(
         "div",
-        {
-          staticClass:
-            "col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"
-        },
+        { staticClass: "col-xs-12 col-sm-8 col-sm-2 col-md-6 col-md-3 center" },
         [
           _c(
             "transition",
@@ -31389,7 +31388,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.signin-form[data-v-5eb2d747] {\n  width: 400px;\n  margin: 30px auto;\n  border: 1px solid #eee;\n  padding: 20px;\n  -webkit-box-shadow: 0 2px 3px #ccc;\n          box-shadow: 0 2px 3px #ccc;\n}\n.input[data-v-5eb2d747] {\n  margin: 10px auto;\n}\n.input label[data-v-5eb2d747] {\n  display: block;\n  color: #4e4e4e;\n  margin-bottom: 6px;\n}\n.input input[data-v-5eb2d747] {\n  font: inherit;\n  width: 100%;\n  padding: 6px 12px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  border: 1px solid #ccc;\n}\n.input input[data-v-5eb2d747]:focus {\n  outline: none;\n  border: 1px solid #521751;\n  background-color: #eee;\n}\n.submit button[data-v-5eb2d747] {\n  border: 1px solid #521751;\n  color: #521751;\n  padding: 10px 20px;\n  font: inherit;\n  cursor: pointer;\n}\n.submit button[data-v-5eb2d747]:hover,\n.submit button[data-v-5eb2d747]:active {\n  background-color: #521751;\n  color: white;\n}\n.submit button[disabled][data-v-5eb2d747],\n.submit button[disabled][data-v-5eb2d747]:hover,\n.submit button[disabled][data-v-5eb2d747]:active {\n  border: 1px solid #ccc;\n  background-color: transparent;\n  color: #ccc;\n  cursor: not-allowed;\n}\n", ""]);
+exports.push([module.i, "\n.box-center[data-v-5eb2d747] {\n  margin: 30px auto;\n  border: 1px solid #eee;\n  padding: 20px;\n  -webkit-box-shadow: 0 2px 3px #ccc;\n          box-shadow: 0 2px 3px #ccc;\n}\n.input[data-v-5eb2d747] {\n  margin: 10px auto;\n}\n.input label[data-v-5eb2d747] {\n  display: block;\n  color: #4e4e4e;\n  margin-bottom: 6px;\n}\n.input input[data-v-5eb2d747] {\n  font: inherit;\n  width: 100%;\n  padding: 6px 12px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  border: 1px solid #ccc;\n}\n.input input[data-v-5eb2d747]:focus {\n  outline: none;\n  border: 1px solid #521751;\n  background-color: #eee;\n}\n.submit button[data-v-5eb2d747] {\n  border: 1px solid #521751;\n  color: #521751;\n  padding: 10px 20px;\n  font: inherit;\n  cursor: pointer;\n}\n.submit button[data-v-5eb2d747]:hover,\n.submit button[data-v-5eb2d747]:active {\n  background-color: #521751;\n  color: white;\n}\n.submit button[disabled][data-v-5eb2d747],\n.submit button[disabled][data-v-5eb2d747]:hover,\n.submit button[disabled][data-v-5eb2d747]:active {\n  border: 1px solid #ccc;\n  background-color: transparent;\n  color: #ccc;\n  cursor: not-allowed;\n}\n", ""]);
 
 // exports
 
@@ -31457,72 +31456,78 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "signin" } }, [
-    _c("div", { staticClass: "signin-form" }, [
-      _c(
-        "form",
-        {
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.onSubmit($event)
+    _c(
+      "div",
+      {
+        staticClass: "box-center col-xs-12 col-sm-8 col-sm-2 col-md-6 col-md-3"
+      },
+      [
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.onSubmit($event)
+              }
             }
-          }
-        },
-        [
-          _c("div", { staticClass: "input" }, [
-            _c("label", { attrs: { for: "email" } }, [_vm._v("Mail")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.email,
-                  expression: "email"
-                }
-              ],
-              attrs: { type: "email", id: "email" },
-              domProps: { value: _vm.email },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+          },
+          [
+            _c("div", { staticClass: "input" }, [
+              _c("label", { attrs: { for: "email" } }, [_vm._v("Mail")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.email,
+                    expression: "email"
                   }
-                  _vm.email = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "input" }, [
-            _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.password,
-                  expression: "password"
-                }
-              ],
-              attrs: { type: "password", id: "password" },
-              domProps: { value: _vm.password },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                ],
+                attrs: { type: "email", id: "email" },
+                domProps: { value: _vm.email },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.email = $event.target.value
                   }
-                  _vm.password = $event.target.value
                 }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _vm._m(0)
-        ]
-      )
-    ])
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input" }, [
+              _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.password,
+                    expression: "password"
+                  }
+                ],
+                attrs: { type: "password", id: "password" },
+                domProps: { value: _vm.password },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.password = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -52744,6 +52749,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -52898,7 +52906,7 @@ var render = function() {
     _c(
       "div",
       { staticClass: "logo" },
-      [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Reserva de aulas")])],
+      [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Home")])],
       1
     ),
     _vm._v(" "),
@@ -52962,7 +52970,11 @@ var render = function() {
   return _c(
     "div",
     { attrs: { id: "app" } },
-    [_c("app-header"), _vm._v(" "), _c("router-view")],
+    [
+      _c("app-header"),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [_c("router-view")], 1)
+    ],
     1
   )
 }
@@ -52981,6 +52993,52 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(95);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("45d57a54", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-02777834\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./Question.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-02777834\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./Question.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.center {\n    margin: auto;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

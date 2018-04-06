@@ -1,36 +1,36 @@
 <template>
-      <div >
-        <div class="panel panel-default" v-for="(pregunta , index) of question" v-if="pregunta.respondida">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">{{ pregunta.pregunta }}</h3>
+      <div>
+        <div class="card " v-for="(pregunta , index) of question" v-if="pregunta.respondida">
+            <div class="card-header col-xs-12 col-sm-6 center">
+                <h3 class="panel-title text-justify">{{ pregunta.pregunta }}</h3>
             </div>
-            <div class="panel-body" v-if="countQuestion == 0">
-                <div class="col-xs-12 col-sm-6 text-center"  >
+            <div class="card-body" v-if="countQuestion == 0">
+                <div class="col-xs-12 col-sm-6 center"  >
                     <input type="date" v-model="dia" placeholder="selecciona el dia">
-                    <button class="btn btn-primary btn-lg" style="margin: 10px" @click="responder(dia , pregunta.nombre)">Siguiente</button>
+                    <button class="btn btn-primary btn-sm" style="margin: 10px" @click="responder(dia , pregunta.nombre)">Siguiente</button>
 
                 </div>
 
             </div>
-            <div class="panel-body" v-if="countQuestion > 0 && countQuestion < 5" >
-                <div class="col-xs-12 col-sm-6 text-center"  v-for="respuesta of pregunta.respuesta">
+            <div class="card-body" v-if="countQuestion > 0 && countQuestion < 5" >
+                <div class="col-xs-12 col-sm-6 center"  v-for="respuesta of pregunta.respuesta">
                     <button class="btn btn-primary btn-lg" style="margin: 10px" @click="responder(respuesta , pregunta.nombre)">{{ respuesta }}</button>
                 </div>
             </div>
 
-            <div class="panel-body" v-if="countQuestion == 5">
-                <div class="col-xs-12 col-sm-6 text-center"  v-for="respuesta of pregunta.respuesta">
+            <div class="card-body" v-if="countQuestion == 5">
+                <div class="col-xs-12 col-sm-6 center"  v-for="respuesta of pregunta.respuesta">
 
                     <input type="checkbox" :id="respuesta" :value="respuesta" v-model="equipamientos">
                     <label :for="respuesta">{{ respuesta }}</label>
                 </div>
-                <button class="btn btn-primary btn-lg" style="margin: 10px" @click="responder(this.equipamientos , pregunta.nombre)">Siguiente</button>
+                <button class="btn btn-primary btn-sm" style="margin: 10px" @click="responder(this.equipamientos , pregunta.nombre)">Siguiente</button>
 
 
             </div>
 
         </div>
-    </div>
+      </div>
 
 </template>
 <style>
@@ -143,3 +143,8 @@
 
     }
 </script>
+<style>
+    .center {
+        margin: auto;
+    }
+</style>

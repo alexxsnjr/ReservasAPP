@@ -1,5 +1,5 @@
 <template>
-    <div class="alert alert-success text-center">
+    <div class="alert alert-success text-justify">
         <h1>Disponible o no disponible !!</h1>
         <hr>
         <button class="btn btn-primary"> Reservar </button>
