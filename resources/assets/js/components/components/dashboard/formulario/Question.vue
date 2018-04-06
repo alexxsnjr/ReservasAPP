@@ -119,7 +119,7 @@
                 }
 
                 this.countQuestion++;
-                console.log(this.formData)
+
                 if(this.countQuestion >= this.question.length){
                     this.$store.dispatch('reservar' , this.formData)
                     this.$emit('answered', false);
@@ -132,7 +132,7 @@
         },
         
         activated(){
-            console.log(this.countQuestion);
+
             this.question[this.countQuestion].respondida = true;
 
             if(this.countQuestion >= 4){

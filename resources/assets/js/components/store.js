@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from './axios-auth'
+import axios from 'axios'
 
 
 import router from './router'
@@ -40,7 +40,7 @@ export default new Vuex.Store({
   },
   actions: {
     login ({commit, dispatch}, authData) {
-        console.log(authData)
+
       axios.post('/login', {
         email: authData.email,
         password: authData.password,
@@ -97,7 +97,7 @@ export default new Vuex.Store({
 
         axios.get('/tipos', { headers: { Authorization: `Bearer ${state.idToken}` } })
         .then(res=>{
-            console.log(res);
+
             const data = [];
 
             for (var i = 0 ; i < res.data.tipos.length ; i++){
@@ -112,7 +112,7 @@ export default new Vuex.Store({
 
           axios.get('/equipamiento', { headers: { Authorization: `Bearer ${state.idToken}` } })
               .then(res=>{
-                  console.log(res);
+
                   const data = [];
 
                   for (var i = 0 ; i < res.data.equipamientos.length ; i++){

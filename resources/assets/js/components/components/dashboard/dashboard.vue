@@ -74,16 +74,9 @@
   .center {
     margin: auto;
   }
-  .flip-enter {
-    /*transform: rotateY(0deg);*/
-  }
 
   .flip-enter-active {
     animation: flip-in  0.7s ease-out forwards;
-  }
-
-  .flip-leave {
-    /*transform: rotateY(0deg);*/
   }
 
   .flip-leave-active {

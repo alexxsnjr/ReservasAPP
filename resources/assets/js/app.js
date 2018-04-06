@@ -31,7 +31,7 @@ const app = new Vue({
 
 
 
-axios.defaults.baseURL = 'http://aulas.app'
+axios.defaults.baseURL = 'http://aulas.app/api'
 axios.defaults.headers.get['Accepts'] = 'application/json'
 
 
