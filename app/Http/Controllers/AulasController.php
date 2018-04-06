@@ -46,10 +46,10 @@ class AulasController extends Controller
     {
 
         $this->validate($request, [
-            'edificio[]' => 'required',
-            'planta[]' => 'required',
+            'edificio' => 'required',
+            'planta' => 'required',
             'nombre' => 'required|string|max: 20',
-            'tipo[]' => 'required',
+            'tipo' => 'required',
             'aforo' => 'required|integer',
         ]);
 
@@ -80,14 +80,14 @@ class AulasController extends Controller
     {
 
         $this->validate($request, [
-            'edificio[]' => 'required',
-            'planta[]' => 'required',
+            'edificio' => 'required',
+            'planta' => 'required',
             'nombre' => 'required|string|max: 20',
-            'tipo[]' => 'required',
-            'aforo' => 'required|positiveInteger',
+            'tipo' => 'required',
+            'aforo' => 'required|integer',
         ]);
 
-        $aula = Aula::where('id', $id);
+        $aula = Aula::find($id);
         $aula->edificio_id = $request->edificio[0];
         $aula->planta_id = $request->planta[0];
         $aula->nombre = $request->nombre;
@@ -97,6 +97,13 @@ class AulasController extends Controller
 
         return redirect('/aulas/listar')->with('success', 'Aula editada con exito!');
 
+    }
+
+    public function ver($id){
+
+        $aula = Aula::find($id);
+
+        return view('admin.aulas.ver')->with('aula', $aula);
 
     }
 
@@ -106,7 +113,7 @@ class AulasController extends Controller
 
         $aula->delete();
 
-        return redirect()->back()->with('success', 'Aula eliminada');
+        return redirect('/aulas/listar')->with('success', 'Aula eliminada!');
 
     }
 

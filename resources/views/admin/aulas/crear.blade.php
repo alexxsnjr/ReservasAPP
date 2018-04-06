@@ -4,9 +4,23 @@
     <meta id="token" name="token" content="{{ csrf_token() }}">
 @endpush
 
+@section('header')
+
+    <h1>
+        Crear
+        <small>Nueva aula</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-university"></i> Aulas</a></li>
+        <li><a href="{{ route('aulas.listar') }}">Listado</a></li>
+        <li><a href="#">Crear</a></li>
+    </ol>
+
+@endsection
+
 @section('content')
 
-            <div class="col-md-12">
+            <div class="col-md-6 col-md-offset-3">
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">Crea aula</h3>

@@ -1,7 +1,19 @@
 @extends('admin.layouts.app')
 
+@section('header')
+
+    <h1>
+        Importar XML
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-university"></i> Aulas</a></li>
+        <li><a href="#">Importar</a></li>
+    </ol>
+
+@endsection
+
 @section('content')
-        <div class="row">
+        <div class="col-md-8 col-md-offset-2">
             <form action="{{ route('aulas.importar') }}" method="POST">
                 {{ csrf_field() }}
                 <div class="col-md-12">
@@ -30,6 +42,7 @@
             paramName: 'xml',
             acceptedFiles: '.xml',
             maxFilesize: 0.05,
+            maxFiles: '1',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
