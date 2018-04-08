@@ -12,6 +12,7 @@ export default new Vuex.Store({
     idToken: null,
     userId: null,
     userName: null,
+    aulas: [],
     tipos: [],
     equipamientos: [],
   },
@@ -24,6 +25,9 @@ export default new Vuex.Store({
         state.userId = userData.userID,
         state.userName = userData.userName
 
+    },
+    aulas (state, aulas){
+        state.aulas = aulas;
     },
     tipos (state, tipos){
         state.tipos = tipos;
@@ -68,8 +72,23 @@ export default new Vuex.Store({
               headers: { Authorization: `Bearer ${state.idToken}` }
           } )
               .then(res => {
-                  console.log(res);
-              })
+
+                  const data = [];
+
+                  for (var i = 0 ; i < res.data.aulas.length ; i++){
+                      data.push( res.data.aulas[i].nombre);
+                  }
+
+
+                  commit('aulas', data);
+
+
+                  router.replace('/aulas-disponibles')
+
+              }).catch(error =>{
+                console.log(error);
+
+          })
       },
       fetchUser ({commit, state}) {
 
@@ -143,6 +162,10 @@ export default new Vuex.Store({
       getEquipamientosAula(state) {
 
           return state.equipamientos;
+      },
+      getAulas(state) {
+
+          return state.aulas;
       }
 
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="container box-center">
+  <div class="box-center">
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-sm-2 col-md-6 col-md-3 center">
         <h1>Bienvenido {{this.$store.getters.getUserName}}</h1>
@@ -20,7 +20,6 @@
 
 <script>
     import Question from './formulario/Question.vue';
-    import Answer from './formulario/Answer.vue';
     import Transit from './formulario/Transit.vue';
     import router from '../../router'
 
@@ -36,15 +35,11 @@
           answered(isCorrect) {
               if (isCorrect) {
                   this.mode = 'app-transit';
-              } else {
-                  this.mode = 'app-answer';
-
               }
           }
       },
       components: {
           appQuestion: Question,
-          appAnswer: Answer,
           appTransit: Transit,
       },
       beforeCreate() {
