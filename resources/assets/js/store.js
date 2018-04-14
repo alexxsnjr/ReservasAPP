@@ -7,16 +7,16 @@ import router from './router'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
+
+ const state= {
     idToken: null,
     userId: null,
     userName: null,
     aulas: [],
     tipos: [],
     equipamientos: [],
-  },
-  mutations: {
+  };
+ const mutations ={
     tokenUser (state, userData) {
       state.idToken = userData.token
 
@@ -41,8 +41,8 @@ export default new Vuex.Store({
       state.idToken = null
     }
 
-  },
-  actions: {
+  };
+  const actions= {
     login ({commit, dispatch}, authData) {
 
       axios.post('/login', {
@@ -58,7 +58,6 @@ export default new Vuex.Store({
             });
             dispatch('fetchUser');
 
-
         })
     },
       logout ({commit}) {
@@ -67,8 +66,8 @@ export default new Vuex.Store({
           router.replace('/signin')
       },
       reservar ({commit, state},  data) {
-
-          axios.post('/reservar', data , {
+            console.log(data)
+          axios.post('/reservar.vue', data , {
               headers: { Authorization: `Bearer ${state.idToken}` }
           } )
               .then(res => {
@@ -143,8 +142,8 @@ export default new Vuex.Store({
               })
       }
 
-  },
-  getters: {
+  };
+  const getters = {
        isAuthenticated (state) {
           if (state.idToken !== null){
             return true;
@@ -168,5 +167,11 @@ export default new Vuex.Store({
           return state.aulas;
       }
 
-  }
+  };
+
+export default new Vuex.Store({
+    state,
+    getters,
+    actions,
+    mutations,
 })

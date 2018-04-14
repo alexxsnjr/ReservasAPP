@@ -8,10 +8,14 @@ import Vue from 'vue'
 
 import axios from 'axios'
 
-import router from './components/router'
-import store from './components/store'
+import router from './router'
+import store from './store'
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
 
-require('./bootstrap');
+Vue.use(VueMaterial)
+
 
 window.Vue = require('vue');
 

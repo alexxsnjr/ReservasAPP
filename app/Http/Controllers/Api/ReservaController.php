@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Aula;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ReservaController extends Controller
 {
     public function comprobarDisponibilidad(Request $request)
     {
-        $aulas = Aula::where('tipo', '=' ,$request->tipo)->get();
+        $aulas = DB::table('aulas')
+            ->where([
+                ['tipo', '=' ,$request->tipo],
+                ['tipo', '=' ,$request->tipo],
+                ['tipo', '=' ,$request->tipo],
+                ['tipo', '=' ,$request->tipo],
+                ])
+            ->get();
 
 
         return response()->json(compact('aulas'));

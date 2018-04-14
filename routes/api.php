@@ -25,7 +25,7 @@ Route::group([
 
         Route::get('tipos' , 'GetInfoController@getTipo');
         Route::get('equipamiento' , 'GetInfoController@getEquipamiento');
-        Route::post('reservar' , 'ReservaController@comprobarDisponibilidad');
+        Route::post('reservar.vue' , 'ReservaController@comprobarDisponibilidad');
 
 
     });
