@@ -104,7 +104,7 @@
                 }
 
                 if (finish){
-                    
+
                 }
 
                 this.tipos = this.$store.getters.getTiposAula
