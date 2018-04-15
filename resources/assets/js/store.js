@@ -12,7 +12,7 @@ Vue.use(Vuex)
     idToken: null,
     userId: null,
     userName: null,
-    aulas: [],
+    aulas: null,
     tipos: [],
     equipamientos: [],
   };
@@ -71,7 +71,7 @@ Vue.use(Vuex)
               headers: { Authorization: `Bearer ${state.idToken}` }
           } )
               .then(res => {
-
+                console.log(res)
                   const data = [];
 
                   for (var i = 0 ; i < res.data.aulas.length ; i++){
@@ -81,8 +81,6 @@ Vue.use(Vuex)
 
                   commit('aulas', data);
 
-
-                  router.replace('/aulas-disponibles')
 
               }).catch(error =>{
                 console.log(error);

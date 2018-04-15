@@ -11902,8 +11902,6 @@ module.exports = defaults;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_dashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_dashboard_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_formulario_Answer_vue__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_formulario_Answer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_formulario_Answer_vue__);
 
 
 
@@ -11914,7 +11912,7 @@ module.exports = defaults;
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
-var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue___default.a }, { path: '/signin', component: __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue___default.a }, { path: '/dashboard', component: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_dashboard_vue___default.a }, { path: '/aulas-disponibles', component: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_formulario_Answer_vue___default.a }];
+var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue___default.a }, { path: '/signin', component: __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue___default.a }, { path: '/dashboard', component: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_dashboard_vue___default.a }];
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({ mode: 'history', routes: routes }));
 
@@ -12405,7 +12403,7 @@ var state = {
     idToken: null,
     userId: null,
     userName: null,
-    aulas: [],
+    aulas: null,
     tipos: [],
     equipamientos: []
 };
@@ -12463,7 +12461,7 @@ var actions = {
         __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/reservar.vue', data, {
             headers: { Authorization: 'Bearer ' + state.idToken }
         }).then(function (res) {
-
+            console.log(res);
             var data = [];
 
             for (var i = 0; i < res.data.aulas.length; i++) {
@@ -12471,8 +12469,6 @@ var actions = {
             }
 
             commit('aulas', data);
-
-            __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].replace('/aulas-disponibles');
         }).catch(function (error) {
             console.log(error);
         });
@@ -16789,7 +16785,7 @@ if (inBrowser && window.Vue) {
 "use strict";
 /* unused harmony export Store */
 /* unused harmony export install */
-/* unused harmony export mapState */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapState; });
 /* unused harmony export mapMutations */
 /* unused harmony export mapGetters */
 /* unused harmony export mapActions */
@@ -18046,6 +18042,22 @@ exports.push([module.i, "\n.md-card[data-v-3aa99c97]{\n    margin-top: 15px;\n}\
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(40);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -18129,8 +18141,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             cuarto: false,
             quinto: false,
             sexto: false,
-            tipos: [],
-            equipamientos: [],
             formData: {
                 fecha: "",
                 aforo: "",
@@ -18143,25 +18153,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     methods: {
-        setDone: function setDone(id, index, finish) {
+        setDone: function setDone(id, index) {
 
             this[id] = true;
 
-            this.secondStepError = null;
-
             if (index) {
                 this.active = index;
+            } else {
+
+                this.$store.dispatch('reservar', {
+                    fecha: this.formData.fecha,
+                    aforo: this.formData.aforo,
+                    turno: this.formData.turno,
+                    hora: this.formData.hora,
+                    tipo: this.formData.tipo,
+                    requerimientos: this.formData.requerimientos
+
+                });
             }
-
-            if (finish) {}
-
-            this.tipos = this.$store.getters.getTiposAula;
-            this.equipamientos = this.$store.getters.getEquipamientosAula;
         }
-    }
-    /*computed: mapGetters([
-        this.tipos = 'getTiposAula',
-    ]),*/
+    },
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])(['tipos', 'equipamientos', 'aulas']))
 
 });
 
@@ -18173,390 +18185,450 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "md-steppers",
-        {
-          attrs: { "md-active-step": _vm.active, "md-linear": "" },
-          on: {
-            "update:mdActiveStep": function($event) {
-              _vm.active = $event
-            }
-          }
-        },
-        [
-          _c(
-            "md-step",
-            {
-              attrs: { id: "primer", "md-label": "Dia", "md-done": _vm.primer },
-              on: {
-                "update:mdDone": function($event) {
-                  _vm.primer = $event
-                }
-              }
-            },
-            [
-              _c(
-                "div",
-                [
-                  _c("span", { staticClass: "md-display-2" }, [
-                    _vm._v("Seleccione el dia de la reserva")
-                  ]),
-                  _vm._v(" "),
-                  _c("md-datepicker", {
-                    model: {
-                      value: _vm.formData.fecha,
-                      callback: function($$v) {
-                        _vm.$set(_vm.formData, "fecha", $$v)
-                      },
-                      expression: "formData.fecha"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "md-button",
-                {
-                  staticClass: "md-raised md-primary",
-                  on: {
-                    click: function($event) {
-                      _vm.setDone("primer", "segundo")
-                    }
-                  }
-                },
-                [_vm._v("Continue")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "md-step",
-            {
-              attrs: {
-                id: "segundo",
-                "md-label": "Turno",
-                "md-done": _vm.segundo
-              },
-              on: {
-                "update:mdDone": function($event) {
-                  _vm.segundo = $event
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "center" }, [
+  return _c("div", [
+    _vm.aulas
+      ? _c(
+          "div",
+          {
+            staticClass: "center",
+            staticStyle: { background: "white", padding: "50px 10px 50px 10px" }
+          },
+          [
+            _c(
+              "div",
+              [
                 _c("span", { staticClass: "md-display-2" }, [
-                  _vm._v("Seleccione el turno de la reserva")
+                  _vm._v("Aulas Disponibles")
                 ]),
-                _vm._v(" "),
                 _c("br"),
                 _c("br"),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "button",
-                    on: {
-                      click: function($event) {
-                        _vm.setDone("segundo", "tercer")
-                        _vm.formData.turno = "mañana"
-                      }
-                    }
-                  },
-                  [_vm._v("Mañana")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "button",
-                    on: {
-                      click: function($event) {
-                        _vm.setDone("segundo", "tercer")
-                        _vm.formData.turno = "tarde"
-                      }
-                    }
-                  },
-                  [_vm._v("Tarde")]
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "md-step",
-            {
-              attrs: {
-                id: "tercer",
-                "md-label": "Hora",
-                "md-done": _vm.tercer
-              },
-              on: {
-                "update:mdDone": function($event) {
-                  _vm.tercer = $event
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "center" }, [
-                _c("span", { staticClass: "md-display-2" }, [
-                  _vm._v("Seleccione la hora de la reserva")
-                ]),
-                _vm._v(" "),
-                _c("br"),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "button",
-                    on: {
-                      click: function($event) {
-                        _vm.setDone("tercer", "cuarto")
-                        _vm.formData.hora = "1"
-                      }
-                    }
-                  },
-                  [_vm._v("1º HORA")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "button",
-                    on: {
-                      click: function($event) {
-                        _vm.setDone("tercer", "cuarto")
-                        _vm.formData.hora = "2"
-                      }
-                    }
-                  },
-                  [_vm._v("2º HORA")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "button",
-                    on: {
-                      click: function($event) {
-                        _vm.setDone("tercer", "cuarto")
-                        _vm.formData.hora = "3"
-                      }
-                    }
-                  },
-                  [_vm._v("3º HORA")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "button",
-                    on: {
-                      click: function($event) {
-                        _vm.setDone("tercer", "cuarto")
-                        _vm.formData.hora = "4"
-                      }
-                    }
-                  },
-                  [_vm._v("4º HORA")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "button",
-                    on: {
-                      click: function($event) {
-                        _vm.setDone("tercer", "cuarto")
-                        _vm.formData.hora = "5"
-                      }
-                    }
-                  },
-                  [_vm._v("5º HORA")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "button",
-                    on: {
-                      click: function($event) {
-                        _vm.setDone("tercer", "cuarto")
-                        _vm.formData.hora = "6"
-                      }
-                    }
-                  },
-                  [_vm._v("6º HORA")]
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "md-step",
-            {
-              attrs: {
-                id: "cuarto",
-                "md-label": "Aforo",
-                "md-done": _vm.cuarto
-              },
-              on: {
-                "update:mdDone": function($event) {
-                  _vm.cuarto = $event
-                }
-              }
-            },
-            [
-              _c("span", { staticClass: "md-display-2" }, [
-                _vm._v("Seleccione cuantos sitios necesita")
-              ]),
-              _vm._v(" "),
-              _c(
-                "md-field",
-                [
-                  _c("md-input", {
-                    attrs: { type: "number" },
-                    model: {
-                      value: _vm.formData.aforo,
-                      callback: function($$v) {
-                        _vm.$set(_vm.formData, "aforo", $$v)
-                      },
-                      expression: "formData.aforo"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "md-button",
-                {
-                  staticClass: "md-raised md-primary",
-                  on: {
-                    click: function($event) {
-                      _vm.setDone("cuarto", "quinto")
-                    }
-                  }
-                },
-                [_vm._v("Continue")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "md-step",
-            {
-              attrs: {
-                id: "quinto",
-                "md-label": "Tipo",
-                "md-done": _vm.quinto
-              },
-              on: {
-                "update:mdDone": function($event) {
-                  _vm.quinto = $event
-                }
-              }
-            },
-            [
-              _vm._l(_vm.tipos, function(tipo) {
-                return _c("div", { staticClass: "center" }, [
-                  _c(
+                _vm._l(_vm.aulas, function(aula) {
+                  return _c(
                     "button",
                     {
                       staticClass: "button",
                       on: {
                         click: function($event) {
-                          _vm.setDone("quinto", "sexto")
+                          _vm.setDone("segundo", "tercer")
                         }
                       }
                     },
-                    [_vm._v(_vm._s(tipo))]
+                    [_vm._v(_vm._s(aula))]
                   )
-                ])
-              }),
-              _vm._v(" "),
-              _c("br")
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _c(
-            "md-step",
-            {
-              attrs: {
-                id: "sexto",
-                "md-label": "Requerimientos",
-                "md-description": "Optional",
-                "md-done": _vm.sexto
-              },
-              on: {
-                "update:mdDone": function($event) {
-                  _vm.sexto = $event
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("br"),
+            _c("br"),
+            _vm._v(" "),
+            _c("span", { staticClass: "md-caption" }, [
+              _vm._v(
+                "\n            Seleccione un aula para hacer la reserva, en el dia y la hora Seleccionado anteriormente\n        "
+              )
+            ])
+          ]
+        )
+      : _c(
+          "div",
+          [
+            _c(
+              "md-steppers",
+              {
+                attrs: { "md-active-step": _vm.active, "md-linear": "" },
+                on: {
+                  "update:mdActiveStep": function($event) {
+                    _vm.active = $event
+                  }
                 }
-              }
-            },
-            [
-              _c("div", { staticClass: "center" }, [
-                _c("span", { staticClass: "md-display-2 " }, [
-                  _vm._v("Seleccione el equipamiento ")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("br"),
-              _c("br"),
-              _vm._v(" "),
-              _vm._l(_vm.equipamientos, function(equipamiento) {
-                return _c(
-                  "div",
-                  { staticStyle: { display: "inline-block" } },
+              },
+              [
+                _c(
+                  "md-step",
+                  {
+                    attrs: {
+                      id: "primer",
+                      "md-label": "Dia",
+                      "md-done": _vm.primer
+                    },
+                    on: {
+                      "update:mdDone": function($event) {
+                        _vm.primer = $event
+                      }
+                    }
+                  },
                   [
                     _c(
-                      "md-checkbox",
-                      {
-                        attrs: { value: equipamiento },
-                        model: {
-                          value: _vm.formData.requerimientos,
-                          callback: function($$v) {
-                            _vm.$set(_vm.formData, "requerimientos", $$v)
+                      "div",
+                      [
+                        _c("span", { staticClass: "md-display-2" }, [
+                          _vm._v("Seleccione el dia de la reserva")
+                        ]),
+                        _vm._v(" "),
+                        _c("md-datepicker", {
+                          model: {
+                            value: _vm.formData.fecha,
+                            callback: function($$v) {
+                              _vm.$set(_vm.formData, "fecha", $$v)
+                            },
+                            expression: "formData.fecha"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.formData.fecha
+                      ? _c(
+                          "md-button",
+                          {
+                            staticClass: "md-raised md-primary",
+                            on: {
+                              click: function($event) {
+                                _vm.setDone("primer", "segundo")
+                              }
+                            }
                           },
-                          expression: "formData.requerimientos"
-                        }
-                      },
-                      [_vm._v(_vm._s(equipamiento))]
-                    )
+                          [_vm._v("Continue")]
+                        )
+                      : _vm._e()
                   ],
                   1
-                )
-              }),
-              _vm._v(" "),
-              _c(
-                "md-button",
-                {
-                  staticClass: "md-raised md-primary",
-                  on: {
-                    click: function($event) {
-                      _vm.setDone("sexto")
+                ),
+                _vm._v(" "),
+                _c(
+                  "md-step",
+                  {
+                    attrs: {
+                      id: "segundo",
+                      "md-label": "Turno",
+                      "md-done": _vm.segundo
+                    },
+                    on: {
+                      "update:mdDone": function($event) {
+                        _vm.segundo = $event
+                      }
                     }
-                  }
-                },
-                [_vm._v("Continue")]
-              )
-            ],
-            2
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
+                  },
+                  [
+                    _c("div", { staticClass: "center" }, [
+                      _c("span", { staticClass: "md-display-2" }, [
+                        _vm._v("Seleccione el turno de la reserva")
+                      ]),
+                      _vm._v(" "),
+                      _c("br"),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button",
+                          on: {
+                            click: function($event) {
+                              _vm.setDone("segundo", "tercer")
+                              _vm.formData.turno = "mañana"
+                            }
+                          }
+                        },
+                        [_vm._v("Mañana")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button",
+                          on: {
+                            click: function($event) {
+                              _vm.setDone("segundo", "tercer")
+                              _vm.formData.turno = "tarde"
+                            }
+                          }
+                        },
+                        [_vm._v("Tarde")]
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "md-step",
+                  {
+                    attrs: {
+                      id: "tercer",
+                      "md-label": "Hora",
+                      "md-done": _vm.tercer
+                    },
+                    on: {
+                      "update:mdDone": function($event) {
+                        _vm.tercer = $event
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "center" }, [
+                      _c("span", { staticClass: "md-display-2" }, [
+                        _vm._v("Seleccione la hora de la reserva")
+                      ]),
+                      _vm._v(" "),
+                      _c("br"),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button",
+                          on: {
+                            click: function($event) {
+                              _vm.setDone("tercer", "cuarto")
+                              _vm.formData.hora = "1"
+                            }
+                          }
+                        },
+                        [_vm._v("1º HORA")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button",
+                          on: {
+                            click: function($event) {
+                              _vm.setDone("tercer", "cuarto")
+                              _vm.formData.hora = "2"
+                            }
+                          }
+                        },
+                        [_vm._v("2º HORA")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button",
+                          on: {
+                            click: function($event) {
+                              _vm.setDone("tercer", "cuarto")
+                              _vm.formData.hora = "3"
+                            }
+                          }
+                        },
+                        [_vm._v("3º HORA")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button",
+                          on: {
+                            click: function($event) {
+                              _vm.setDone("tercer", "cuarto")
+                              _vm.formData.hora = "4"
+                            }
+                          }
+                        },
+                        [_vm._v("4º HORA")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button",
+                          on: {
+                            click: function($event) {
+                              _vm.setDone("tercer", "cuarto")
+                              _vm.formData.hora = "5"
+                            }
+                          }
+                        },
+                        [_vm._v("5º HORA")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button",
+                          on: {
+                            click: function($event) {
+                              _vm.setDone("tercer", "cuarto")
+                              _vm.formData.hora = "6"
+                            }
+                          }
+                        },
+                        [_vm._v("6º HORA")]
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "md-step",
+                  {
+                    attrs: {
+                      id: "cuarto",
+                      "md-label": "Aforo",
+                      "md-done": _vm.cuarto
+                    },
+                    on: {
+                      "update:mdDone": function($event) {
+                        _vm.cuarto = $event
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { staticClass: "md-display-2" }, [
+                      _vm._v("Introduzca cuantos sitios necesita")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "md-field",
+                      [
+                        _c("md-input", {
+                          attrs: { type: "number" },
+                          model: {
+                            value: _vm.formData.aforo,
+                            callback: function($$v) {
+                              _vm.$set(_vm.formData, "aforo", $$v)
+                            },
+                            expression: "formData.aforo"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.formData.aforo
+                      ? _c(
+                          "md-button",
+                          {
+                            staticClass: "md-raised md-primary",
+                            on: {
+                              click: function($event) {
+                                _vm.setDone("cuarto", "quinto")
+                              }
+                            }
+                          },
+                          [_vm._v("Continue")]
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "md-step",
+                  {
+                    attrs: {
+                      id: "quinto",
+                      "md-label": "Tipo",
+                      "md-done": _vm.quinto
+                    },
+                    on: {
+                      "update:mdDone": function($event) {
+                        _vm.quinto = $event
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { staticClass: "md-display-2" }, [
+                      _vm._v("Seleccione el tipo de aula requerida")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.tipos, function(tipo) {
+                      return _c("div", { staticClass: "center" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "button",
+                            on: {
+                              click: function($event) {
+                                _vm.setDone("quinto", "sexto")
+                                _vm.formData.tipo = tipo
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(tipo))]
+                        )
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("br")
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "md-step",
+                  {
+                    attrs: {
+                      id: "sexto",
+                      "md-label": "Requerimientos",
+                      "md-description": "Optional",
+                      "md-done": _vm.sexto
+                    },
+                    on: {
+                      "update:mdDone": function($event) {
+                        _vm.sexto = $event
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "center" }, [
+                      _c("span", { staticClass: "md-display-2 " }, [
+                        _vm._v("Seleccione el equipamiento ")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _c("br"),
+                    _vm._v(" "),
+                    _vm._l(_vm.equipamientos, function(equipamiento) {
+                      return _c(
+                        "div",
+                        { staticStyle: { display: "inline-block" } },
+                        [
+                          _c(
+                            "md-checkbox",
+                            {
+                              attrs: { value: equipamiento },
+                              model: {
+                                value: _vm.formData.requerimientos,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.formData, "requerimientos", $$v)
+                                },
+                                expression: "formData.requerimientos"
+                              }
+                            },
+                            [_vm._v(_vm._s(equipamiento))]
+                          )
+                        ],
+                        1
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "md-button",
+                      {
+                        staticClass: "md-raised md-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.setDone("sexto")
+                          }
+                        }
+                      },
+                      [_vm._v("Continue")]
+                    )
+                  ],
+                  2
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -18885,7 +18957,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         email: this.email,
         password: this.password
       };
-      console.log(formData);
+
       this.$store.dispatch('login', { email: formData.email, password: formData.password });
     }
   }
@@ -18990,200 +19062,11 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(58)
-}
-var normalizeComponent = __webpack_require__(4)
-/* script */
-var __vue_script__ = __webpack_require__(60)
-/* template */
-var __vue_template__ = __webpack_require__(61)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/dashboard/formulario/Answer.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-01ee8d99", Component.options)
-  } else {
-    hotAPI.reload("data-v-01ee8d99", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(59);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("5813c4d0", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-01ee8d99\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Answer.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-01ee8d99\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Answer.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.box-center {\n    margin: 30px auto;\n    border: 1px solid #eee;\n    padding: 20px;\n    -webkit-box-shadow: 0 2px 3px #ccc;\n            box-shadow: 0 2px 3px #ccc;\n}\n.center {\n    margin: auto;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 60 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            aulas: []
-        };
-    },
-
-    methods: {},
-    mounted: function mounted() {
-        this.aulas = this.$store.getters.getAulas;
-        console.log(this.aulas);
-    }
-});
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "box-center" }, [
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-xs-12 col-sm-8 col-sm-2 col-md-6 col-md-3 center" },
-        [
-          _c("div", { staticClass: "card " }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-body" },
-              _vm._l(_vm.aulas, function(aula) {
-                return _c("div", { staticClass: "col-xs-12 col-sm-6 center" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary btn-sm",
-                      staticStyle: { margin: "10px" }
-                    },
-                    [_vm._v(_vm._s(aula))]
-                  )
-                ])
-              })
-            )
-          ])
-        ]
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header col-xs-12 col-sm-6 center" }, [
-      _c("h3", { staticClass: "panel-title text-justify" }, [
-        _vm._v("Aulas disponibles")
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-01ee8d99", module.exports)
-  }
-}
-
-/***/ }),
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
 /* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 

@@ -1,5 +1,17 @@
 <template>
     <div>
+        <div class="center" style="background: white; padding: 50px 10px 50px 10px" v-if="aulas">
+            <div >
+                <span class="md-display-2">Aulas Disponibles</span><br><br>
+                <button v-for="aula of aulas" class="button" @click="setDone('segundo', 'tercer')">{{aula}}</button>
+
+            </div>
+            <br><br>
+            <span class="md-caption">
+                Seleccione un aula para hacer la reserva, en el dia y la hora Seleccionado anteriormente
+            </span>
+        </div>
+        <div v-else>
         <md-steppers :md-active-step.sync="active" md-linear>
             <md-step id="primer" md-label="Dia"  :md-done.sync="primer">
                     <div>
@@ -8,7 +20,7 @@
 
                         </md-datepicker>
                     </div>
-                <md-button class="md-raised md-primary" @click="setDone('primer', 'segundo')">Continue</md-button>
+                <md-button class="md-raised md-primary" @click="setDone('primer', 'segundo')" v-if="formData.fecha ">Continue</md-button>
             </md-step>
 
             <md-step id="segundo" md-label="Turno"  :md-done.sync="segundo">
@@ -36,17 +48,18 @@
                 </div>
             </md-step>
             <md-step id="cuarto" md-label="Aforo"  :md-done.sync="cuarto">
-                <span class="md-display-2">Seleccione cuantos sitios necesita</span>
+                <span class="md-display-2">Introduzca cuantos sitios necesita</span>
                 <md-field>
                     <md-input v-model="formData.aforo" type="number"></md-input>
                 </md-field>
-                <md-button class="md-raised md-primary" @click="setDone('cuarto', 'quinto')">Continue</md-button>
+                <md-button v-if="formData.aforo " class="md-raised md-primary" @click="setDone('cuarto', 'quinto')">Continue</md-button>
             </md-step>
 
             <md-step id="quinto" md-label="Tipo"  :md-done.sync="quinto">
+                <span class="md-display-2">Seleccione el tipo de aula requerida</span>
 
                 <div class="center" v-for="tipo of tipos">
-                <button class="button" @click="setDone('quinto', 'sexto')">{{tipo}}</button>
+                <button class="button" @click="setDone('quinto', 'sexto'); formData.tipo=tipo">{{tipo}}</button>
 
                 </div>
                 <br>
@@ -64,11 +77,12 @@
                 <md-button class="md-raised md-primary" @click="setDone('sexto')">Continue</md-button>
             </md-step>
         </md-steppers>
+        </div>
     </div>
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+    import { mapState } from 'vuex';
 
     export default {
         name: 'StepperLinear',
@@ -80,8 +94,6 @@
             cuarto: false,
             quinto: false,
             sexto: false,
-            tipos: [],
-            equipamientos: [],
             formData: {
                 fecha: "",
                 aforo:"",
@@ -89,31 +101,35 @@
                 hora:"",
                 tipo:"",
                 requerimientos: []
-            }
+            },
+
 
         }),
         methods: {
-            setDone (id, index , finish) {
+            setDone (id, index ) {
 
                 this[id] = true
 
-                this.secondStepError = null
-
                 if (index) {
                     this.active = index
+                }else{
+
+                    this.$store.dispatch('reservar', {
+                        fecha : this.formData.fecha,
+                        aforo: this.formData.aforo,
+                        turno: this.formData.turno,
+                        hora: this.formData.hora,
+                        tipo: this.formData.tipo,
+                        requerimientos: this.formData.requerimientos,
+
+
+                    });
                 }
-
-                if (finish){
-
-                }
-
-                this.tipos = this.$store.getters.getTiposAula
-                this.equipamientos = this.$store.getters.getEquipamientosAula
             },
         },
-        /*computed: mapGetters([
-            this.tipos = 'getTiposAula',
-        ]),*/
+        computed: {
+            ...mapState(['tipos', 'equipamientos','aulas'])
+        }
 
 
     }
