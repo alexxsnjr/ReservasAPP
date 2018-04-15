@@ -9,14 +9,26 @@ class Edificio extends Model
 
     protected $fillable = ['nombre'];
 
-    public function plantas()
+    public function planta()
     {
         return $this->hasMany(Planta::class);
     }
 
-    public function aulas()
+    public function aula()
     {
         return $this->hasMany(Aula::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($edificio) {
+
+            $edificio->planta->each->delete();
+            $edificio->aula->each->delete();
+
+        });
     }
 
 }

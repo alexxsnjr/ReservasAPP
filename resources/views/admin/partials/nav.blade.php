@@ -19,12 +19,12 @@
                     Ver listado de aulas
                 </a>
             </li>
-            <li {{ request()->is('aulas/importar-xml') ? 'class=active' : '' }}>
-                <a href="{{ route('aulas.importarXML') }}">
-                    <i class="fa fa-folder-open"></i>
-                    Cargar XML
-                </a>
-            </li>
         </ul>
+    </li>
+    <li class="header">Configuración</li>
+    <li {{ request()->is('importar-xml') ? 'class=active' : '' }}>
+        <a href="{{ route('importarXML') }}">
+            <i class="fa fa-folder-open"></i> <span>Importar XML</span>
+        </a>
     </li>
 </ul>

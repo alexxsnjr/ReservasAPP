@@ -53,7 +53,7 @@ Route::put('/aulas/{id}/equipamiento-editar', 'EquipamientosController@update')-
 Route::delete('/aulas/{id}/equipamiento-borrar','EquipamientosController@borrar')->name('equipamiento.borrar');
 
 
-//XML AULAS
-Route::get('/aulas/importar-xml','XMLController@aulas')->name('aulas.importarXML');
-Route::post('/aulas/importar-xml','XMLController@importarAulas')->name('aulas.importar');
-Route::post('/aulas/subir-xml','XMLController@subirAulas')->name('aulas.subirXML');
+//XML
+Route::get('/importar-xml','XMLController@index')->name('importarXML');
+Route::post('/subir-xml','XMLController@subirArchivo')->name('subirXML');
+Route::post('/importar-xml','XMLController@importar')->name('importar');

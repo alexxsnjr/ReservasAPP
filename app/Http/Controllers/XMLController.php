@@ -7,6 +7,7 @@ use App\Aula;
 use App\Edificio;
 use App\Equipamiento;
 use App\Planta;
+use App\Profesor;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -20,14 +21,14 @@ class XMLController extends Controller
         $this->middleware('auth');
     }
 
-    public function aulas()
+    public function index()
     {
 
-        return view('admin/aulas/xml');
+        return view('admin/importar/xml');
 
     }
 
-    public function subirAulas(Request $request)
+    public function subirArchivo(Request $request)
     {
 
         $this->validate(request(), [
@@ -50,8 +51,37 @@ class XMLController extends Controller
 
     }
 
-    public function importarAulas()
+    public function importar(Request $request)
     {
+
+        $this->validate(request(), [
+            'tipoFichero' => 'required'
+        ]);
+
+        if($request->tipoFichero === 'aulas'){
+
+            return $this->importarAulas($request->confirmar);
+
+        }elseif($request->tipoFichero === 'usuarios'){
+
+            return $this->importarUsuarios($request->confirmar);
+
+        }elseif($request->tipoFichero === 'reservas'){
+
+            return $this->importarReservas($request->confirmar);
+
+        }
+
+    }
+
+    public function importarAulas($delete)
+    {
+        //Si marcas eliminar datos actuales borra el contenido de las tablas antes de insertar
+        if($delete) {
+
+            Edificio::all()->each->delete();
+
+        }
 
         $xmlPath = str_replace('storage', 'public', auth()->user()->xml);
         //Lectura fichero XML del servidor
@@ -100,7 +130,45 @@ class XMLController extends Controller
 
         }
 
-        return redirect()->back()->with('success',  'El fichero ha sido importado correctamente!');
+        return redirect('/importar-xml')->with('success',  'El fichero de aulas ha sido importado correctamente!');
+
+    }
+
+    public function importarUsuarios($delete)
+    {
+
+        //Si marcas eliminar datos actuales borra el contenido de las tablas antes de insertar
+        if($delete) {
+
+            Profesor::all()->each->delete();
+
+        }
+
+        $xmlPath = str_replace('storage', 'public', auth()->user()->xml);
+        //Lectura fichero XML del servidor
+        $contents = File::get(public_path().'/../storage/app'.$xmlPath);
+        //Conversion a array
+        $xml = simplexml_load_string($contents);
+        //Algoritmo de almacenamiento en BD
+        foreach ($xml->usuario as $usuarioXML) {
+
+            $profesor = new Profesor;
+            $profesor->name = $usuarioXML->nombre;
+            $profesor->email = $usuarioXML->email;
+            $profesor->password = bcrypt('123456');
+            $profesor->remember_token = ' ';
+            $profesor->save();
+
+        }
+
+        return redirect('/importar-xml')->with('success',  'El fichero de usuarios ha sido importado correctamente!');
+
+    }
+
+    public function importarReservas($delete)
+    {
+
+        return 'en proceso';
 
     }
 

@@ -9,14 +9,25 @@ class Planta extends Model
 
     protected $fillable = ['edificio_id','piso'];
 
-    public function edificios()
+    public function edificio()
     {
         return $this->belongsTo(Edificio::class);
     }
 
-    public function aulas()
+    public function aula()
     {
         return $this->hasMany(Aula::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($planta) {
+
+            $planta->aula->each->delete();
+
+        });
     }
 
 }
