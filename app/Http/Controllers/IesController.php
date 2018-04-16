@@ -5,18 +5,19 @@ namespace App\Http\Controllers;
 use App\Ies;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class IesController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('primerlogin');
+        $this->middleware('asistente');
+
     }
 
-    public function index()
+    public function asistente()
     {
-        return view('admin/admin');
-    }
 
+        return view('admin/asistente/index');
+
+    }
 }

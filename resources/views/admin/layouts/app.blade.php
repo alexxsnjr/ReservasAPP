@@ -22,7 +22,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
-    <link rel="stylesheet" href="/adminlte/dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="/adminlte/dist/css/skins/skin-black.min.css">
+    <!--Animaciones-->
+    <link rel="stylesheet" href="/js/animsition/css/animsition.css">
 @stack('styles')
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,7 +57,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
 
     <!-- Main Header -->
@@ -102,7 +104,7 @@ desired effect
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default">Editar usuario</a>
+                                    <a href="#" class="btn btn-default">Editar centro</a>
                                 </div>
 
                                 <form action="{{ route('logout') }}" method="POST">
@@ -178,6 +180,10 @@ desired effect
 
 <!-- AdminLTE App -->
 <script src="/adminlte/dist/js/adminlte.min.js"></script>
+
+<!--Aminaciones-->
+<script src="/js/animsition/js/animsition.js"></script>
+<script src="/js/transicion.js"></script>
 @stack('scripts')
 </body>
 </html>

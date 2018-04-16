@@ -46,18 +46,24 @@
                                                 <td>{{ $aula->tipo }}</td>
                                                 <td>{{ $aula->aforo }}</td>
                                                 <td>
+                                                    <div class="btn-group">
+                                                        <a href="{{ route('aulas.ver',$aula->id) }}" class="btn btn-sm btn-info"><span class="fa fa-eye"></span> Ver más</a>
+                                                        <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="fa fa-angle-down"></span>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a href="{{ route('aulas.editar',$aula->id) }}" class="btn btn-primary"><span class="fa fa-pencil"></span> Editar</a>
+                                                            <br><br>
+                                                            {!! Form::open(['action' => ['AulasController@borrar', $aula->id], 'method' => 'DELETE', 'style' => 'display:inline;']) !!}
 
-                                                    <a href="{{ route('aulas.ver',$aula->id) }}" class="btn btn-sm btn-success"><span class="fa fa-eye"></span></a>
-                                                    <a href="{{ route('aulas.editar',$aula->id) }}" class="btn btn-sm btn-primary"><span class="fa fa-pencil"></span></a>
+                                                            <button class="btn btn-danger"
+                                                                    onclick="return confirm('¿Seguro que quiere eliminar esta aula? Se eliminaran tanto sus equipaciones como sus reservas.')">
+                                                                <span class="fa fa-trash"></span> Eliminar
+                                                            </button>
 
-                                                    {!! Form::open(['action' => ['AulasController@borrar', $aula->id], 'method' => 'DELETE', 'style' => 'display:inline;']) !!}
-
-                                                    <button class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('¿Seguro que quiere eliminar esta aula? Se eliminaran tanto sus equipaciones como sus reservas.')">
-                                                        <span class="fa fa-trash"></span>
-                                                    </button>
-
-                                                    {!! Form::close() !!}
+                                                            {!! Form::close() !!}
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
