@@ -18,6 +18,7 @@ class Profesor extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    protected $guard = 'api';
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -42,9 +42,10 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
+            'driver' => 'session',
+            'provider' => 'profesores',
         ],
+
     ],
 
     /*

@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('login' , 'Api\AuthenticateController@authenticate')->name('login');
+Route::post('user' , 'Api\AuthenticateController@getUser')->name('user');
+
 
 Route::group([
     'namespace' =>  'Api',
@@ -30,6 +30,5 @@ Route::group([
 
     });
 
-Route::post('login' , 'Api\AuthenticateController@authenticate')->name('login');
-Route::post('user' , 'Api\AuthenticateController@getUser')->name('user');
+
 

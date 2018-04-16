@@ -26,6 +26,7 @@ Vue.use(Vuex)
         state.userName = userData.userName
 
     },
+     
     aulas (state, aulas){
         state.aulas = aulas;
     },
