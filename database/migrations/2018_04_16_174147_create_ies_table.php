@@ -17,7 +17,10 @@ class CreateIesTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->longText('descripcion');
-            $table->string('imagen');
+            $table->string('email');
+            $table->string('imagen')->nullable();
+            $table->string('color')->nullable();
+            $table->string('xml')->nullable();
             $table->timestamps();
         });
     }

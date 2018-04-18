@@ -62,5 +62,14 @@ Route::post('/subir-xml','XMLController@subirArchivo')->name('subirXML');
 Route::post('/importar-xml','XMLController@importar')->name('importar');
 
 
-//IES
-Route::get('/asistente','IesController@asistente')->name('asistente');
+//ASISTENTE IES
+Route::get('/asistente','IesController@index')->name('asistente');
+Route::get('/datos-centro','IesController@datos')->name('datosCentro');
+Route::post('/datos-centro','IesController@store')->name('datosCentro.store');
+Route::put('/datos-centro/{id}','IesController@anadirColor')->name('datosCentro.color');
+Route::post('/recargarimagen','IesController@recargarImagen')->name('recargarImagen');
+Route::get('/personalizar-centro','IesController@personalizar')->name('personalizarCentro');
+Route::post('/subir-imagen','IesController@subirImagen')->name('subirImagen');
+Route::get('/importar-datos','IesController@importarDatos')->name('importarDatos');
+Route::get('/consultardatos','IesController@consultarDatos')->name('consultarDatos');
+Route::get('/asistente-terminar','IesController@terminar')->name('asistenteTerminar');

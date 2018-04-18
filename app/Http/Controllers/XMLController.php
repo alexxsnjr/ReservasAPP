@@ -6,9 +6,9 @@ namespace App\Http\Controllers;
 use App\Aula;
 use App\Edificio;
 use App\Equipamiento;
+use App\Ies;
 use App\Planta;
 use App\Profesor;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -36,18 +36,18 @@ class XMLController extends Controller
         ]);
 
         $xml = request()->file('xml')->store('public');
-        $user= User::find(auth()->user()->id);
+        $centro= Ies::all()->first();
 
         //Si hay ya un archivo XML lo elimina e introduce el nuevo
-        if($user->xml != null){
+        if($centro->xml != null){
 
-            $xmlPath = str_replace('storage', 'public', $user->xml);
+            $xmlPath = str_replace('storage', 'public', $centro->xml);
             Storage::delete($xmlPath);
 
         }
 
-        $user->xml = Storage::url($xml);
-        $user->save();
+        $centro->xml = Storage::url($xml);
+        $centro->save();
 
     }
 
@@ -83,7 +83,9 @@ class XMLController extends Controller
 
         }
 
-        $xmlPath = str_replace('storage', 'public', auth()->user()->xml);
+        $centro= Ies::all()->first();
+
+        $xmlPath = str_replace('storage', 'public', $centro->xml);
         //Lectura fichero XML del servidor
         $contents = File::get(public_path().'/../storage/app'.$xmlPath);
         //Conversion a array
@@ -130,7 +132,7 @@ class XMLController extends Controller
 
         }
 
-        return redirect('/importar-xml')->with('success',  'El fichero de aulas ha sido importado correctamente!');
+        return redirect()->back()->with('success',  'El fichero de aulas ha sido importado correctamente!');
 
     }
 
@@ -144,7 +146,9 @@ class XMLController extends Controller
 
         }
 
-        $xmlPath = str_replace('storage', 'public', auth()->user()->xml);
+        $centro= Ies::all()->first();
+
+        $xmlPath = str_replace('storage', 'public', $centro->xml);
         //Lectura fichero XML del servidor
         $contents = File::get(public_path().'/../storage/app'.$xmlPath);
         //Conversion a array
@@ -161,7 +165,7 @@ class XMLController extends Controller
 
         }
 
-        return redirect('/importar-xml')->with('success',  'El fichero de usuarios ha sido importado correctamente!');
+        return redirect()->back()->with('success',  'El fichero de usuarios ha sido importado correctamente!');
 
     }
 
