@@ -95,7 +95,7 @@
             quinto: false,
             sexto: false,
             formData: {
-                fecha: "",
+                fecha: null,
                 aforo:"",
                 turno:"",
                 hora:"",
@@ -164,5 +164,6 @@
 .center{
     text-align:center;
     margin-top: 10px;
+    margin-bottom: 25px;
 }
 </style>

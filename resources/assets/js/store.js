@@ -26,7 +26,7 @@ Vue.use(Vuex)
         state.userName = userData.userName
 
     },
-     
+
     aulas (state, aulas){
         state.aulas = aulas;
     },
@@ -40,6 +40,10 @@ Vue.use(Vuex)
     },
     clearAuthData (state) {
       state.idToken = null
+        state.aulas = null
+        state.tipos = []
+        state.equipamientos = []
+      
     }
 
   };
@@ -114,7 +118,7 @@ Vue.use(Vuex)
 
         axios.get('/tipos', { headers: { Authorization: `Bearer ${state.idToken}` } })
         .then(res=>{
-
+            console.log(res)
             const data = [];
 
             for (var i = 0 ; i < res.data.tipos.length ; i++){
