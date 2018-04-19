@@ -62,7 +62,7 @@ Route::post('/subir-xml','XMLController@subirArchivo')->name('subirXML');
 Route::post('/importar-xml','XMLController@importar')->name('importar');
 
 
-//ASISTENTE IES
+//IES
 Route::get('/asistente','IesController@index')->name('asistente');
 Route::get('/datos-centro','IesController@datos')->name('datosCentro');
 Route::post('/datos-centro','IesController@store')->name('datosCentro.store');

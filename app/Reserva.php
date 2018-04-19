@@ -9,12 +9,12 @@ class Reserva extends Model
 
     protected $fillable = ['profesor_id','aula_id','fecha','hora'];
 
-    public function profesors()
+    public function profesor()
     {
         return $this->belongsTo(Profesor::class);
     }
 
-    public function aulas()
+    public function aula()
     {
         return $this->belongsTo(Aula::class);
     }

@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
-    <link rel="stylesheet" href="/adminlte/dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="/adminlte/dist/css/skins/skin-{{centro()->color}}.min.css">
 
     <!--Animaciones-->
     <link rel="stylesheet" href="/js/animsition/css/animsition.css">
@@ -58,7 +58,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-{{centro()->color}} sidebar-mini">
 <div class="wrapper">
 
     <!-- Main Header -->
@@ -88,18 +88,18 @@ desired effect
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="/img/fotocarnet.jpg" class="user-image" alt="User Image">
+                            <img src="{{centro()->imagen}}" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{ auth()->user()->name }}</span>
+                            <span class="hidden-xs">{{centro()->nombre}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="/img/fotocarnet.jpg" class="img-circle" alt="User Image">
+                                <img src="{{centro()->imagen}}" class="img-circle" alt="Centro Image">
 
                                 <p>
-                                    {{ auth()->user()->name }}
-                                    <small>Miembro desde: {{ auth()->user()->created_at->format('d/m/Y') }}</small>
+                                    {{centro()->nombre}}
+                                    <small>Funcionando desde: {{centro()->created_at->format('d/m/Y') }}</small>
                                 </p>
                             </li>
                             <!-- Menu Footer-->
@@ -130,10 +130,10 @@ desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="/img/fotocarnet.jpg" class="img-circle" alt="User Image">
+                    <img src="{{centro()->imagen}}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>{{ auth()->user()->name }}</p>
+                    <p>{{centro()->nombre}}</p>
                     <!-- Status -->
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
