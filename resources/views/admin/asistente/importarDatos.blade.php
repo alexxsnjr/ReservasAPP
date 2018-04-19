@@ -10,13 +10,13 @@
 
             <div class="box box-widget widget-user-2">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-{{ $centro[0]->color ? $centro[0]->color : 'blue' }}">
+                <div class="widget-user-header bg-{{ centro()->color ? centro()->color : 'blue' }}">
                     <div class="widget-user-image">
-                        <img id="imagen" class="img-circle" style="margin-right: 10px;" src="{{ $centro[0]->imagen ? $centro[0]->imagen : '/img/subirFoto.jpg' }}" alt="User Avatar">
+                        <img id="imagen" class="img-circle" style="margin-right: 10px;" src="{{ centro()->imagen ? centro()->imagen : '/img/subirFoto.jpg' }}" alt="User Avatar">
                     </div>
                     <!-- /.widget-user-image -->
-                    <h3 class="widget-user-username">{{ $centro[0]->nombre }}</h3>
-                    <h5 class="widget-user-desc">{{ $centro[0]->email }}</h5>
+                    <h3 class="widget-user-username">{{ centro()->nombre }}</h3>
+                    <h5 class="widget-user-desc">{{ centro()->email }}</h5>
                     <br><br>
                 </div>
                 <div class="box-footer no-padding">
@@ -120,8 +120,6 @@
                 dataType : 'json',
 
                 success : function(json) {
-
-                    console.log(json);
 
                     if(json.aulas=='1'){
 

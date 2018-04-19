@@ -20,7 +20,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-                <a href="{{ route('datosCentro') }}" class="btn btn-info pull-right animsition-link">Continuar</a>
+                <a href="{{ route('asistente.datosCentro') }}" class="btn btn-info pull-right animsition-link">Continuar</a>
             </div>
         </div>
 

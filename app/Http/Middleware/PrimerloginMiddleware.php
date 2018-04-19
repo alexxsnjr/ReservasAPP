@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Ies;
+use App\Centro;
 use Closure;
 
 class PrimerloginMiddleware
@@ -17,7 +17,7 @@ class PrimerloginMiddleware
     public function handle($request, Closure $next)
     {
 
-        if(count(Ies::all())<1){
+        if(count(Centro::all())<1){
 
             return redirect('/asistente');
 

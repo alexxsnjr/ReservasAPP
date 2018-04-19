@@ -19,7 +19,7 @@ Route::post('user' , 'Api\AuthenticateController@getUser')->name('user');
 
 Route::group([
     'namespace' =>  'Api',
-
+    'middleware' => 'jwt.auth',
     ],
     function () {
 

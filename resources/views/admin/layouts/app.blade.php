@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
-    <link rel="stylesheet" href="/adminlte/dist/css/skins/skin-{{centro()->color}}.min.css">
+    <link rel="stylesheet" href="/adminlte/dist/css/skins/skin-{{centro()->color ? centro()->color : 'blue'}}.min.css">
 
     <!--Animaciones-->
     <link rel="stylesheet" href="/js/animsition/css/animsition.css">
@@ -58,7 +58,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-{{centro()->color}} sidebar-mini">
+<body class="hold-transition skin-{{centro()->color ? centro()->color : 'blue'}} sidebar-mini">
 <div class="wrapper">
 
     <!-- Main Header -->
@@ -88,14 +88,14 @@ desired effect
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="{{centro()->imagen}}" class="user-image" alt="User Image">
+                            <img src="{{centro()->imagen ? centro()->imagen : '/img/centroPredefinido.jpg' }}" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{{centro()->nombre}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="{{centro()->imagen}}" class="img-circle" alt="Centro Image">
+                                <img src="{{centro()->imagen ? centro()->imagen : '/img/centroPredefinido.jpg' }}" class="img-circle" alt="Centro Image">
 
                                 <p>
                                     {{centro()->nombre}}
@@ -105,7 +105,7 @@ desired effect
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default">Editar centro</a>
+                                    <a href="{{ route('centro.editar') }}" class="btn btn-default">Editar centro</a>
                                 </div>
 
                                 <form action="{{ route('logout') }}" method="POST">
@@ -130,7 +130,7 @@ desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{centro()->imagen}}" class="img-circle" alt="User Image">
+                    <img src="{{centro()->imagen!='' ? centro()->imagen : '/img/centroPredefinido.jpg' }}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>{{centro()->nombre}}</p>

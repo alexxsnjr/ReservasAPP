@@ -33,6 +33,6 @@ class CreateEquipamientoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('equipamiento');
+        Schema::dropIfExists('equipamientos');
     }
 }

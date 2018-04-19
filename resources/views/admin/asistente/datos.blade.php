@@ -1,7 +1,6 @@
 @extends('admin.asistente.layouts.layout')
 
 @section('content')
-
     <h1>El primer paso es introducir los datos del centro:</h1>
     <br><br>
     <div class="row">

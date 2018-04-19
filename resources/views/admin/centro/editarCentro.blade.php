@@ -1,17 +1,26 @@
-@extends('admin.asistente.layouts.layout')
+@extends('admin.layouts.app')
 
+@push('token')
+    <meta id="token" name="token" content="{{ csrf_token() }}">
+@endpush
+@section('header')
+    <h1>
+        Centro
+        <small>Editar datos y preferencias</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+    </ol>
+@endsection
 @section('content')
 
-    <h1>¡Muy bien, ya has registrado tu centro en la aplicación!</h1>
-    <h2>El siguiente paso es personalizar el sistema un poco:</h2>
-    <br><br>
     <div class="row">
         <div id="contenedor" class="col-md-6 col-md-offset-3">
 
             <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div id="fondo" class="widget-user-header bg-blue-active">
-                    <h3 class="widget-user-username">{{ centro()->nombre }}</h3>
+                <div id="fondo" class="widget-user-header bg-{{centro()->color ? centro()->color : 'blue'}}-active">
+                    <h3 id="nombreCentro" class="widget-user-username">{{ centro()->nombre }}</h3>
                     <h5 class="widget-user-desc">{{ centro()->email }}</h5>
                     <h3 class="pull-right widget-user-username" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modal-color"><i class="fa fa-edit"></i></h3>
                 </div>
@@ -39,7 +48,7 @@
                         <div class="col-sm-4">
                             <div class="description-block">
                                 <form class="form-horizontal" action="{{ route('datosCentro.color' , centro()->id)}}" method="POST">
-                                {{ csrf_field() }}{{ method_field('PUT') }}
+                                    {{ csrf_field() }}{{ method_field('PUT') }}
 
                                     <input id="colorEnvio" type="hidden" name="color">
 
@@ -117,12 +126,6 @@
 
         </div>
     </div>
-    <div id="barra" class="progress active">
-        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="60"
-             aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-            <span class="sr-only">60% Completado</span>
-        </div>
-    </div>
 @endsection
 @push('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css">
@@ -146,30 +149,29 @@
 
             var centro=$('#nombreCentro').text();
 
-            console.log(centro);
-
             $.ajax({
                 //URL para la petición
                 url : '/recargarimagen',
 
-                type : 'GET',
+                data : { centro : centro },
+
+                type : 'POST',
 
                 // el tipo de información que se espera de respuesta
                 dataType : 'json',
 
+                beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
+
                 success : function(json) {
 
-                    if(json.imagen!=null) {
-                        $('#imagen').attr('src', json.imagen);
-                    }
-
+                    $('#imagen').attr('src',json[0].imagen);
                 }
 
             });
 
         });
 
-        $('#colorEnvio').val('blue');
+        $('#colorEnvio').val({{centro()->color ? centro()->color : 'blue'}});
 
         $('.color').click(function(){
 

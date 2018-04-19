@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIesTable extends Migration
+class CreateCentroTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateIesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ies', function (Blueprint $table) {
+        Schema::create('centros', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
             $table->longText('descripcion');
@@ -32,6 +32,6 @@ class CreateIesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ies');
+        Schema::dropIfExists('centros');
     }
 }

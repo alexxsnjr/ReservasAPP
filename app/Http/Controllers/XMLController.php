@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Aula;
 use App\Edificio;
 use App\Equipamiento;
-use App\Ies;
+use App\Centro;
 use App\Planta;
 use App\Profesor;
 use Illuminate\Http\Request;
@@ -36,7 +36,7 @@ class XMLController extends Controller
         ]);
 
         $xml = request()->file('xml')->store('public');
-        $centro= Ies::all()->first();
+        $centro= Centro::all()->first();
 
         //Si hay ya un archivo XML lo elimina e introduce el nuevo
         if($centro->xml != null){
@@ -83,7 +83,7 @@ class XMLController extends Controller
 
         }
 
-        $centro= Ies::all()->first();
+        $centro= Centro::all()->first();
 
         $xmlPath = str_replace('storage', 'public', $centro->xml);
         //Lectura fichero XML del servidor
@@ -146,7 +146,7 @@ class XMLController extends Controller
 
         }
 
-        $centro= Ies::all()->first();
+        $centro= Centro::all()->first();
 
         $xmlPath = str_replace('storage', 'public', $centro->xml);
         //Lectura fichero XML del servidor

@@ -1,9 +1,9 @@
 <?php
 
-use App\Ies;
+use App\Centro;
 
 function centro()
 {
-    $centro = Ies::all()->first();
+    $centro = Centro::all()->first();
     return $centro;
 }

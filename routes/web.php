@@ -62,14 +62,19 @@ Route::post('/subir-xml','XMLController@subirArchivo')->name('subirXML');
 Route::post('/importar-xml','XMLController@importar')->name('importar');
 
 
-//IES
-Route::get('/asistente','IesController@index')->name('asistente');
-Route::get('/datos-centro','IesController@datos')->name('datosCentro');
-Route::post('/datos-centro','IesController@store')->name('datosCentro.store');
-Route::put('/datos-centro/{id}','IesController@anadirColor')->name('datosCentro.color');
-Route::post('/recargarimagen','IesController@recargarImagen')->name('recargarImagen');
-Route::get('/personalizar-centro','IesController@personalizar')->name('personalizarCentro');
-Route::post('/subir-imagen','IesController@subirImagen')->name('subirImagen');
-Route::get('/importar-datos','IesController@importarDatos')->name('importarDatos');
-Route::get('/consultardatos','IesController@consultarDatos')->name('consultarDatos');
-Route::get('/asistente-terminar','IesController@terminar')->name('asistenteTerminar');
+//ASISTENTE
+Route::get('/asistente','AsistenteController@index')->name('asistente');
+Route::get('/datos-centro','AsistenteController@datosCentro')->name('asistente.datosCentro');
+Route::get('/personalizar-centro','AsistenteController@personalizarCentro')->name('asistente.personalizarCentro');
+Route::get('/importar-datos','AsistenteController@importarDatos')->name('asistente.importarDatos');
+Route::get('/consultardatos','AsistenteController@consultarDatos')->name('consultarDatos');
+Route::get('/asistente-terminar','AsistenteController@terminar')->name('asistenteTerminar');
+
+
+//CENTRO
+Route::post('/datos-centro','CentroController@store')->name('datosCentro.store');
+Route::put('/datos-centro/{id}','CentroController@anadirColor')->name('datosCentro.color');
+Route::get('/recargarimagen','CentroController@recargarImagen')->name('recargarImagen');
+Route::post('/subir-imagen','CentroController@subirImagen')->name('subirImagen');
+Route::get('/editar-centro','CentroController@editar')->name('centro.editar');
+
