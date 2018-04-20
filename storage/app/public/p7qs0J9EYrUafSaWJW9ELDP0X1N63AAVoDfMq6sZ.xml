@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<edificios>
+  <edificio>
+    <nombre>Pabellon A</nombre>
+    <plantas>
+      <planta>
+        <piso>0</piso>
+        <aulas>
+          <aula tipo="Taller">
+            <nombre >A01</nombre>
+            <aforo>24</aforo>
+            <equipamientos>
+              <equipamiento cantidad="1">Proyector</equipamiento>
+              <equipamiento cantidad="1">Pizarra</equipamiento>
+            </equipamientos>
+          </aula>
+          <aula tipo="Normal">
+            <nombre >A02</nombre>
+            <aforo>28</aforo>
+            <equipamientos>
+              <equipamiento cantidad="2">Pizarra</equipamiento>
+            </equipamientos>
+          </aula>
+          <aula tipo="Informatica">
+            <nombre >A03</nombre>
+            <aforo>10</aforo>
+            <equipamientos>
+              <equipamiento cantidad="1">Proyector</equipamiento>
+            </equipamientos>
+          </aula>
+          <aula tipo="Informatica">
+            <nombre >A04</nombre>
+            <aforo>35</aforo>
+            <equipamientos>
+              <equipamiento cantidad="8">Altavoces</equipamiento>
+            </equipamientos>
+          </aula>
+        </aulas>
+      </planta>
+      <planta>
+        <piso>1</piso>
+        <aulas>
+          <aula tipo="Normal">
+            <nombre >A11</nombre>
+            <aforo>30</aforo>
+            <equipamientos>
+              <equipamiento cantidad="1">Proyector</equipamiento>
+            </equipamientos>
+          </aula>
+          <aula tipo="Normal">
+            <nombre>A12</nombre>
+            <aforo>28</aforo>
+            <equipamientos>
+              <equipamiento cantidad="1">Proyector</equipamiento>
+            </equipamientos>
+          </aula>
+          <aula tipo="Nomral">
+            <nombre >A13</nombre>
+            <aforo>20</aforo>
+            <equipamientos>
+              <equipamiento cantidad="1">Proyector</equipamiento>
+              <equipamiento cantidad="1">Pizarra</equipamiento>
+            </equipamientos>
+          </aula>
+          <aula tipo="Normal">
+            <nombre>A14</nombre>
+            <aforo>16</aforo>
+            <equipamientos>
+              <equipamiento cantidad="1">Proyector</equipamiento>
+            </equipamientos>
+          </aula>
+        </aulas>
+      </planta>
+      <planta>
+        <piso>2</piso>
+        <aulas>
+          <aula tipo="Musica">
+            <nombre>A21</nombre>
+            <aforo>18</aforo>
+            <equipamientos>
+              <equipamiento cantidad="1">Proyector</equipamiento>
+              <equipamiento cantidad="1">Piano</equipamiento>
+              <equipamiento cantidad="40">instrumentos</equipamiento>
+            </equipamientos>
+          </aula>
+          <aula tipo="Normal">
+            <nombre>A22</nombre>
+            <aforo>28</aforo>
+            <equipamientos>
+              <equipamiento cantidad="1">Proyector</equipamiento>
+            </equipamientos>
+          </aula>
+          <aula tipo="Taller">
+            <nombre >A23</nombre>
+            <aforo>14</aforo>
+            <equipamientos>
+              <equipamiento cantidad="104">Herramientas</equipamiento>
+            </equipamientos>
+            <aforo>14</aforo>
+          </aula>
+          <aula tipo="Normal">
+            <nombre>A24</nombre>
+            <aforo>35</aforo>
+          </aula>
+        </aulas>
+      </planta>
+    </plantas>
+  </edificio>
+  <edificio>
+    <nombre>Pabellon B</nombre>
+    <plantas>
+      <planta>
+        <piso>0</piso>
+        <aulas>
+          <aula tipo="Musica">
+            <nombre>B01</nombre>
+            <aforo>20</aforo>
+            <equipamientos>
+              <equipamiento cantidad="40">instrumentos</equipamiento>
+            </equipamientos>
+          </aula>
+          <aula tipo="Normal"> 
+            <nombre>B02</nombre>
+            <aforo>30</aforo>
+          </aula>
+          <aula tipo="Normal">
+            <nombre>B03</nombre>
+            <aforo>30</aforo>
+            <equipamientos>
+              <equipamiento cantidad="4">Ordenadores</equipamiento>
+            </equipamientos>
+          </aula>
+          <aula tipo="Normal">
+            <nombre>B04</nombre>
+            <aforo>35</aforo>
+          </aula>
+        </aulas>
+      </planta>
+    </plantas>
+  </edificio>
+</edificios>

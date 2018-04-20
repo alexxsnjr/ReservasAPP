@@ -3,7 +3,7 @@
         <div class="center" style="background: white; padding: 50px 10px 50px 10px" v-if="aulas">
             <div >
                 <span class="md-display-2">Aulas Disponibles</span><br><br>
-                <button v-for="aula of aulas" class="button" @click="setDone('segundo', 'tercer')">{{aula}}</button>
+                <button v-for="aula of aulas" class="button" @click=" mode = 'app-table'">{{aula}}</button>
 
             </div>
             <br><br>
@@ -12,7 +12,7 @@
             </span>
         </div>
         <div v-else>
-        <md-steppers :md-active-step.sync="active" md-linear>
+        <md-steppers :md-active-step.sync="active" md-vertical md-linear>
             <md-step id="primer" md-label="Dia"  :md-done.sync="primer">
                     <div>
                         <span class="md-display-2">Seleccione el dia de la reserva</span>

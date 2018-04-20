@@ -12,8 +12,9 @@
                     </md-avatar>
                     <div style="float: right">
                         <button @click="edit"><i class="material-icons" style="color: white" >create</i></button>
-                        <button><i class="material-icons" style="color: white" >more_vert</i></button>
-                        
+                        <button  @click="back"><i class="material-icons" style="color: white" >undo</i></button>
+
+
                     </div>
                     
                         <div >
@@ -99,7 +100,10 @@
     methods: {
         edit() {
              this.$emit('edit');
-        }
+        },
+          back(){
+              this.showDialog = false;
+          }
     }
   }
 </script>

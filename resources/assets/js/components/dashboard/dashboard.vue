@@ -10,9 +10,11 @@
 
             <md-app-drawer :md-active.sync="menuVisible">
                 <div class="perfil">
-                    <md-avatar class="md-avatar-icon" style="margin: 20px 0 10px 20px">
-                        <md-icon>home</md-icon>
-                    </md-avatar>
+                    <button @click="menuVisible = false">
+                        <md-avatar  class="md-avatar-icon" style="margin: 20px 0 10px 20px">
+                            <md-icon  >home</md-icon>
+                        </md-avatar>
+                    </button>
                     <div style="margin-top: 10px; margin-left: 20px; margin-bottom: 20px">
                         <span class="md-body-2" style="color:white">{{user.name}} </span>
                         <br>
@@ -22,18 +24,22 @@
                 </div>
 
                 <md-list>
+                    <md-list-item @click="mode = 'app-table'">
+                        <i class="material-icons" :class="mode == 'app-table' ? 'active' : ''">work</i>
+                        <span class="md-list-item-text" :class="mode == 'app-table' ? 'active' : ''">Mis Reservas</span>
+                    </md-list-item>
                     <md-list-item @click="mode = 'app-reservar'">
-                        <md-icon>date_range</md-icon>
-                        <span class="md-list-item-text">Reservar</span>
+                        <i class="material-icons" :class="mode == 'app-reservar' ? 'active' : ''">date_range</i>
+                        <span class="md-list-item-text" :class="mode == 'app-reservar' ? 'active' : ''">Reservar</span>
                     </md-list-item>
 
                     <md-list-item @click="mode = 'app-perfil'; menuVisible = false">
-                        <md-icon>account_box</md-icon>
+                        <i class="material-icons" :class="mode == 'app-perfil' ? 'active' : ''">account_box</i>
                         <span class="md-list-item-text">Perfil de Usuario</span>
                     </md-list-item>
 
                     <md-list-item @click="logout">
-                        <md-icon>open_in_new</md-icon>
+                        <i class="material-icons" >open_in_new</i>
                         <span class="md-list-item-text">Salir</span>
                     </md-list-item>
 
@@ -42,8 +48,10 @@
             </md-app-drawer>
 
             <md-app-content>
+                <div class="fondo">
+                    <component :is="mode" :user="user"  ></component>
+                </div>
 
-                <component :is="mode" :user="user"  ></component>
 
             </md-app-content>
         </md-app>
@@ -52,13 +60,14 @@
 
 
 <script>
-    import Reservar from './pages/reservar'
-    import Perfil from './pages/profile/profile.vue'
-    import router from '../../router'
+    import Reservar from './pages/reservar';
+    import Table from './pages/table';
+    import Perfil from './pages/profile/profile.vue';
+    import router from '../../router';
     export default {
         data: () => ({
             menuVisible: false,
-            mode: 'app-reservar',
+            mode: 'app-table',
             user: {
                 name :'nombre de usuario',
                 email : 'emailUser@gmail.com',
@@ -74,6 +83,7 @@
         components:{
             appReservar : Reservar,
             appPerfil : Perfil,
+            appTable: Table,
         },
         beforeCreate() {
 
@@ -128,5 +138,19 @@
         min-height: 144px;
 
     }
+    .active{
+        color:lightblue;
+    }
+    .fondo{
+        background: white;
+        padding: 20px;
+    }
+    button {
+
+        background: transparent;
+        border: none !important;
+        font-size:0;
+    }
+
 
 </style>

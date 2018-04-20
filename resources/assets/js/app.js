@@ -13,6 +13,10 @@ import store from './store'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
+import 'vue-event-calendar/dist/style.css' //^1.1.10, CSS has been extracted as one file, so you can easily update it.
+import vueEventCalendar from 'vue-event-calendar'
+
+Vue.use(vueEventCalendar, {locale: 'es', color: 'lightblue'})
 
 Vue.use(VueMaterial)
 
