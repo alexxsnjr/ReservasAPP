@@ -1,0 +1,31 @@
+.caja {
+
+    width: 80px;
+    height: 80px;
+    float: left;
+    border: solid 2px;
+    margin-right: 15px;
+
+}
+
+.icono {
+
+    font-size: 30px;
+    margin-top: 20px;
+
+}
+
+.color {
+
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+}
+
+#imagen {
+
+    width: 100px;
+    height: 100px;
+
+}

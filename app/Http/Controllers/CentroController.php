@@ -95,4 +95,25 @@ class CentroController extends Controller
         return view('admin/centro/editarCentro');
 
     }
+
+    public function update(Request $request, $id)
+    {
+
+        $this->validate($request, [
+            'nombre' => 'required|string|max:50|min: 3',
+            'descripcion' => 'required|string|max: 200|min: 3',
+            'email' => 'required|email|max: 30|min :3',
+            'color' => 'required|string',
+        ]);
+
+        $centro = Centro::find($id);
+        $centro->nombre = $request->nombre;
+        $centro->descripcion = $request->descripcion;
+        $centro->email = $request->email;
+        $centro->color = $request->color;
+        $centro->save();
+
+        return redirect()->back()->with('success','Los cambios se han guardado correctamente');
+
+    }
 }

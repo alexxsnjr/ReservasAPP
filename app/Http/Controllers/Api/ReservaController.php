@@ -10,6 +10,9 @@ class ReservaController extends Controller
 {
     public function comprobarDisponibilidad(Request $request)
     {
+
+        dd($request);
+
         $aulas = DB::table('aulas')
             ->where([
                 ['tipo', '=' ,$request->tipo],

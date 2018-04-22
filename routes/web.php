@@ -77,4 +77,6 @@ Route::put('/datos-centro/{id}','CentroController@anadirColor')->name('datosCent
 Route::get('/recargarimagen','CentroController@recargarImagen')->name('recargarImagen');
 Route::post('/subir-imagen','CentroController@subirImagen')->name('subirImagen');
 Route::get('/editar-centro','CentroController@editar')->name('centro.editar');
+Route::put('/editar-centro/{id}','CentroController@update')->name('centro.update');
+
 

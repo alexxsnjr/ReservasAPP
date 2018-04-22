@@ -144,10 +144,6 @@
 
         $('#recargarImagen').click(function(){
 
-            var centro=$('#nombreCentro').text();
-
-            console.log(centro);
-
             $.ajax({
                 //URL para la petición
                 url : '/recargarimagen',
