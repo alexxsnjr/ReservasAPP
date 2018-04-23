@@ -8,169 +8,169 @@ import router from './router'
 Vue.use(Vuex)
 
 
- const state= {
+const state = {
     idToken: null,
     userId: null,
     userName: null,
     aulas: null,
     tipos: [],
     equipamientos: [],
-  };
- const mutations ={
-    tokenUser (state, userData) {
-      state.idToken = userData.token
+};
+const mutations = {
+    tokenUser(state, userData) {
+        state.idToken = userData.token
 
     },
-    authUser (state, userData){
+    authUser(state, userData) {
         state.userId = userData.userID,
-        state.userName = userData.userName
+            state.userName = userData.userName
 
     },
 
-    aulas (state, aulas){
+    aulas(state, aulas) {
         state.aulas = aulas;
     },
-    tipos (state, tipos){
+    tipos(state, tipos) {
         state.tipos = tipos;
 
     },
-    equipamientos (state, equipamientos){
-      state.equipamientos = equipamientos;
+    equipamientos(state, equipamientos) {
+        state.equipamientos = equipamientos;
 
     },
-    clearAuthData (state) {
-      state.idToken = null
+    clearAuthData(state) {
+        state.idToken = null
         state.aulas = null
         state.tipos = []
         state.equipamientos = []
-      
+
     }
 
-  };
-  const actions= {
-    login ({commit, dispatch}, authData) {
+};
+const actions = {
+    login({commit, dispatch}, authData) {
 
-      axios.post('/login', {
-        email: authData.email,
-        password: authData.password,
+        axios.post('/login', {
+            email: authData.email,
+            password: authData.password,
 
-      })
-        .then(res => {
+        })
+            .then(res => {
 
-            commit('tokenUser', {
-                token: res.data.token,
+                commit('tokenUser', {
+                    token: res.data.token,
 
-            });
-            dispatch('fetchUser');
+                });
+                dispatch('fetchUser');
+
+            })
+    },
+    logout({commit}) {
+        commit('clearAuthData')
+        localStorage.removeItem('token')
+        router.replace('/signin')
+    },
+    reservar({commit, state}, data) {
+        console.log(data)
+        axios.post('/reservar.vue', data, {
+            headers: {Authorization: `Bearer ${state.idToken}`}
+        })
+            .then(res => {
+                console.log(res)
+                const data = [];
+
+                for (var i = 0; i < res.data.aulas.length; i++) {
+                    data.push(res.data.aulas[i].nombre);
+                }
+
+
+                commit('aulas', data);
+
+
+            }).catch(error => {
+            console.log(error);
 
         })
     },
-      logout ({commit}) {
-          commit('clearAuthData')
-          localStorage.removeItem('token')
-          router.replace('/signin')
-      },
-      reservar ({commit, state},  data) {
-            console.log(data)
-          axios.post('/reservar.vue', data , {
-              headers: { Authorization: `Bearer ${state.idToken}` }
-          } )
-              .then(res => {
-                console.log(res)
-                  const data = [];
-
-                  for (var i = 0 ; i < res.data.aulas.length ; i++){
-                      data.push( res.data.aulas[i].nombre);
-                  }
+    fetchUser({commit, state}) {
 
 
-                  commit('aulas', data);
-
-
-              }).catch(error =>{
-                console.log(error);
-
-          })
-      },
-      fetchUser ({commit, state}) {
-
-
-          if (!state.idToken) {
+        if (!state.idToken) {
 
             return
 
-          }
-          axios.post('/user', {
-              token:state.idToken
-          })
-              .then(res => {
-
-                commit('authUser',{
+        }
+        axios.post('/user', {
+            token: state.idToken
+        })
+            .then(res => {
+                console.log(res)
+                commit('authUser', {
                     userID: res.data.user.id,
                     userName: res.data.user.name,
 
                 })
-                  router.replace('/dashboard')
-              })
-              .catch(error => console.log(error))
-      },
-      fetchTipos({commit , state}){
+                router.replace('/dashboard')
+            })
+            .catch(error => console.log(error))
+    },
+    fetchTipos({commit, state}) {
 
-        axios.get('/tipos', { headers: { Authorization: `Bearer ${state.idToken}` } })
-        .then(res=>{
-            console.log(res)
-            const data = [];
+        axios.get('/tipos', {headers: {Authorization: `Bearer ${state.idToken}`}})
+            .then(res => {
+                console.log(res)
+                const data = [];
 
-            for (var i = 0 ; i < res.data.tipos.length ; i++){
-                data.push( res.data.tipos[i].tipo);
-            }
+                for (var i = 0; i < res.data.tipos.length; i++) {
+                    data.push(res.data.tipos[i].tipo);
+                }
 
-            commit('tipos', data);
+                commit('tipos', data);
 
-        })
-      },
-      fetchEquipamiento({commit , state}){
+            })
+    },
+    fetchEquipamiento({commit, state}) {
 
-          axios.get('/equipamiento', { headers: { Authorization: `Bearer ${state.idToken}` } })
-              .then(res=>{
+        axios.get('/equipamiento', {headers: {Authorization: `Bearer ${state.idToken}`}})
+            .then(res => {
 
-                  const data = [];
+                const data = [];
 
-                  for (var i = 0 ; i < res.data.equipamientos.length ; i++){
-                      data.push( res.data.equipamientos[i].nombre);
-                  }
+                for (var i = 0; i < res.data.equipamientos.length; i++) {
+                    data.push(res.data.equipamientos[i].nombre);
+                }
 
-                  commit('equipamientos', data);
+                commit('equipamientos', data);
 
-              })
-      }
+            })
+    }
 
-  };
-  const getters = {
-       isAuthenticated (state) {
-          if (state.idToken !== null){
+};
+const getters = {
+    isAuthenticated(state) {
+        if (state.idToken !== null) {
             return true;
-          }else {
+        } else {
             return false;
-          }
-       },
-      getUserName(state) {
-           return state.userName;
-      },
-      getTiposAula(state) {
+        }
+    },
+    getUserName(state) {
+        return state.userName;
+    },
+    getTiposAula(state) {
 
-           return state.tipos;
-      },
-      getEquipamientosAula(state) {
+        return state.tipos;
+    },
+    getEquipamientosAula(state) {
 
-          return state.equipamientos;
-      },
-      getAulas(state) {
+        return state.equipamientos;
+    },
+    getAulas(state) {
 
-          return state.aulas;
-      }
+        return state.aulas;
+    }
 
-  };
+};
 
 export default new Vuex.Store({
     state,

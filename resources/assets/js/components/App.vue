@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+    <div>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
 
-  export default {
-    name: 'app',
+    export default {
+        name: 'app',
 
-  }
+    }
 </script>
 
 <style>
-  body, html {
-    margin: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
+    body, html {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
 </style>

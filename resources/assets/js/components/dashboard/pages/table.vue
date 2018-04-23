@@ -1,10 +1,12 @@
 <template>
-    <vue-event-calendar :events="demoEvents"></vue-event-calendar>
+    <md-content class="md-elevation-1">
+        <vue-event-calendar :events="demoEvents"></vue-event-calendar>
+    </md-content>
 </template>
 
 <script>
     export default {
-        data () {
+        data() {
             return {
                 demoEvents: [{
                     date: '2018/04/12', // Required

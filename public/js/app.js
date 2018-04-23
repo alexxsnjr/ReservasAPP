@@ -12870,7 +12870,7 @@ var actions = {
         __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/user', {
             token: state.idToken
         }).then(function (res) {
-
+            console.log(res);
             commit('authUser', {
                 userID: res.data.user.id,
                 userName: res.data.user.name
@@ -13921,7 +13921,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vue_event_calendar_dist_style_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_vue_event_calendar_dist_style_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_vue_event_calendar__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_vue_event_calendar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_vue_event_calendar__);
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -17937,20 +17936,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             menuVisible: false,
             mode: 'app-table',
             user: {
+                id: 1,
                 name: 'nombre de usuario',
-                email: 'emailUser@gmail.com',
-                phone: '651487598',
-                address: {
-                    c: ' C/E , Parcela 43 - P.I Vicente Antolinos ',
-                    m: 'Santomera, 30140',
-                    p: 'Spain, Murcia'
-                }
+                email: 'emailUser@gmail.com'
             }
 
         };
@@ -18065,7 +18060,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.md-card[data-v-3aa99c97]{\n    margin-top: 15px;\n}\n.button[data-v-3aa99c97] {\n    display: inline-block;\n    padding: 15px 25px;\n    font-size: 24px;\n    cursor: pointer;\n    text-align: center;\n    text-decoration: none;\n    outline: none;\n    color: #fff;\n    background-color: #448aff;\n    border: none;\n    border-radius: 15px;\n    -webkit-box-shadow: 0 9px #999;\n            box-shadow: 0 9px #999;\n}\n.button[data-v-3aa99c97]:hover {background-color: lightblue\n}\n.button[data-v-3aa99c97]:active {\n    background-color: lightblue;\n    -webkit-box-shadow: 0 5px #666;\n            box-shadow: 0 5px #666;\n    -webkit-transform: translateY(4px);\n            transform: translateY(4px);\n}\n.center[data-v-3aa99c97]{\n    text-align:center;\n    margin-top: 10px;\n    margin-bottom: 25px;\n}\n", ""]);
+exports.push([module.i, "\n.md-card[data-v-3aa99c97] {\n    margin-top: 15px;\n}\n.md-content[data-v-3aa99c97] {\n    background: #b7cfd3;\n    padding: 50px;\n}\n.button[data-v-3aa99c97] {\n    display: inline-block;\n    padding: 15px 25px;\n    font-size: 24px;\n    cursor: pointer;\n    text-align: center;\n    text-decoration: none;\n    outline: none;\n    color: #fff;\n    background-color: #448aff;\n    border: none;\n    border-radius: 15px;\n    -webkit-box-shadow: 0 9px #999;\n            box-shadow: 0 9px #999;\n}\n@media (max-width : 439px){\n.md-display-2[data-v-3aa99c97]{\n        font-size: 15px;\n}\nbutton[data-v-3aa99c97]{\n        font-size: 15px;\n}\n.md-content[data-v-3aa99c97] {\n        background: white;\n        padding: 10px;\n}\n.button[data-v-3aa99c97] {\n        display: inline-block;\n        padding: 10px 20px;\n        font-size: 16px;\n        cursor: pointer;\n        text-align: center;\n        text-decoration: none;\n        outline: none;\n        color: #fff;\n        background-color: #448aff;\n        border: none;\n        border-radius: 15px;\n        -webkit-box-shadow: 0 9px #999;\n                box-shadow: 0 9px #999;\n}\n}\n.button[data-v-3aa99c97]:hover {\n    background-color: lightblue\n}\n.button[data-v-3aa99c97]:active {\n    background-color: lightblue;\n    -webkit-box-shadow: 0 5px #666;\n            box-shadow: 0 5px #666;\n    -webkit-transform: translateY(4px);\n            transform: translateY(4px);\n}\n.center[data-v-3aa99c97] {\n    text-align: center;\n    margin-top: 10px;\n    margin-bottom: 25px;\n}\n\n", ""]);
 
 // exports
 
@@ -18079,6 +18074,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(17);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -18229,42 +18253,45 @@ var render = function() {
             staticStyle: { background: "white", padding: "50px 10px 50px 10px" }
           },
           [
-            _c(
-              "div",
-              [
-                _c("span", { staticClass: "md-display-2" }, [
-                  _vm._v("Aulas Disponibles")
-                ]),
-                _c("br"),
-                _c("br"),
-                _vm._v(" "),
-                _vm._l(_vm.aulas, function(aula) {
-                  return _c(
-                    "button",
-                    {
-                      staticClass: "button",
-                      on: {
-                        click: function($event) {
-                          _vm.mode = "app-table"
+            _c("md-content", { staticClass: "md-elevation-3" }, [
+              _c(
+                "div",
+                [
+                  _c("span", { staticClass: "md-display-2" }, [
+                    _vm._v("Aulas Disponibles")
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._l(_vm.aulas, function(aula) {
+                    return _c(
+                      "button",
+                      {
+                        staticClass: "button",
+                        on: {
+                          click: function($event) {
+                            _vm.mode = "app-table"
+                          }
                         }
-                      }
-                    },
-                    [_vm._v(_vm._s(aula))]
-                  )
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("br"),
-            _c("br"),
-            _vm._v(" "),
-            _c("span", { staticClass: "md-caption" }, [
-              _vm._v(
-                "\n            Seleccione un aula para hacer la reserva, en el dia y la hora Seleccionado anteriormente\n        "
-              )
+                      },
+                      [_vm._v(_vm._s(aula))]
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("br"),
+              _c("br"),
+              _vm._v(" "),
+              _c("span", { staticClass: "md-caption" }, [
+                _vm._v(
+                  "\n            Seleccione un aula para hacer la reserva, en el dia y la hora Seleccionado anteriormente\n        "
+                )
+              ])
             ])
-          ]
+          ],
+          1
         )
       : _c(
           "div",
@@ -18300,39 +18327,46 @@ var render = function() {
                   },
                   [
                     _c(
-                      "div",
+                      "md-content",
+                      { staticClass: "md-elevation-20" },
                       [
-                        _c("span", { staticClass: "md-display-2" }, [
-                          _vm._v("Seleccione el dia de la reserva")
-                        ]),
+                        _c(
+                          "div",
+                          [
+                            _c("span", { staticClass: "md-display-2" }, [
+                              _vm._v("Seleccione el dia de la reserva")
+                            ]),
+                            _vm._v(" "),
+                            _c("md-datepicker", {
+                              model: {
+                                value: _vm.formData.fecha,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.formData, "fecha", $$v)
+                                },
+                                expression: "formData.fecha"
+                              }
+                            })
+                          ],
+                          1
+                        ),
                         _vm._v(" "),
-                        _c("md-datepicker", {
-                          model: {
-                            value: _vm.formData.fecha,
-                            callback: function($$v) {
-                              _vm.$set(_vm.formData, "fecha", $$v)
-                            },
-                            expression: "formData.fecha"
-                          }
-                        })
+                        _vm.formData.fecha
+                          ? _c(
+                              "md-button",
+                              {
+                                staticClass: "md-raised md-primary",
+                                on: {
+                                  click: function($event) {
+                                    _vm.setDone("primer", "segundo")
+                                  }
+                                }
+                              },
+                              [_vm._v("Continue\n                    ")]
+                            )
+                          : _vm._e()
                       ],
                       1
-                    ),
-                    _vm._v(" "),
-                    _vm.formData.fecha
-                      ? _c(
-                          "md-button",
-                          {
-                            staticClass: "md-raised md-primary",
-                            on: {
-                              click: function($event) {
-                                _vm.setDone("primer", "segundo")
-                              }
-                            }
-                          },
-                          [_vm._v("Continue")]
-                        )
-                      : _vm._e()
+                    )
                   ],
                   1
                 ),
@@ -18352,43 +18386,50 @@ var render = function() {
                     }
                   },
                   [
-                    _c("div", { staticClass: "center" }, [
-                      _c("span", { staticClass: "md-display-2" }, [
-                        _vm._v("Seleccione el turno de la reserva")
-                      ]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button",
-                          on: {
-                            click: function($event) {
-                              _vm.setDone("segundo", "tercer")
-                              _vm.formData.turno = "mañana"
+                    _c("md-content", { staticClass: "md-elevation-20" }, [
+                      _c("div", { staticClass: "center" }, [
+                        _c("span", { staticClass: "md-display-2" }, [
+                          _vm._v("Seleccione el turno de la reserva")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "button",
+                            on: {
+                              click: function($event) {
+                                _vm.setDone("segundo", "tercer")
+                                _vm.formData.turno = "mañana"
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("Mañana")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button",
-                          on: {
-                            click: function($event) {
-                              _vm.setDone("segundo", "tercer")
-                              _vm.formData.turno = "tarde"
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Mañana\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "button",
+                            on: {
+                              click: function($event) {
+                                _vm.setDone("segundo", "tercer")
+                                _vm.formData.turno = "tarde"
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("Tarde")]
-                      )
+                          },
+                          [_vm._v("Tarde\n                        ")]
+                        )
+                      ])
                     ])
-                  ]
+                  ],
+                  1
                 ),
                 _vm._v(" "),
                 _c(
@@ -18406,99 +18447,102 @@ var render = function() {
                     }
                   },
                   [
-                    _c("div", { staticClass: "center" }, [
-                      _c("span", { staticClass: "md-display-2" }, [
-                        _vm._v("Seleccione la hora de la reserva")
-                      ]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button",
-                          on: {
-                            click: function($event) {
-                              _vm.setDone("tercer", "cuarto")
-                              _vm.formData.hora = "1"
+                    _c("md-content", { staticClass: "md-elevation-20" }, [
+                      _c("div", { staticClass: "center" }, [
+                        _c("span", { staticClass: "md-display-2" }, [
+                          _vm._v("Seleccione la hora de la reserva")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "button",
+                            on: {
+                              click: function($event) {
+                                _vm.setDone("tercer", "cuarto")
+                                _vm.formData.hora = "1"
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("1º HORA")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button",
-                          on: {
-                            click: function($event) {
-                              _vm.setDone("tercer", "cuarto")
-                              _vm.formData.hora = "2"
+                          },
+                          [_vm._v("1º HORA\n                        ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "button",
+                            on: {
+                              click: function($event) {
+                                _vm.setDone("tercer", "cuarto")
+                                _vm.formData.hora = "2"
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("2º HORA")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button",
-                          on: {
-                            click: function($event) {
-                              _vm.setDone("tercer", "cuarto")
-                              _vm.formData.hora = "3"
+                          },
+                          [_vm._v("2º HORA\n                        ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "button",
+                            on: {
+                              click: function($event) {
+                                _vm.setDone("tercer", "cuarto")
+                                _vm.formData.hora = "3"
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("3º HORA")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button",
-                          on: {
-                            click: function($event) {
-                              _vm.setDone("tercer", "cuarto")
-                              _vm.formData.hora = "4"
+                          },
+                          [_vm._v("3º HORA\n                        ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "button",
+                            on: {
+                              click: function($event) {
+                                _vm.setDone("tercer", "cuarto")
+                                _vm.formData.hora = "4"
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("4º HORA")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button",
-                          on: {
-                            click: function($event) {
-                              _vm.setDone("tercer", "cuarto")
-                              _vm.formData.hora = "5"
+                          },
+                          [_vm._v("4º HORA\n                        ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "button",
+                            on: {
+                              click: function($event) {
+                                _vm.setDone("tercer", "cuarto")
+                                _vm.formData.hora = "5"
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("5º HORA")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button",
-                          on: {
-                            click: function($event) {
-                              _vm.setDone("tercer", "cuarto")
-                              _vm.formData.hora = "6"
+                          },
+                          [_vm._v("5º HORA\n                        ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "button",
+                            on: {
+                              click: function($event) {
+                                _vm.setDone("tercer", "cuarto")
+                                _vm.formData.hora = "6"
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("6º HORA")]
-                      )
+                          },
+                          [_vm._v("6º HORA\n                        ")]
+                        )
+                      ])
                     ])
-                  ]
+                  ],
+                  1
                 ),
                 _vm._v(" "),
                 _c(
@@ -18516,41 +18560,52 @@ var render = function() {
                     }
                   },
                   [
-                    _c("span", { staticClass: "md-display-2" }, [
-                      _vm._v("Introduzca cuantos sitios necesita")
-                    ]),
-                    _vm._v(" "),
                     _c(
-                      "md-field",
+                      "md-content",
+                      { staticClass: "md-elevation-20" },
                       [
-                        _c("md-input", {
-                          attrs: { type: "number" },
-                          model: {
-                            value: _vm.formData.aforo,
-                            callback: function($$v) {
-                              _vm.$set(_vm.formData, "aforo", $$v)
-                            },
-                            expression: "formData.aforo"
-                          }
-                        })
+                        _c("span", { staticClass: "md-display-2" }, [
+                          _vm._v("Introduzca cuantos sitios necesita")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "md-field",
+                          [
+                            _c("md-input", {
+                              attrs: { type: "number" },
+                              model: {
+                                value: _vm.formData.aforo,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.formData, "aforo", $$v)
+                                },
+                                expression: "formData.aforo"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm.formData.aforo
+                          ? _c(
+                              "md-button",
+                              {
+                                staticClass: "md-raised md-primary",
+                                on: {
+                                  click: function($event) {
+                                    _vm.setDone("cuarto", "quinto")
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Continue\n                    "
+                                )
+                              ]
+                            )
+                          : _vm._e()
                       ],
                       1
-                    ),
-                    _vm._v(" "),
-                    _vm.formData.aforo
-                      ? _c(
-                          "md-button",
-                          {
-                            staticClass: "md-raised md-primary",
-                            on: {
-                              click: function($event) {
-                                _vm.setDone("cuarto", "quinto")
-                              }
-                            }
-                          },
-                          [_vm._v("Continue")]
-                        )
-                      : _vm._e()
+                    )
                   ],
                   1
                 ),
@@ -18570,31 +18625,42 @@ var render = function() {
                     }
                   },
                   [
-                    _c("span", { staticClass: "md-display-2" }, [
-                      _vm._v("Seleccione el tipo de aula requerida")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.tipos, function(tipo) {
-                      return _c("div", { staticClass: "center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "button",
-                            on: {
-                              click: function($event) {
-                                _vm.setDone("quinto", "sexto")
-                                _vm.formData.tipo = tipo
-                              }
-                            }
-                          },
-                          [_vm._v(_vm._s(tipo))]
-                        )
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c("br")
+                    _c(
+                      "md-content",
+                      { staticClass: "md-elevation-20" },
+                      [
+                        _c("span", { staticClass: "md-display-2" }, [
+                          _vm._v("Seleccione el tipo de aula requerida")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.tipos, function(tipo) {
+                          return _c("div", { staticClass: "center" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "button",
+                                on: {
+                                  click: function($event) {
+                                    _vm.setDone("quinto", "sexto")
+                                    _vm.formData.tipo = tipo
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(tipo) + "\n                        "
+                                )
+                              ]
+                            )
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _c("br")
+                      ],
+                      2
+                    )
                   ],
-                  2
+                  1
                 ),
                 _vm._v(" "),
                 _c(
@@ -18613,53 +18679,69 @@ var render = function() {
                     }
                   },
                   [
-                    _c("div", { staticClass: "center" }, [
-                      _c("span", { staticClass: "md-display-2 " }, [
-                        _vm._v("Seleccione el equipamiento ")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("br"),
-                    _c("br"),
-                    _vm._v(" "),
-                    _vm._l(_vm.equipamientos, function(equipamiento) {
-                      return _c(
-                        "div",
-                        { staticStyle: { display: "inline-block" } },
-                        [
-                          _c(
-                            "md-checkbox",
-                            {
-                              attrs: { value: equipamiento },
-                              model: {
-                                value: _vm.formData.requerimientos,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.formData, "requerimientos", $$v)
-                                },
-                                expression: "formData.requerimientos"
-                              }
-                            },
-                            [_vm._v(_vm._s(equipamiento))]
-                          )
-                        ],
-                        1
-                      )
-                    }),
-                    _vm._v(" "),
                     _c(
-                      "md-button",
-                      {
-                        staticClass: "md-raised md-primary",
-                        on: {
-                          click: function($event) {
-                            _vm.setDone("sexto")
-                          }
-                        }
-                      },
-                      [_vm._v("Continue")]
+                      "md-content",
+                      { staticClass: "md-elevation-20" },
+                      [
+                        _c("div", { staticClass: "center" }, [
+                          _c("span", { staticClass: "md-display-2 " }, [
+                            _vm._v("Seleccione el equipamiento ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _c("br"),
+                        _vm._v(" "),
+                        _vm._l(_vm.equipamientos, function(equipamiento) {
+                          return _c(
+                            "div",
+                            { staticStyle: { display: "inline-block" } },
+                            [
+                              _c(
+                                "md-checkbox",
+                                {
+                                  attrs: { value: equipamiento },
+                                  model: {
+                                    value: _vm.formData.requerimientos,
+                                    callback: function($$v) {
+                                      _vm.$set(
+                                        _vm.formData,
+                                        "requerimientos",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "formData.requerimientos"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(equipamiento) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "md-button",
+                          {
+                            staticClass: "md-raised md-primary",
+                            on: {
+                              click: function($event) {
+                                _vm.setDone("sexto")
+                              }
+                            }
+                          },
+                          [_vm._v("Continue")]
+                        )
+                      ],
+                      2
                     )
                   ],
-                  2
+                  1
                 )
               ],
               1
@@ -18736,6 +18818,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -18761,7 +18845,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("vue-event-calendar", { attrs: { events: _vm.demoEvents } })
+  return _c(
+    "md-content",
+    { staticClass: "md-elevation-1" },
+    [_c("vue-event-calendar", { attrs: { events: _vm.demoEvents } })],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -18838,17 +18927,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      component: 'app-View'
-    };
-  },
-  props: ['user'],
-  components: {
-    appView: __WEBPACK_IMPORTED_MODULE_0__viewProfile_vue___default.a,
-    appEdit: __WEBPACK_IMPORTED_MODULE_1__editProfile_vue___default.a
+    data: function data() {
+        return {
+            component: 'app-View'
+        };
+    },
+    props: ['user'],
+    components: {
+        appView: __WEBPACK_IMPORTED_MODULE_0__viewProfile_vue___default.a,
+        appEdit: __WEBPACK_IMPORTED_MODULE_1__editProfile_vue___default.a
 
-  }
+    }
 
 });
 
@@ -19010,54 +19099,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'DialogCustom',
-  data: function data() {
-    return {
-      showDialog: true
-    };
-  },
-  props: ['user'],
-  methods: {
-    edit: function edit() {
-      this.$emit('edit');
+    name: 'DialogCustom',
+    data: function data() {
+        return {
+            showDialog: true
+        };
     },
-    back: function back() {
-      this.showDialog = false;
+    props: ['user'],
+    methods: {
+        edit: function edit() {
+            this.$emit('edit');
+        },
+        back: function back() {
+            this.showDialog = false;
+        }
     }
-  }
 });
 
 /***/ }),
@@ -19166,24 +19224,6 @@ var render = function() {
                         "md-list-item",
                         [
                           _c("md-icon", { staticClass: "md-primary" }, [
-                            _vm._v("phone")
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "md-list-item-text" }, [
-                            _c("span", [_vm._v(_vm._s(_vm.user.phone))]),
-                            _vm._v(" "),
-                            _c("span", [_vm._v("phone")])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("md-divider", { staticClass: "md-inset" }),
-                      _vm._v(" "),
-                      _c(
-                        "md-list-item",
-                        [
-                          _c("md-icon", { staticClass: "md-primary" }, [
                             _vm._v("email")
                           ]),
                           _vm._v(" "),
@@ -19191,39 +19231,6 @@ var render = function() {
                             _c("span", [_vm._v(_vm._s(_vm.user.email))]),
                             _vm._v(" "),
                             _c("span", [_vm._v("email")])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("md-divider", { staticClass: "md-inset" }),
-                      _vm._v(" "),
-                      _c(
-                        "md-list-item",
-                        [
-                          _c("md-icon", { staticClass: "md-primary" }, [
-                            _vm._v("location_on")
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "md-list-item-text" }, [
-                            _c("p", [
-                              _vm._v(
-                                "\n                                     " +
-                                  _vm._s(_vm.user.address.c) +
-                                  "\n                                      "
-                              ),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c("span", { staticStyle: { color: "black" } }, [
-                                _vm._v(_vm._s(_vm.user.address.m))
-                              ]),
-                              _vm._v(" "),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c("span", [_vm._v(_vm._s(_vm.user.address.p))])
-                            ]),
-                            _vm._v(" "),
-                            _c("span", [_vm._v("Address")])
                           ])
                         ],
                         1
@@ -19351,41 +19358,6 @@ exports.push([module.i, "\n.md-dialog[data-v-3b166ce8] {\n  min-width: 290px;\n}
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -19623,43 +19595,6 @@ var render = function() {
                         "md-list-item",
                         [
                           _c("md-icon", { staticClass: "md-primary" }, [
-                            _vm._v("phone")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "md-list-item-text" },
-                            [
-                              _c(
-                                "md-field",
-                                [
-                                  _c("label", [_vm._v("Phone")]),
-                                  _vm._v(" "),
-                                  _c("md-input", {
-                                    model: {
-                                      value: _vm.user.phone,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.user, "phone", $$v)
-                                      },
-                                      expression: "user.phone"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("md-divider", { staticClass: "md-inset" }),
-                      _vm._v(" "),
-                      _c(
-                        "md-list-item",
-                        [
-                          _c("md-icon", { staticClass: "md-primary" }, [
                             _vm._v("email")
                           ]),
                           _vm._v(" "),
@@ -19680,82 +19615,6 @@ var render = function() {
                                         _vm.$set(_vm.user, "email", $$v)
                                       },
                                       expression: "user.email"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("md-divider", { staticClass: "md-inset" }),
-                      _vm._v(" "),
-                      _c(
-                        "md-list-item",
-                        [
-                          _c("md-icon", { staticClass: "md-primary" }, [
-                            _vm._v("location_on")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "md-list-item-text" },
-                            [
-                              _c(
-                                "md-field",
-                                [
-                                  _c("label", [_vm._v("Street")]),
-                                  _vm._v(" "),
-                                  _c("md-input", {
-                                    attrs: { type: "text" },
-                                    model: {
-                                      value: _vm.user.address.c,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.user.address, "c", $$v)
-                                      },
-                                      expression: "user.address.c"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "md-field",
-                                [
-                                  _c("label", [_vm._v("City")]),
-                                  _vm._v(" "),
-                                  _c("md-input", {
-                                    attrs: { type: "text" },
-                                    model: {
-                                      value: _vm.user.address.m,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.user.address, "m", $$v)
-                                      },
-                                      expression: "user.address.m"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "md-field",
-                                [
-                                  _c("label", [_vm._v("Country")]),
-                                  _vm._v(" "),
-                                  _c("md-input", {
-                                    attrs: { type: "text" },
-                                    model: {
-                                      value: _vm.user.address.p,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.user.address, "p", $$v)
-                                      },
-                                      expression: "user.address.p"
                                     }
                                   })
                                 ],
@@ -20313,25 +20172,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "App",
-  data: function data() {
-    return {
-      email: "",
-      password: ""
-    };
-  },
+    name: "App",
+    data: function data() {
+        return {
+            email: "",
+            password: ""
+        };
+    },
 
-  methods: {
-    onSubmit: function onSubmit() {
+    methods: {
+        onSubmit: function onSubmit() {
 
-      var formData = {
-        email: this.email,
-        password: this.password
-      };
+            var formData = {
+                email: this.email,
+                password: this.password
+            };
 
-      this.$store.dispatch('login', { email: formData.email, password: formData.password });
+            this.$store.dispatch('login', { email: formData.email, password: formData.password });
+        }
     }
-  }
 
 });
 
@@ -52392,7 +52251,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nbody, html {\n  margin: 0;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n}\n", ""]);
+exports.push([module.i, "\nbody, html {\n    margin: 0;\n    font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n}\n", ""]);
 
 // exports
 
@@ -52412,7 +52271,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'app'
+    name: 'app'
 
 });
 

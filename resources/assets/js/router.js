@@ -10,9 +10,9 @@ import SigninPage from './components/auth/signin.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: SigninPage },
-  { path: '/signin', component: SigninPage },
-  { path: '/dashboard', component: DashboardPage},
+    {path: '/', component: SigninPage},
+    {path: '/signin', component: SigninPage},
+    {path: '/dashboard', component: DashboardPage},
 
 ]
 
