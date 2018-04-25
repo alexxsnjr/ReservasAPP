@@ -18402,7 +18402,7 @@ var render = function() {
                             on: {
                               click: function($event) {
                                 _vm.setDone("segundo", "tercer")
-                                _vm.formData.turno = "mañana"
+                                _vm.formData.turno = "manana"
                               }
                             }
                           },

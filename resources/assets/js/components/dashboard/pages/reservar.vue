@@ -34,7 +34,7 @@
                         <div class="center">
                             <span class="md-display-2">Seleccione el turno de la reserva</span>
                             <br><br>
-                            <button class="button" @click="setDone('segundo', 'tercer'); formData.turno = 'mañana'">
+                            <button class="button" @click="setDone('segundo', 'tercer'); formData.turno = 'manana'">
                                 Mañana
                             </button>
                             <button class="button" @click="setDone('segundo', 'tercer'); formData.turno = 'tarde'">Tarde
