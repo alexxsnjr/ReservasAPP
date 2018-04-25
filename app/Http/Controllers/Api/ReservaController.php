@@ -11,15 +11,11 @@ class ReservaController extends Controller
     public function comprobarDisponibilidad(Request $request)
     {
 
-        dd($request);
-
-        $aulas = DB::table('aulas')
+        $aulas = DB::table('aulas')->leftJoin('reservas', 'aulas.id', '=', 'reservas.aula_id')
             ->where([
                 ['tipo', '=' ,$request->tipo],
-                ['tipo', '=' ,$request->tipo],
-                ['tipo', '=' ,$request->tipo],
-                ['tipo', '=' ,$request->tipo],
-                ])
+                ['aforo', '>=' ,$request->aforo]
+            ])
             ->get();
 
 

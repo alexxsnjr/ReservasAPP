@@ -18,7 +18,8 @@ class CreateReservasTable extends Migration
             $table->unsignedInteger('profesor_id');
             $table->unsignedInteger('aula_id');
             $table->date('fecha');
-            $table->time('hora');
+            $table->string('turno');
+            $table->unsignedInteger('hora');
             $table->timestamps();
 
 
