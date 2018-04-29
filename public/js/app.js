@@ -12783,8 +12783,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 var state = {
     idToken: null,
-    userId: null,
-    userName: null,
+    user: {
+        email: null,
+        name: null,
+        id: null
+    },
     aulas: null,
     tipos: [],
     equipamientos: []
@@ -12794,7 +12797,8 @@ var mutations = {
         state.idToken = userData.token;
     },
     authUser: function authUser(state, userData) {
-        state.userId = userData.userID, state.userName = userData.userName;
+        state.user.id = userData.userID, state.user.name = userData.userName;
+        state.user.email = userData.userEmail;
     },
     aulas: function aulas(state, _aulas) {
         state.aulas = _aulas;
@@ -12870,11 +12874,11 @@ var actions = {
         __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/user', {
             token: state.idToken
         }).then(function (res) {
-            console.log(res);
+
             commit('authUser', {
                 userID: res.data.user.id,
-                userName: res.data.user.name
-
+                userName: res.data.user.name,
+                userEmail: res.data.user.email
             });
             __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].replace('/dashboard');
         }).catch(function (error) {
@@ -12887,7 +12891,7 @@ var actions = {
 
 
         __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/tipos', { headers: { Authorization: 'Bearer ' + state.idToken } }).then(function (res) {
-            console.log(res);
+
             var data = [];
 
             for (var i = 0; i < res.data.tipos.length; i++) {
@@ -12922,8 +12926,8 @@ var getters = {
             return false;
         }
     },
-    getUserName: function getUserName(state) {
-        return state.userName;
+    getUser: function getUser(state) {
+        return state.user;
     },
     getTiposAula: function getTiposAula(state) {
 
@@ -17870,6 +17874,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_profile_profile_vue__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_profile_profile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__pages_profile_profile_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(17);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -17941,12 +17948,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             menuVisible: false,
-            mode: 'app-table',
-            user: {
-                id: 1,
-                name: 'nombre de usuario',
-                email: 'emailUser@gmail.com'
-            }
+            mode: 'app-table'
 
         };
     },
@@ -17955,12 +17957,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         appPerfil: __WEBPACK_IMPORTED_MODULE_2__pages_profile_profile_vue___default.a,
         appTable: __WEBPACK_IMPORTED_MODULE_1__pages_table___default.a
     },
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapState */])(['user'])),
     beforeCreate: function beforeCreate() {
 
         if (!this.$store.getters.isAuthenticated) {
             __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].replace('/');
         } else {
-            console.log('dispatch');
             this.$store.dispatch('fetchTipos');
             this.$store.dispatch('fetchEquipamiento');
         }
@@ -18060,7 +18062,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.md-card[data-v-3aa99c97] {\n    margin-top: 15px;\n}\n.md-content[data-v-3aa99c97] {\n    background: #b7cfd3;\n    padding: 50px;\n}\n.button[data-v-3aa99c97] {\n    display: inline-block;\n    padding: 15px 25px;\n    font-size: 24px;\n    cursor: pointer;\n    text-align: center;\n    text-decoration: none;\n    outline: none;\n    color: #fff;\n    background-color: #448aff;\n    border: none;\n    border-radius: 15px;\n    -webkit-box-shadow: 0 9px #999;\n            box-shadow: 0 9px #999;\n}\n@media (max-width : 439px){\n.md-display-2[data-v-3aa99c97]{\n        font-size: 15px;\n}\nbutton[data-v-3aa99c97]{\n        font-size: 15px;\n}\n.md-content[data-v-3aa99c97] {\n        background: white;\n        padding: 10px;\n}\n.button[data-v-3aa99c97] {\n        display: inline-block;\n        padding: 10px 20px;\n        font-size: 16px;\n        cursor: pointer;\n        text-align: center;\n        text-decoration: none;\n        outline: none;\n        color: #fff;\n        background-color: #448aff;\n        border: none;\n        border-radius: 15px;\n        -webkit-box-shadow: 0 9px #999;\n                box-shadow: 0 9px #999;\n}\n}\n.button[data-v-3aa99c97]:hover {\n    background-color: lightblue\n}\n.button[data-v-3aa99c97]:active {\n    background-color: lightblue;\n    -webkit-box-shadow: 0 5px #666;\n            box-shadow: 0 5px #666;\n    -webkit-transform: translateY(4px);\n            transform: translateY(4px);\n}\n.center[data-v-3aa99c97] {\n    text-align: center;\n    margin-top: 10px;\n    margin-bottom: 25px;\n}\n\n", ""]);
+exports.push([module.i, "\n.md-card[data-v-3aa99c97] {\n    margin-top: 15px;\n}\n.md-content[data-v-3aa99c97] {\n    background: lightblue;\n    padding: 50px;\n}\n.button[data-v-3aa99c97] {\n    display: inline-block;\n    padding: 15px 25px;\n    font-size: 24px;\n    cursor: pointer;\n    text-align: center;\n    text-decoration: none;\n    outline: none;\n    color: #fff;\n    background-color: #448aff;\n    border: none;\n    border-radius: 15px;\n    -webkit-box-shadow: 0 9px #999;\n            box-shadow: 0 9px #999;\n}\n@media (max-width : 439px){\n.md-display-2[data-v-3aa99c97]{\n        font-size: 15px;\n}\nbutton[data-v-3aa99c97]{\n        font-size: 15px;\n}\n.md-content[data-v-3aa99c97] {\n        background: white;\n        padding: 10px;\n}\n.button[data-v-3aa99c97] {\n        display: inline-block;\n        padding: 10px 20px;\n        font-size: 16px;\n        cursor: pointer;\n        text-align: center;\n        text-decoration: none;\n        outline: none;\n        color: #fff;\n        background-color: #448aff;\n        border: none;\n        border-radius: 15px;\n        -webkit-box-shadow: 0 9px #999;\n                box-shadow: 0 9px #999;\n}\n}\n.button[data-v-3aa99c97]:hover {\n    background-color: lightblue\n}\n.button[data-v-3aa99c97]:active {\n    background-color: lightblue;\n    -webkit-box-shadow: 0 5px #666;\n            box-shadow: 0 5px #666;\n    -webkit-transform: translateY(4px);\n            transform: translateY(4px);\n}\n.center[data-v-3aa99c97] {\n    text-align: center;\n    margin-top: 10px;\n    margin-bottom: 25px;\n}\n\n", ""]);
 
 // exports
 

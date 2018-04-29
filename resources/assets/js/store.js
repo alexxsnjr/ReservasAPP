@@ -10,8 +10,11 @@ Vue.use(Vuex)
 
 const state = {
     idToken: null,
-    userId: null,
-    userName: null,
+    user :{
+        email: null,
+        name : null,
+        id : null,
+    },
     aulas: null,
     tipos: [],
     equipamientos: [],
@@ -22,9 +25,9 @@ const mutations = {
 
     },
     authUser(state, userData) {
-        state.userId = userData.userID,
-            state.userName = userData.userName
-
+        state.user.id= userData.userID,
+        state.user.name = userData.userName
+        state.user.email = userData.userEmail
     },
 
     aulas(state, aulas) {
@@ -104,11 +107,11 @@ const actions = {
             token: state.idToken
         })
             .then(res => {
-                console.log(res)
+
                 commit('authUser', {
                     userID: res.data.user.id,
                     userName: res.data.user.name,
-
+                    userEmail: res.data.user.email,
                 })
                 router.replace('/dashboard')
             })
@@ -118,7 +121,7 @@ const actions = {
 
         axios.get('/tipos', {headers: {Authorization: `Bearer ${state.idToken}`}})
             .then(res => {
-                console.log(res)
+
                 const data = [];
 
                 for (var i = 0; i < res.data.tipos.length; i++) {
@@ -154,8 +157,8 @@ const getters = {
             return false;
         }
     },
-    getUserName(state) {
-        return state.userName;
+    getUser(state) {
+        return state.user;
     },
     getTiposAula(state) {
 

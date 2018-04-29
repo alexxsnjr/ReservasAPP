@@ -64,16 +64,12 @@
     import Table from './pages/table';
     import Perfil from './pages/profile/profile.vue';
     import router from '../../router';
-
+    import {mapState} from 'vuex';
     export default {
         data: () => ({
             menuVisible: false,
             mode: 'app-table',
-            user: {
-                id: 1,
-                name: 'nombre de usuario',
-                email: 'emailUser@gmail.com',
-            }
+
 
         }),
         components: {
@@ -81,13 +77,15 @@
             appPerfil: Perfil,
             appTable: Table,
         },
+        computed: {
+            ...mapState(['user'])
+        },
         beforeCreate() {
 
             if (!this.$store.getters.isAuthenticated) {
                 router.replace('/')
 
             } else {
-                console.log('dispatch')
                 this.$store.dispatch('fetchTipos');
                 this.$store.dispatch('fetchEquipamiento');
             }

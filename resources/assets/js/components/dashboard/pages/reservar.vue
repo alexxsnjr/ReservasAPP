@@ -170,7 +170,7 @@
     }
 
     .md-content {
-        background: #b7cfd3;
+        background: lightblue;
         padding: 50px;
 
     }

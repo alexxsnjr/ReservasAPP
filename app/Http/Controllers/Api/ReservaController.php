@@ -13,9 +13,9 @@ class ReservaController extends Controller
 
         $aulas = DB::table('aulas')->leftJoin('equipamientos', 'aulas.id', '=', 'equipamientos.aula_id')
             ->where('aulas.id', '=', 'equipamientos.aula_id')
-            ->where('aulas.tipo', '=', $request->tipo)
-            ->where('aulas.aforo', '>=', $request->aforo)
-            ->whereRaw('aulas.id not in ( SELECT aula_id FROM reservas WHERE fecha = "2018-04-25 00:00:00" AND turno = "'.$request->turno.'" AND hora = '.$request->hora.' )')
+            ->where('aulas.tipo', '=', 'normal')
+            ->where('aulas.aforo', '>=', '2')
+            ->whereRaw('aulas.id not in ( SELECT aula_id FROM reservas WHERE fecha = "2018-04-25" AND turno = "mañana" AND hora = 1 )')
             ->get();
 
 
