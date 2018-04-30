@@ -35,10 +35,5 @@ class AuthenticateController extends Controller
         return response()->json(compact('token'));
     }
 
-    public function getUser(Request $request)
-    {
-        $user = JWTAuth::toUser($request->token);
 
-        return response()->json(compact('user'));
-    }
 }

@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::post('login' , 'Api\AuthenticateController@authenticate')->name('login');
-Route::post('user' , 'Api\AuthenticateController@getUser')->name('user');
+Route::post('user' , 'Api\UserController@index')->name('user');
 
 
 Route::group([
@@ -25,7 +25,8 @@ Route::group([
 
         Route::get('tipos' , 'GetInfoController@getTipo');
         Route::get('equipamiento' , 'GetInfoController@getEquipamiento');
-        Route::post('reservar.vue' , 'ReservaController@comprobarDisponibilidad');
+        Route::post('reservar' , 'ReservaController@comprobarDisponibilidad');
+        Route::post('update-user' , 'UserController@update');
 
 
     });

@@ -94,6 +94,7 @@
 </template>
 
 <script>
+
     export default {
         name: 'DialogCustom',
         data: () => ({
@@ -111,7 +112,11 @@
                 this.$emit('view');
             },
             done() {
-                // codigo peticion ajax;
+                this.$store.dispatch('updateUser', {
+                    name : this.user.name,
+                    email : this.user.email,
+                    id : this.user.id,
+                })
                 this.back();
             },
             cancel() {

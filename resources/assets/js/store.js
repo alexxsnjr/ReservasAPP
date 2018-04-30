@@ -75,7 +75,7 @@ const actions = {
     },
     reservar({commit, state}, data) {
         console.log(data)
-        axios.post('/reservar.vue', data, {
+        axios.post('/reservar', data, {
             headers: {Authorization: `Bearer ${state.idToken}`}
         })
             .then(res => {
@@ -94,6 +94,14 @@ const actions = {
             console.log(error);
 
         })
+    },
+    updateUser({state} , data){
+        console.log(data)
+        axios.post('/update-user', data, {
+            headers: {Authorization: `Bearer ${state.idToken}`}
+        }).then(res =>{
+            console.log(res)
+        }).catch(error => console.log(error))
     },
     fetchUser({commit, state}) {
 
