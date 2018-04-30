@@ -16,7 +16,7 @@ class ReservaController extends Controller
             ->where('aulas.aforo', '>=', $request->aforo)
             ->get();
 
-
+        //dd($aulas);
         return response()->json(compact('aulas'));
     }
 }

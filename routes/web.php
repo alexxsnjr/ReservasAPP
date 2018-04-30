@@ -56,6 +56,16 @@ Route::put('/aulas/{id}/equipamiento-editar', 'EquipamientosController@update')-
 Route::delete('/aulas/{id}/equipamiento-borrar','EquipamientosController@borrar')->name('equipamiento.borrar');
 
 
+//Profesores
+Route::get('/profesores/listar','ProfesorController@listar')->name('profesores.listar');
+Route::get('/profesores/crear','ProfesorController@crear')->name('profesores.crear');
+Route::post('/profesores/store','ProfesorController@store')->name('profesores.store');
+Route::get('/profesores/{id}/editar','ProfesorController@editar')->name('profesores.editar');
+Route::put('/profesores/{id}', 'ProfesorController@update')->name('profesores.update');
+Route::delete('/profesores/{id}/borrar','ProfesorController@borrar')->name('profesores.borrar');
+Route::get('/profesores/{id}/restaurar','ProfesorController@restaurarClave')->name('profesores.restaurarClave');
+
+
 //XML
 Route::get('/importar-xml','XMLController@index')->name('importarXML');
 Route::post('/subir-xml','XMLController@subirArchivo')->name('subirXML');

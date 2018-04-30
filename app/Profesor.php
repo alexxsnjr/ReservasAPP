@@ -28,8 +28,20 @@ class Profesor extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function reservas()
+    public function reserva()
     {
-        $this->hasMany(Reserva::class);
+        return $this->hasMany(Reserva::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($profesor) {
+
+            $profesor->reserva->each->delete();
+
+        });
+    }
+
 }
