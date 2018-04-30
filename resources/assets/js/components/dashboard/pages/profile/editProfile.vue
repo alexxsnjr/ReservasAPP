@@ -23,13 +23,16 @@
 
 
                     <md-list class="md-double-line md-dense">
+                        
                         <md-list-item>
                             <md-icon class="md-primary">group</md-icon>
                             <div class="md-list-item-text">
 
-                                <md-field>
+                                <md-field :class="getValidationClass('name')">
                                     <label>Full name</label>
                                     <md-input v-model="user.name" autofocus></md-input>
+                                    <span class="md-error" v-if="!$v.user.name.required">The  name is required</span>
+                                    <span class="md-error" v-else-if="!$v.user.name.minlength">Invalid  name</span>
                                 </md-field>
 
                             </div>
@@ -41,9 +44,11 @@
                         <md-list-item>
                             <md-icon class="md-primary">email</md-icon>
                             <div class="md-list-item-text">
-                                <md-field>
+                                <md-field :class="getValidationClass('email')">
                                     <label>Email</label>
                                     <md-input v-model="user.email" type="email"></md-input>
+                                    <span class="md-error" v-if="!$v.user.email.required">The email is required</span>
+                                    <span class="md-error" v-else-if="!$v.user.email.email">Invalid email</span>
                                 </md-field>
                             </div>
                         </md-list-item>
@@ -94,8 +99,15 @@
 </template>
 
 <script>
-
+    import { validationMixin } from 'vuelidate'
+    import {
+        required,
+        email,
+        minLength,
+        maxLength
+    } from 'vuelidate/lib/validators'
     export default {
+        mixins: [validationMixin],
         name: 'DialogCustom',
         data: () => ({
             showDialog: true,
@@ -107,17 +119,43 @@
             },
         }),
         props: ['user'],
+        validations: {
+            user: {
+                name: {
+                    required,
+                    minLength: minLength(3)
+                },
+                email: {
+                    required,
+                    email
+                }
+            }
+        },
         methods: {
+            getValidationClass (fieldName) {
+                const field = this.$v.user[fieldName]
+
+                if (field) {
+                    return {
+                        'md-invalid': field.$invalid && field.$dirty
+                    }
+                }
+            },
             back() {
                 this.$emit('view');
             },
             done() {
-                this.$store.dispatch('updateUser', {
-                    name : this.user.name,
-                    email : this.user.email,
-                    id : this.user.id,
-                })
-                this.back();
+                this.$v.$touch()
+
+                if (!this.$v.$invalid) {
+                    this.$store.dispatch('updateUser', {
+                        name : this.user.name,
+                        email : this.user.email,
+                        id : this.user.id,
+                    })
+                    this.back();
+                }
+
             },
             cancel() {
                 this.activeChangePassword = false
