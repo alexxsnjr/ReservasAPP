@@ -22,39 +22,30 @@
                 <md-card-content>
 
 
-                    <md-list class="md-double-line md-dense">
-                        
-                        <md-list-item>
-                            <md-icon class="md-primary">group</md-icon>
-                            <div class="md-list-item-text">
-
                                 <md-field :class="getValidationClass('name')">
+
                                     <label>Full name</label>
-                                    <md-input v-model="user.name" autofocus></md-input>
-                                    <span class="md-error" v-if="!$v.user.name.required">The  name is required</span>
-                                    <span class="md-error" v-else-if="!$v.user.name.minlength">Invalid  name</span>
+                                    <md-input v-model="usu.name" autofocus></md-input>
+                                    <span class="md-error" v-if="!$v.usu.name.required">The  name is required</span>
+                                    <span class="md-error" v-else-if="!$v.usu.name.minlength">Invalid  name</span>
                                 </md-field>
 
-                            </div>
-                        </md-list-item>
+
 
 
                         <md-divider class="md-inset"></md-divider>
 
-                        <md-list-item>
-                            <md-icon class="md-primary">email</md-icon>
-                            <div class="md-list-item-text">
+
                                 <md-field :class="getValidationClass('email')">
                                     <label>Email</label>
-                                    <md-input v-model="user.email" type="email"></md-input>
-                                    <span class="md-error" v-if="!$v.user.email.required">The email is required</span>
-                                    <span class="md-error" v-else-if="!$v.user.email.email">Invalid email</span>
+                                    <md-input v-model="usu.email" type="email"></md-input>
+                                    <span class="md-error" v-if="!$v.usu.email.required">The email is required</span>
+                                    <span class="md-error" v-else-if="!$v.usu.email.email">Invalid email</span>
                                 </md-field>
-                            </div>
-                        </md-list-item>
 
 
-                    </md-list>
+
+
 
 
                 </md-card-content>
@@ -112,15 +103,25 @@
         data: () => ({
             showDialog: true,
             activeChangePassword: false,
+            usu: {
+                name : '',
+                email: '',
+            },
             password: {
                 old: '',
                 new: '',
                 repeat: '',
             },
         }),
+        mounted() {
+            var stateUsu = this.$store.getters.getUser;
+            this.usu.name =  stateUsu.name;
+            this.usu.email = stateUsu.email;
+
+        },
         props: ['user'],
         validations: {
-            user: {
+            usu: {
                 name: {
                     required,
                     minLength: minLength(3)
@@ -133,7 +134,7 @@
         },
         methods: {
             getValidationClass (fieldName) {
-                const field = this.$v.user[fieldName]
+                const field = this.$v.usu[fieldName]
 
                 if (field) {
                     return {
@@ -148,9 +149,11 @@
                 this.$v.$touch()
 
                 if (!this.$v.$invalid) {
+                    this.user.name = this.usu.name;
+                    this.user.email = this.usu.email;
                     this.$store.dispatch('updateUser', {
-                        name : this.user.name,
-                        email : this.user.email,
+                        name : this.usu.name,
+                        email : this.usu.email,
                         id : this.user.id,
                     })
                     this.back();

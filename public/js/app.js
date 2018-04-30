@@ -20168,15 +20168,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -20187,6 +20178,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             showDialog: true,
             activeChangePassword: false,
+            usu: {
+                name: '',
+                email: ''
+            },
             password: {
                 old: '',
                 new: '',
@@ -20194,9 +20189,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         };
     },
+    mounted: function mounted() {
+        var stateUsu = this.$store.getters.getUser;
+        this.usu.name = stateUsu.name;
+        this.usu.email = stateUsu.email;
+    },
+
     props: ['user'],
     validations: {
-        user: {
+        usu: {
             name: {
                 required: __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__["required"],
                 minLength: Object(__WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__["minLength"])(3)
@@ -20209,7 +20210,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         getValidationClass: function getValidationClass(fieldName) {
-            var field = this.$v.user[fieldName];
+            var field = this.$v.usu[fieldName];
 
             if (field) {
                 return {
@@ -20224,9 +20225,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$v.$touch();
 
             if (!this.$v.$invalid) {
+                this.user.name = this.usu.name;
+                this.user.email = this.usu.email;
                 this.$store.dispatch('updateUser', {
-                    name: this.user.name,
-                    email: this.user.email,
+                    name: this.usu.name,
+                    email: this.usu.email,
                     id: this.user.id
                 });
                 this.back();
@@ -20967,108 +20970,63 @@ var render = function() {
                 "md-card-content",
                 [
                   _c(
-                    "md-list",
-                    { staticClass: "md-double-line md-dense" },
+                    "md-field",
+                    { class: _vm.getValidationClass("name") },
                     [
-                      _c(
-                        "md-list-item",
-                        [
-                          _c("md-icon", { staticClass: "md-primary" }, [
-                            _vm._v("group")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "md-list-item-text" },
-                            [
-                              _c(
-                                "md-field",
-                                { class: _vm.getValidationClass("name") },
-                                [
-                                  _c("label", [_vm._v("Full name")]),
-                                  _vm._v(" "),
-                                  _c("md-input", {
-                                    attrs: { autofocus: "" },
-                                    model: {
-                                      value: _vm.user.name,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.user, "name", $$v)
-                                      },
-                                      expression: "user.name"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  !_vm.$v.user.name.required
-                                    ? _c("span", { staticClass: "md-error" }, [
-                                        _vm._v("The  name is required")
-                                      ])
-                                    : !_vm.$v.user.name.minlength
-                                      ? _c(
-                                          "span",
-                                          { staticClass: "md-error" },
-                                          [_vm._v("Invalid  name")]
-                                        )
-                                      : _vm._e()
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
+                      _c("label", [_vm._v("Full name")]),
                       _vm._v(" "),
-                      _c("md-divider", { staticClass: "md-inset" }),
+                      _c("md-input", {
+                        attrs: { autofocus: "" },
+                        model: {
+                          value: _vm.usu.name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.usu, "name", $$v)
+                          },
+                          expression: "usu.name"
+                        }
+                      }),
                       _vm._v(" "),
-                      _c(
-                        "md-list-item",
-                        [
-                          _c("md-icon", { staticClass: "md-primary" }, [
-                            _vm._v("email")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "md-list-item-text" },
-                            [
-                              _c(
-                                "md-field",
-                                { class: _vm.getValidationClass("email") },
-                                [
-                                  _c("label", [_vm._v("Email")]),
-                                  _vm._v(" "),
-                                  _c("md-input", {
-                                    attrs: { type: "email" },
-                                    model: {
-                                      value: _vm.user.email,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.user, "email", $$v)
-                                      },
-                                      expression: "user.email"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  !_vm.$v.user.email.required
-                                    ? _c("span", { staticClass: "md-error" }, [
-                                        _vm._v("The email is required")
-                                      ])
-                                    : !_vm.$v.user.email.email
-                                      ? _c(
-                                          "span",
-                                          { staticClass: "md-error" },
-                                          [_vm._v("Invalid email")]
-                                        )
-                                      : _vm._e()
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
+                      !_vm.$v.usu.name.required
+                        ? _c("span", { staticClass: "md-error" }, [
+                            _vm._v("The  name is required")
+                          ])
+                        : !_vm.$v.usu.name.minlength
+                          ? _c("span", { staticClass: "md-error" }, [
+                              _vm._v("Invalid  name")
+                            ])
+                          : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("md-divider", { staticClass: "md-inset" }),
+                  _vm._v(" "),
+                  _c(
+                    "md-field",
+                    { class: _vm.getValidationClass("email") },
+                    [
+                      _c("label", [_vm._v("Email")]),
+                      _vm._v(" "),
+                      _c("md-input", {
+                        attrs: { type: "email" },
+                        model: {
+                          value: _vm.usu.email,
+                          callback: function($$v) {
+                            _vm.$set(_vm.usu, "email", $$v)
+                          },
+                          expression: "usu.email"
+                        }
+                      }),
+                      _vm._v(" "),
+                      !_vm.$v.usu.email.required
+                        ? _c("span", { staticClass: "md-error" }, [
+                            _vm._v("The email is required")
+                          ])
+                        : !_vm.$v.usu.email.email
+                          ? _c("span", { staticClass: "md-error" }, [
+                              _vm._v("Invalid email")
+                            ])
+                          : _vm._e()
                     ],
                     1
                   )
