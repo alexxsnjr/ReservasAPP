@@ -85,7 +85,7 @@
     }
 
     .perfil {
-        background: lightblue;
+        background: #C5D639;
         padding: 30px;
     }
 

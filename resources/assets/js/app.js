@@ -16,7 +16,7 @@ import 'vue-event-calendar/dist/style.css' //^1.1.10, CSS has been extracted as 
 import vueEventCalendar from 'vue-event-calendar'
 import Vuelidate from 'vuelidate'
 
-Vue.use(vueEventCalendar, {locale: 'es', color: 'lightblue'})
+Vue.use(vueEventCalendar, {locale: 'es', color: '#81b66a'})
 
 Vue.use(VueMaterial)
 Vue.use(Vuelidate)

@@ -171,7 +171,7 @@
     }
 
     .md-content {
-        background: lightblue;
+        background: #C5D639;
         padding: 50px;
 
     }
@@ -188,7 +188,7 @@
         text-decoration: none;
         outline: none;
         color: #fff;
-        background-color: #448aff;
+        background-color: #0096A4;
         border: none;
         border-radius: 15px;
         box-shadow: 0 9px #999;
@@ -215,18 +215,18 @@
             text-decoration: none;
             outline: none;
             color: #fff;
-            background-color: #448aff;
+            background-color: #0096A4;
             border: none;
             border-radius: 15px;
             box-shadow: 0 9px #999;
         }
     }
     .button:hover {
-        background-color: lightblue
+        background-color: #0096A4;
     }
 
     .button:active {
-        background-color: lightblue;
+        background-color: #0096A4;
         box-shadow: 0 5px #666;
         transform: translateY(4px);
     }
