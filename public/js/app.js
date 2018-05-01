@@ -13874,7 +13874,7 @@ var actions = {
         var state = _ref4.state;
 
         console.log(data);
-        __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/update-user', data, {
+        __WEBPACK_IMPORTED_MODULE_2_axios___default.a.put('/user/' + state.user.id, data, {
             headers: { Authorization: 'Bearer ' + state.idToken }
         }).then(function (res) {
             console.log(res);
@@ -13891,8 +13891,8 @@ var actions = {
 
             return;
         }
-        __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/user', {
-            token: state.idToken
+        __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/user/' + state.idToken, {
+            headers: { Authorization: 'Bearer ' + state.idToken }
         }).then(function (res) {
 
             commit('authUser', {
@@ -18901,6 +18901,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -20229,8 +20230,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.user.email = this.usu.email;
                 this.$store.dispatch('updateUser', {
                     name: this.usu.name,
-                    email: this.usu.email,
-                    id: this.user.id
+                    email: this.usu.email
+
                 });
                 this.back();
             }

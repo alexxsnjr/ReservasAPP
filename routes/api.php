@@ -13,8 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('login' , 'Api\AuthenticateController@authenticate')->name('login');
-Route::post('user' , 'Api\UserController@index')->name('user');
+//LOGIN
+Route::post('login' , 'Api\AuthenticateController@authenticate');
+
 
 
 Route::group([
@@ -22,11 +23,15 @@ Route::group([
     'middleware' => 'jwt.auth',
     ],
     function () {
-
+        //INFO
         Route::get('tipos' , 'GetInfoController@getTipo');
         Route::get('equipamiento' , 'GetInfoController@getEquipamiento');
+        //RESERVAS
         Route::post('reservar' , 'ReservaController@comprobarDisponibilidad');
-        Route::post('update-user' , 'UserController@update');
+
+        //USER
+        Route::get('user/{token}' , 'UserController@index');
+        Route::put('user/{id}' , 'UserController@update');
 
 
     });

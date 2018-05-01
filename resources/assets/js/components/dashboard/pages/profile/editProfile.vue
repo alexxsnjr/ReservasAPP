@@ -154,7 +154,7 @@
                     this.$store.dispatch('updateUser', {
                         name : this.usu.name,
                         email : this.usu.email,
-                        id : this.user.id,
+
                     })
                     this.back();
                 }

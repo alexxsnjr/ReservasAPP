@@ -97,7 +97,7 @@ const actions = {
     },
     updateUser({state} , data){
         console.log(data)
-        axios.post('/update-user', data, {
+        axios.put('/user/'+state.user.id, data, {
             headers: {Authorization: `Bearer ${state.idToken}`}
         }).then(res =>{
             console.log(res)
@@ -111,8 +111,8 @@ const actions = {
             return
 
         }
-        axios.post('/user', {
-            token: state.idToken
+        axios.get('/user/'+ state.idToken, {
+            headers: {Authorization: `Bearer ${state.idToken}`}
         })
             .then(res => {
 

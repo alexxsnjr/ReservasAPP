@@ -6,6 +6,7 @@
             <i class="fa fa-dashboard"></i> <span>Inicio</span>
         </a>
     </li>
+
     <li class="treeview {{ request()->is('aulas/*') ? 'active' : '' }}">
         <a href="#"><i class="fa fa-university"></i> <span>Aulas</span>
             <span class="pull-right-container">
@@ -21,6 +22,23 @@
             </li>
         </ul>
     </li>
+
+    <li class="treeview {{ request()->is('profesores/*') ? 'active' : '' }}">
+        <a href="#"><i class="fa fa-users"></i> <span>Profesores</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+        </a>
+        <ul class="treeview-menu">
+            <li {{ request()->is('profesores/listar') ? 'class=active' : '' }}>
+                <a href="{{ route('profesores.listar') }}">
+                    <i class="fa fa-list-ul"></i>
+                    Ver listado de profesores
+                </a>
+            </li>
+        </ul>
+    </li>
+
     <li class="header">Configuración</li>
     <li {{ request()->is('importar-xml') ? 'class=active' : '' }}>
         <a href="{{ route('importarXML') }}">

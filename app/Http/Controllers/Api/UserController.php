@@ -16,21 +16,21 @@ class UserController extends Controller
         return response()->json(compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request , $id)
     {
 
         $this->validate($request, [
             'email' => 'required|email',
             'name' => 'required|string|max: 20',
-            'id' => 'required'
+
         ]);
 
-        $profesor = Profesor::find($request->id);
+        $profesor = Profesor::find($id);
         $profesor->name = $request->name;
         $profesor->email = $request->email;
         $profesor->save();
 
-        return response()->json([],200);
+        return response()->json($profesor,200);
 
     }
 }

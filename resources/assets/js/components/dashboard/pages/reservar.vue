@@ -3,6 +3,7 @@
         <div class="center" style="background: white; padding: 50px 10px 50px 10px" v-if="aulas">
             <md-content class="md-elevation-3">
                 <div>
+
                     <span class="md-display-2">Aulas Disponibles</span><br><br>
                     <button v-for="aula of aulas" class="button" @click=" mode = 'app-table'">{{aula}}</button>
 
