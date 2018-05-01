@@ -7,8 +7,9 @@
                 <div class="md-title">Reserva de Aulas</div>
 
             </div>
-
+            <form novalidate  @submit.prevent="onSubmit">
             <div class="form">
+
                 <md-field>
                     <label>E-mail</label>
                     <md-input v-model="email" autofocus></md-input>
@@ -22,9 +23,9 @@
 
             <div class="actions md-layout md-alignment-center-space-between">
 
-                <md-button class="md-raised md-primary" @click="onSubmit">Log in</md-button>
+                <md-button type="submit" class="md-raised md-primary">Log in</md-button>
             </div>
-
+            </form>
 
         </md-content>
         <div class="background"/>
