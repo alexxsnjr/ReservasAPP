@@ -13859,19 +13859,30 @@ var actions = {
             headers: { Authorization: 'Bearer ' + state.idToken }
         }).then(function (res) {
             console.log(res);
-            var data = [];
-
-            for (var i = 0; i < res.data.aulas.length; i++) {
-                data.push(res.data.aulas[i].nombre);
-            }
-
-            commit('aulas', data);
+            commit('aulas', res.data.aulas);
         }).catch(function (error) {
             console.log(error);
         });
     },
-    updateUser: function updateUser(_ref4, data) {
-        var state = _ref4.state;
+    doReserva: function doReserva(_ref4, data) {
+        var commit = _ref4.commit,
+            state = _ref4.state;
+
+        console.log(data);
+        __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/doreserva', data, {
+            headers: { Authorization: 'Bearer ' + state.idToken }
+        }).then(function (res) {
+            console.log(res);
+            state.aulas = [];
+
+            //commit('aulas', data);
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+    updateUser: function updateUser(_ref5, data) {
+        var state = _ref5.state;
 
         console.log(data);
         __WEBPACK_IMPORTED_MODULE_2_axios___default.a.put('/user/' + state.user.id, data, {
@@ -13882,9 +13893,9 @@ var actions = {
             return console.log(error);
         });
     },
-    fetchUser: function fetchUser(_ref5) {
-        var commit = _ref5.commit,
-            state = _ref5.state;
+    fetchUser: function fetchUser(_ref6) {
+        var commit = _ref6.commit,
+            state = _ref6.state;
 
 
         if (!state.idToken) {
@@ -13905,9 +13916,9 @@ var actions = {
             return console.log(error);
         });
     },
-    fetchTipos: function fetchTipos(_ref6) {
-        var commit = _ref6.commit,
-            state = _ref6.state;
+    fetchTipos: function fetchTipos(_ref7) {
+        var commit = _ref7.commit,
+            state = _ref7.state;
 
 
         __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/tipos', { headers: { Authorization: 'Bearer ' + state.idToken } }).then(function (res) {
@@ -13921,9 +13932,9 @@ var actions = {
             commit('tipos', data);
         });
     },
-    fetchEquipamiento: function fetchEquipamiento(_ref7) {
-        var commit = _ref7.commit,
-            state = _ref7.state;
+    fetchEquipamiento: function fetchEquipamiento(_ref8) {
+        var commit = _ref8.commit,
+            state = _ref8.state;
 
 
         __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/equipamiento', { headers: { Authorization: 'Bearer ' + state.idToken } }).then(function (res) {
@@ -18946,6 +18957,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
                 });
             }
+        },
+        reservar: function reservar(aula) {
+
+            this.$store.dispatch('doReserva', {
+                fecha: this.formData.fecha,
+                aula: aula,
+                turno: this.formData.turno,
+                hora: this.formData.hora
+
+            });
+
+            this.formData.fecha = null;
+            this.formData.aforo = "";
+            this.formData.turno = "";
+            this.formData.hora = "";
+            this.formData.tipo = "";
+            this.formData.requerimientos = [];
         }
     },
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])(['tipos', 'equipamientos', 'aulas']))
@@ -18986,11 +19014,11 @@ var render = function() {
                         staticClass: "button",
                         on: {
                           click: function($event) {
-                            _vm.mode = "app-table"
+                            _vm.reservar(aula.ID)
                           }
                         }
                       },
-                      [_vm._v(_vm._s(aula))]
+                      [_vm._v(_vm._s(aula.nombre))]
                     )
                   })
                 ],

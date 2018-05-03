@@ -80,14 +80,24 @@ const actions = {
         })
             .then(res => {
                 console.log(res)
-                const data = [];
-
-                for (var i = 0; i < res.data.aulas.length; i++) {
-                    data.push(res.data.aulas[i].nombre);
-                }
+                commit('aulas', res.data.aulas);
 
 
-                commit('aulas', data);
+            }).catch(error => {
+            console.log(error);
+
+        })
+    },
+    doReserva({commit, state}, data) {
+        console.log(data)
+        axios.post('/doreserva', data, {
+            headers: {Authorization: `Bearer ${state.idToken}`}
+        })
+            .then(res => {
+                console.log(res)
+                state.aulas = []
+                
+                //commit('aulas', data);
 
 
             }).catch(error => {

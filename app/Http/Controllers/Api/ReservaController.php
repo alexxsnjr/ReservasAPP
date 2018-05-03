@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Reserva;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ReservaController extends Controller
 {
+
     public function comprobarDisponibilidad(Request $request)
     {
         $this->validate($request, [
@@ -16,7 +19,7 @@ class ReservaController extends Controller
             'fecha'=>'required',
             'aforo'=>'required',
             'turno'=>'required',
-            'hora'=>  'required',
+            'hora'=>  'required|integer',
             'tipo'=>'required',
         ]);
 
@@ -27,4 +30,28 @@ class ReservaController extends Controller
 
         return response()->json(compact('aulas'));
     }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'aula' => 'required|integer',
+            'fecha'=>'required',
+            'turno'=>'required',
+            'hora'=>  'required',
+        ]);
+
+        $user = JWTAuth::toUser($request->token);
+        $fecha= Carbon::parse($request->fecha)->format('Y-m-d');
+
+        $reserva = new Reserva;
+        $reserva->profesor_id = $user->id;
+        $reserva->aula_id = $request->aula;
+        $reserva->fecha = $fecha;
+        $reserva->turno = $request->turno;
+        $reserva->hora = $request->hora;
+        $reserva->save();
+
+        return response()->json($reserva,200);
+    }
+
 }

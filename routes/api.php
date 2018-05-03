@@ -28,7 +28,7 @@ Route::group([
         Route::get('equipamiento' , 'GetInfoController@getEquipamiento');
         //RESERVAS
         Route::post('reservar' , 'ReservaController@comprobarDisponibilidad');
-
+        Route::post('doreserva' , 'ReservaController@store');
         //USER
         Route::get('user/{token}' , 'UserController@index');
         Route::put('user/{id}' , 'UserController@update');

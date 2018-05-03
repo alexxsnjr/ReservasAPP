@@ -5,7 +5,7 @@
                 <div>
 
                     <span class="md-display-2">Aulas Disponibles</span><br><br>
-                    <button v-for="aula of aulas" class="button" @click=" mode = 'app-table'">{{aula}}</button>
+                    <button v-for="aula of aulas" class="button" @click="reservar(aula.ID)">{{aula.nombre}}</button>
 
                 </div>
                 <br><br>
@@ -156,6 +156,24 @@
                     });
                 }
             },
+            reservar(aula){
+
+                this.$store.dispatch('doReserva', {
+                    fecha: this.formData.fecha,
+                    aula: aula,
+                    turno: this.formData.turno,
+                    hora: this.formData.hora,
+
+                });
+
+                this.formData.fecha = null
+                this.formData.aforo= ""
+                this.formData.turno= ""
+                this.formData.hora= ""
+                this.formData.tipo= ""
+                this.formData.requerimientos = []
+
+            }
         },
         computed: {
             ...mapState(['tipos', 'equipamientos', 'aulas'])
