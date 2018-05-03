@@ -32,7 +32,7 @@ class ProfesorController extends Controller
     {
 
         $this->validate($request, [
-            'email' => 'required|email',
+            'email' => 'required|email|unique:profesors',
             'nombre' => 'required|string|max: 20',
         ]);
 
@@ -59,7 +59,7 @@ class ProfesorController extends Controller
     {
 
         $this->validate($request, [
-            'email' => 'required|email',
+            'email' => 'required|email|unique:profesors,email,'.$id,
             'nombre' => 'required|string|max: 20',
         ]);
 
