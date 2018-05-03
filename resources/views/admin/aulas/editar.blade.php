@@ -35,14 +35,13 @@
                         <label class="col-sm-2 control-label">Edificio</label>
 
                         <div class="col-sm-10">
-                            <select name="edificio[]"
+                            <select name="edificio"
                                     class="form-control"
                                     id="edificio"
                                     style="width: 100%;">
-                                <option>Selecciona un edificio</option>
+                                <option value="">Selecciona un edificio</option>
                                 @foreach($edificios as $edificio)
-                                    <option {{ collect(old('edificio',$aula->edificio_id))->contains($edificio->id) ? 'selected' : '' }}
-                                            value="{{ $edificio->id }}"
+                                    <option value="{{ $edificio->id }}"
                                             {{ old('edificio',$aula->edificio_id) == $edificio->id ? 'selected' : '' }}
                                     >{{ $edificio->nombre }}</option>
                                 @endforeach
@@ -54,7 +53,7 @@
                         <label class="col-sm-2 control-label">Planta</label>
 
                         <div class="col-sm-10">
-                            <select name="planta[]"
+                            <select name="planta"
                                     id="planta"
                                     class="form-control"
                                     style="width: 100%;">
