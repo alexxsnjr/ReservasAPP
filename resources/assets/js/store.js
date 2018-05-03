@@ -96,7 +96,7 @@ const actions = {
             .then(res => {
                 console.log(res)
                 state.aulas = []
-                
+
                 //commit('aulas', data);
 
 

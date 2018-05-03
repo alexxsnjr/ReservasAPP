@@ -31,7 +31,7 @@ class ReservaController extends Controller
         return response()->json(compact('aulas'));
     }
 
-<<<<<<< HEAD
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -55,6 +55,5 @@ class ReservaController extends Controller
         return response()->json($reserva,200);
     }
 
-=======
->>>>>>> master
+
 }
