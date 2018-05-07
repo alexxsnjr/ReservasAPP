@@ -11,8 +11,8 @@
             <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div id="fondo" class="widget-user-header bg-blue-active">
-                    <h3 class="widget-user-username">{{ centro()->nombre }}</h3>
-                    <h5 class="widget-user-desc">{{ centro()->email }}</h5>
+                    <h3 class="widget-user-username">{{ $centro->nombre }}</h3>
+                    <h5 class="widget-user-desc">{{ $centro->email }}</h5>
                     <h3 class="pull-right widget-user-username" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modal-color"><i class="fa fa-edit"></i></h3>
                 </div>
                 <div class="widget-user-image">
@@ -38,7 +38,7 @@
                         <!-- /.col -->
                         <div class="col-sm-4">
                             <div class="description-block">
-                                <form class="form-horizontal" action="{{ route('datosCentro.color' , centro()->id)}}" method="POST">
+                                <form class="form-horizontal" action="{{ route('datosCentro.color' , $centro->id)}}" method="POST">
                                 {{ csrf_field() }}{{ method_field('PUT') }}
 
                                     <input id="colorEnvio" type="hidden" name="color">

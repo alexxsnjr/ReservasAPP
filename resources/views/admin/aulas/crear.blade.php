@@ -76,14 +76,13 @@
                                 <label class="col-sm-2 control-label">Tipo de aula</label>
 
                                 <div class="col-sm-10">
-                                    <select name="tipo[]"
+                                    <select name="tipo"
                                             class="form-control"
                                             id="tipo"
                                             style="width: 100%;">
                                         <option selected value="">Selecciona un tipo</option>
                                         @foreach($tipos as $tipo)
-                                            <option {{ collect(old('tipo'))->contains($tipo->tipo) ? 'selected' : '' }}
-                                                    value="{{ $tipo->tipo }}"
+                                            <option value="{{ $tipo->tipo }}"
                                                     {{ old('tipo') == $tipo->id ? 'selected' : '' }}
                                             >{{ $tipo->tipo }}</option>
                                         @endforeach

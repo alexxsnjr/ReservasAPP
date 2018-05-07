@@ -39,6 +39,22 @@
         </ul>
     </li>
 
+    <li class="treeview {{ request()->is('reservas/*') ? 'active' : '' }}">
+        <a href="#"><i class="fa fa-calendar"></i> <span>Reservas</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+        </a>
+        <ul class="treeview-menu">
+            <li {{ request()->is('reservas/listar') ? 'class=active' : '' }}>
+                <a href="{{ route('reservas.listar') }}">
+                    <i class="fa fa-list-ul"></i>
+                    Ver reservas
+                </a>
+            </li>
+        </ul>
+    </li>
+
     <li class="header">Configuración</li>
     <li {{ request()->is('importar-xml') ? 'class=active' : '' }}>
         <a href="{{ route('importarXML') }}">

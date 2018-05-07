@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Centro;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $centro = Centro::all()->first();
+        view()->share('centro',$centro);
     }
 
     /**

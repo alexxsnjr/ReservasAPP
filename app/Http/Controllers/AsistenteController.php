@@ -18,12 +18,12 @@ class AsistenteController extends CentroController
         return view('admin/asistente/index');
     }
 
-    public function datosCentro()
+    public function datoscentro()
     {
         return view('admin/asistente/datos');
     }
 
-    public function personalizarCentro()
+    public function personalizarcentro()
     {
         return view('admin/asistente/personalizar');
     }

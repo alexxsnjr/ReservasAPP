@@ -19,37 +19,37 @@
 
             <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div id="fondo" class="widget-user-header bg-{{centro()->color ? centro()->color : 'blue'}}-active">
-                    <h3 id="nombreCentro" class="widget-user-username">{{ centro()->nombre }}</h3>
-                    <h5 class="widget-user-desc">{{ centro()->email }}</h5>
+                <div id="fondo" class="widget-user-header bg-{{$centro->color ? $centro->color : 'blue'}}-active">
+                    <h3 id="nombreCentro" class="widget-user-username">{{ $centro->nombre }}</h3>
+                    <h5 class="widget-user-desc">{{ $centro->email }}</h5>
                     <h3 class="pull-right widget-user-username" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modal-color"><i class="fa fa-edit"></i></h3>
                 </div>
                 <div class="widget-user-image">
-                    <img id="imagen" data-toggle="modal" data-target="#modal-imagen" data-backdrop="static" data-keyboard="false" class="img-circle" src="{{centro()->imagen ? centro()->imagen : '/img/centroPredefinido.jpg' }}" alt="Logo centro">
+                    <img id="imagen" data-toggle="modal" data-target="#modal-imagen" data-backdrop="static" data-keyboard="false" class="img-circle" src="{{$centro->imagen ? $centro->imagen : '/img/centroPredefinido.jpg' }}" alt="Logo centro">
                 </div>
                 <div class="box-footer">
                     <div class="row">
                         <div class="col-sm-12 border-right">
                             <div class="description-block">
-                                <form class="form-horizontal" action="{{ route('centro.update' , centro()->id)}}" method="POST">
+                                <form class="form-horizontal" action="{{ route('centro.update' , $centro->id)}}" method="POST">
                                 {{ csrf_field() }}{{ method_field('PUT') }}
 
                                     <br>
                                     <label class="pull-left">Nombre del centro:</label>
 
                                     <input type="text" name="nombre" class="form-control"
-                                               value="{{ old('nombre',centro()->nombre) }}">
+                                               value="{{ old('nombre',$centro->nombre) }}">
                                     <br>
                                     <label class="pull-left">Email del centro:</label>
 
                                     <input type="text" name="email" class="form-control"
-                                           value="{{ old('email',centro()->email) }}">
+                                           value="{{ old('email',$centro->email) }}">
                                     <br>
                                     <label class="pull-left">Descripción del centro:</label>
                                     <br>
-                                    <textarea type="text" name="descripcion" class="form-control">{{ old('descripcion',centro()->descripcion) }}</textarea>
+                                    <textarea type="text" name="descripcion" class="form-control">{{ old('descripcion',$centro->descripcion) }}</textarea>
 
-                                    <input id="colorEnvio" type="hidden" name="color" value="{{centro()->color ? centro()->color : 'blue'}}">
+                                    <input id="colorEnvio" type="hidden" name="color" value="{{$centro->color ? $centro->color : 'blue'}}">
                                     <br>
                                     <button type="submit" class="btn btn-info pull-right">Guardar</button>
 
@@ -91,32 +91,32 @@
                         <div class="modal-body">
                             <div class="caja">
                                 <div id="blue" class="color bg-blue-active">
-                                    {!! centro()->color==('blue') ? '<i class="icono fa fa-check-circle"></i>' : '' !!}
+                                    {!! $centro->color==('blue') ? '<i class="icono fa fa-check-circle"></i>' : '' !!}
                                 </div>
                             </div>
                             <div class="caja">
                                 <div id="white" class="color bg-white-active">
-                                    {!! centro()->color==('white') ? '<i class="icono fa fa-check-circle"></i>' : '' !!}
+                                    {!! $centro->color==('white') ? '<i class="icono fa fa-check-circle"></i>' : '' !!}
                                 </div>
                             </div>
                             <div class="caja">
                                 <div id="purple" class="color bg-purple-active">
-                                    {!! centro()->color==('purple') ? '<i class="icono fa fa-check-circle"></i>' : '' !!}
+                                    {!! $centro->color==('purple') ? '<i class="icono fa fa-check-circle"></i>' : '' !!}
                                 </div>
                             </div>
                             <div class="caja">
                                 <div id="green" class="color bg-green-active">
-                                    {!! centro()->color==('green') ? '<i class="icono fa fa-check-circle"></i>' : '' !!}
+                                    {!! $centro->color==('green') ? '<i class="icono fa fa-check-circle"></i>' : '' !!}
                                 </div>
                             </div>
                             <div class="caja">
                                 <div id="red" class="color bg-red-active">
-                                    {!! centro()->color==('red') ? '<i class="icono fa fa-check-circle"></i>' : '' !!}
+                                    {!! $centro->color==('red') ? '<i class="icono fa fa-check-circle"></i>' : '' !!}
                                 </div>
                             </div>
                             <div class="caja">
                                 <div id="yellow" class="color bg-yellow-active">
-                                    {!! centro()->color==('yellow') ? '<i class="icono fa fa-check-circle"></i>' : '' !!}
+                                    {!! $centro->color==('yellow') ? '<i class="icono fa fa-check-circle"></i>' : '' !!}
                                 </div>
                             </div>
                             <br><br><br><br>
