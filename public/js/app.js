@@ -18662,6 +18662,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -18672,7 +18677,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     data: function data() {
         return {
             menuVisible: false,
-            mode: 'app-table'
+            mode: 'app-table',
+            showSnackbar: false
 
         };
     },
@@ -18695,6 +18701,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     methods: {
         logout: function logout() {
             this.$store.dispatch('logout');
+        },
+        back: function back() {
+            this.mode = 'app-table';
+            this.showSnackbar = true;
         }
     }
 
@@ -18913,6 +18923,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -18921,6 +18937,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     data: function data() {
         return {
             active: 'primer',
+            showResponse: false,
             primer: false,
             segundo: false,
             tercer: false,
@@ -18946,7 +18963,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             if (index) {
                 this.active = index;
             } else {
-
+                this.showResponse = true;
                 this.$store.dispatch('reservar', {
                     fecha: this.formData.fecha,
                     aforo: this.formData.aforo,
@@ -18960,20 +18977,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         reservar: function reservar(aula) {
 
-            this.$store.dispatch('doReserva', {
-                fecha: this.formData.fecha,
-                aula: aula,
-                turno: this.formData.turno,
-                hora: this.formData.hora
+            if (aula) {
+                this.$store.dispatch('doReserva', {
+                    fecha: this.formData.fecha,
+                    aula: aula,
+                    turno: this.formData.turno,
+                    hora: this.formData.hora
 
-            });
-
-            this.formData.fecha = null;
-            this.formData.aforo = "";
-            this.formData.turno = "";
-            this.formData.hora = "";
-            this.formData.tipo = "";
-            this.formData.requerimientos = [];
+                });
+            }
+            this.$emit('back');
+        },
+        reintentar: function reintentar() {
+            this.showResponse = false;
+            this.active = 'primer';
         }
     },
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])(['tipos', 'equipamientos', 'aulas']))
@@ -18989,7 +19006,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.aulas
+    _vm.aulas && _vm.showResponse
       ? _c(
           "div",
           {
@@ -18998,32 +19015,57 @@ var render = function() {
           },
           [
             _c("md-content", { staticClass: "md-elevation-3" }, [
-              _c(
-                "div",
-                [
-                  _c("span", { staticClass: "md-display-2" }, [
-                    _vm._v("Aulas Disponibles")
-                  ]),
-                  _c("br"),
-                  _c("br"),
-                  _vm._v(" "),
-                  _vm._l(_vm.aulas, function(aula) {
-                    return _c(
+              _vm.aulas.length > 0
+                ? _c(
+                    "div",
+                    [
+                      _c("span", { staticClass: "md-display-2" }, [
+                        _vm._v("Aulas Disponibles")
+                      ]),
+                      _c("br"),
+                      _c("br"),
+                      _vm._v(" "),
+                      _vm._l(_vm.aulas, function(aula) {
+                        return _c(
+                          "button",
+                          {
+                            staticClass: "button",
+                            on: {
+                              click: function($event) {
+                                _vm.reservar(aula.ID)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(aula.nombre))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.aulas.length == 0
+                ? _c("div", [
+                    _c("span", { staticClass: "md-display-2" }, [
+                      _vm._v("No hay Aulas Disponibles")
+                    ]),
+                    _c("br"),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
                       "button",
                       {
                         staticClass: "button",
                         on: {
                           click: function($event) {
-                            _vm.reservar(aula.ID)
+                            _vm.reintentar()
                           }
                         }
                       },
-                      [_vm._v(_vm._s(aula.nombre))]
+                      [_vm._v("Volver a intentar")]
                     )
-                  })
-                ],
-                2
-              ),
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c("br"),
               _c("br"),
@@ -21591,7 +21633,49 @@ var render = function() {
             _c(
               "div",
               { staticClass: "fondo" },
-              [_c(_vm.mode, { tag: "component", attrs: { user: _vm.user } })],
+              [
+                _c(_vm.mode, {
+                  tag: "component",
+                  attrs: { user: _vm.user },
+                  on: {
+                    back: function($event) {
+                      _vm.back()
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "md-snackbar",
+                  {
+                    attrs: {
+                      "md-active": _vm.showSnackbar,
+                      "md-persistent": ""
+                    },
+                    on: {
+                      "update:mdActive": function($event) {
+                        _vm.showSnackbar = $event
+                      }
+                    }
+                  },
+                  [
+                    _c("span", [_vm._v("Reserva Realizada correctamente")]),
+                    _vm._v(" "),
+                    _c(
+                      "md-button",
+                      {
+                        staticClass: "md-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.showSnackbar = false
+                          }
+                        }
+                      },
+                      [_vm._v("cerrar")]
+                    )
+                  ],
+                  1
+                )
+              ],
               1
             )
           ])

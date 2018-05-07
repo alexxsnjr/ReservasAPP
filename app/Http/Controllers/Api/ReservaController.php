@@ -42,7 +42,7 @@ class ReservaController extends Controller
         ]);
 
         $user = JWTAuth::toUser($request->token);
-        $fecha= Carbon::parse($request->fecha)->format('Y-m-d');
+        $fecha= Carbon::parse($request->fecha)->addDay()->format('Y-m-d');
 
         $reserva = new Reserva;
         $reserva->profesor_id = $user->id;

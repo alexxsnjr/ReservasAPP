@@ -49,7 +49,12 @@
 
             <md-app-content>
                 <div class="fondo">
-                    <component :is="mode" :user="user"></component>
+                    <component :is="mode" @back="back()" :user="user"></component>
+
+                    <md-snackbar   :md-active.sync="showSnackbar" md-persistent>
+                        <span>Reserva Realizada correctamente</span>
+                        <md-button class="md-primary" @click="showSnackbar = false">cerrar</md-button>
+                    </md-snackbar>
                 </div>
 
 
@@ -69,7 +74,7 @@
         data: () => ({
             menuVisible: false,
             mode: 'app-table',
-
+            showSnackbar: false,
 
         }),
         components: {
@@ -93,6 +98,10 @@
         methods: {
             logout() {
                 this.$store.dispatch('logout')
+            },
+            back(){
+                this.mode = 'app-table'
+                this.showSnackbar = true
             }
         }
 

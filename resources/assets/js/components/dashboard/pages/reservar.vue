@@ -1,11 +1,17 @@
 <template>
     <div>
-        <div class="center" style="background: white; padding: 50px 10px 50px 10px" v-if="aulas">
+        <div class="center" style="background: white; padding: 50px 10px 50px 10px" v-if="aulas && showResponse">
             <md-content class="md-elevation-3">
-                <div>
+                <div v-if="aulas.length > 0">
 
                     <span class="md-display-2">Aulas Disponibles</span><br><br>
                     <button v-for="aula of aulas" class="button" @click="reservar(aula.ID)">{{aula.nombre}}</button>
+
+                </div>
+                <div v-if="aulas.length == 0">
+
+                    <span class="md-display-2">No hay Aulas Disponibles</span><br><br>
+                    <button  class="button" @click="reintentar()">Volver a intentar</button>
 
                 </div>
                 <br><br>
@@ -118,6 +124,7 @@
         name: 'StepperLinear',
         data: () => ({
             active: 'primer',
+            showResponse:false,
             primer: false,
             segundo: false,
             tercer: false,
@@ -143,7 +150,7 @@
                 if (index) {
                     this.active = index
                 } else {
-
+                    this.showResponse = true;
                     this.$store.dispatch('reservar', {
                         fecha: this.formData.fecha,
                         aforo: this.formData.aforo,
@@ -158,21 +165,22 @@
             },
             reservar(aula){
 
-                this.$store.dispatch('doReserva', {
-                    fecha: this.formData.fecha,
-                    aula: aula,
-                    turno: this.formData.turno,
-                    hora: this.formData.hora,
+                if(aula){
+                    this.$store.dispatch('doReserva', {
+                        fecha: this.formData.fecha,
+                        aula: aula,
+                        turno: this.formData.turno,
+                        hora: this.formData.hora,
 
-                });
+                    });
+                }
+                this.$emit('back');
 
-                this.formData.fecha = null
-                this.formData.aforo= ""
-                this.formData.turno= ""
-                this.formData.hora= ""
-                this.formData.tipo= ""
-                this.formData.requerimientos = []
 
+            },
+            reintentar(){
+                this.showResponse= false;
+                this.active = 'primer'
             }
         },
         computed: {
