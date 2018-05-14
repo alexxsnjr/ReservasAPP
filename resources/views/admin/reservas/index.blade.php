@@ -83,7 +83,7 @@
 
                     <a id="ocultarCajaInfo" class="btn btn-warning pull-left">Cancelar</a>
 
-                    {!! Form::open(['action' => ['ReservasController@borrar', 1], 'method' => 'DELETE', 'style' => 'display:inline;']) !!}
+                    {!! Form::open(['action' => ['ReservasController@borrar', ':ID'], 'method' => 'DELETE', 'style' => 'display:inline;', 'id' => 'formDelete']) !!}
 
                     <button type="submit" class="btn btn-danger pull-right" onclick="return confirm('¿Seguro que quiere anular esta reserva?')">
                         <span class="fa fa-trash"></span> Anular
@@ -306,6 +306,10 @@
                         $('#fecha').text(json.fecha);
                         $('#turno').text(json.turno);
                         $('#hora').text(json.hora);
+
+                        var url = $('#formDelete').attr('action').replace(':ID', json.id);
+
+                        $('#formDelete').attr('action',url);
 
                     },
 

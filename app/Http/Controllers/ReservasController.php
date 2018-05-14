@@ -60,6 +60,16 @@ class ReservasController extends Controller
 
     }
 
+    public function borrar(Request $request){
+
+        $reserva = Reserva::find($request->id);
+
+        $reserva->delete();
+
+        return redirect()->back()->with('success', 'Reserva eliminada!');
+
+    }
+
     public function info(Request $request)
     {
 
