@@ -23,7 +23,7 @@
                 <div class="icon">
                     <i class="ion ion-calendar"></i>
                 </div>
-                <a href="#" class="small-box-footer">Ver más <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ route('reservas.listar') }}" class="small-box-footer">Ver más <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -38,7 +38,7 @@
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer">Ver más <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ route('reservas.listar') }}" class="small-box-footer">Ver más <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->

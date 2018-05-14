@@ -28,6 +28,7 @@ class ReservasController extends Controller
 
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'profesor_id' => 'required|integer',
             'aula_id' => 'required|integer',
@@ -56,6 +57,18 @@ class ReservasController extends Controller
         $reserva->save();
 
         return redirect()->back()->with('success','Reserva hecha con exito!');
+
+    }
+
+    public function info(Request $request)
+    {
+
+        $reserva = Reserva::find($request->reserva_id);
+        $reserva->profesor;
+        $reserva->aula;
+
+        return response()->json($reserva);
+
     }
 
 }

@@ -66,10 +66,11 @@ Route::delete('/profesores/{id}/borrar','ProfesorController@borrar')->name('prof
 Route::get('/profesores/{id}/restaurar','ProfesorController@restaurarClave')->name('profesores.restaurarClave');
 
 
-//Profesores
+//Reservas
 Route::get('/reservas/listar','ReservasController@index')->name('reservas.listar');
 Route::post('/reservas/store','ReservasController@store')->name('reservas.store');
-Route::delete('/profesores/{id}/borrar','ProfesorController@borrar')->name('profesores.borrar');
+Route::post('/reservas/info', 'ReservasController@info')->name('reservas.info');
+Route::delete('/reservas/{id}/borrar','ReservasController@borrar')->name('reservas.borrar');
 
 
 //XML
