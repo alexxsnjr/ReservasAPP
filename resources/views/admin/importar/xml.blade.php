@@ -34,6 +34,7 @@
                             <select name="tipoFichero"
                                     class="form-control"
                                     style="width: 100%;">
+                                <option disabled selected>-- Selecciona el tipo de fichero --</option>
                                 <option value="aulas">Aulas</option>
                                 <option value="usuarios">Usuarios</option>
                                 <option value="reservas">Reservas</option>
@@ -69,7 +70,7 @@
             url: '/subir-xml',
             paramName: 'xml',
             acceptedFiles: '.xml',
-            maxFilesize: 0.05,
+            maxFilesize: 5,
             maxFiles: '1',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'

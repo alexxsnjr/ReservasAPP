@@ -45,7 +45,7 @@ class CentroController extends Controller
     {
 
         $this->validate(request(), [
-            'img' => 'required|max:15000|image'
+            'img' => 'required|max:12000|image'
         ]);
 
         $centro = Centro::all()->first();

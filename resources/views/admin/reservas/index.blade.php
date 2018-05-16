@@ -7,12 +7,12 @@
 @section('header')
 
     <h1>
-        Aulas
-        <small>Todas</small>
+        Reservas
+        <small>Gestión</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-university"></i> Aulas</a></li>
-        <li><a href="{{ route('aulas.listar') }}">Listado</a></li>
+        <li><a href="#"><i class="fa fa-calendar"></i> Reservas</a></li>
+        <li><a href="{{ route('reservas.listar') }}">Listado</a></li>
     </ol>
 
 @endsection

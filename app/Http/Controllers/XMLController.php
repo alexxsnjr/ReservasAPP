@@ -9,6 +9,7 @@ use App\Equipamiento;
 use App\Centro;
 use App\Planta;
 use App\Profesor;
+use App\Reserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -32,21 +33,21 @@ class XMLController extends Controller
     {
 
         $this->validate(request(), [
-            'xml' => 'required|max:50|mimes:xml'
+            'xml' => 'required|max:5000|mimes:xml'
         ]);
 
-        $xml = request()->file('xml')->store('public');
+        $xml = request()->file('xml')->store('import');
+
         $centro= Centro::all()->first();
 
         //Si hay ya un archivo XML lo elimina e introduce el nuevo
         if($centro->xml != null){
 
-            $xmlPath = str_replace('storage', 'public', $centro->xml);
-            Storage::delete($xmlPath);
+            Storage::delete($centro->xml);
 
         }
 
-        $centro->xml = Storage::url($xml);
+        $centro->xml = $xml;
         $centro->save();
 
     }
@@ -55,7 +56,7 @@ class XMLController extends Controller
     {
 
         $this->validate(request(), [
-            'tipoFichero' => 'required'
+            'tipoFichero' => 'required|in:aulas,usuarios,reservas'
         ]);
 
         if($request->tipoFichero === 'aulas'){
@@ -77,6 +78,7 @@ class XMLController extends Controller
     public function importarAulas($delete)
     {
         //Si marcas eliminar datos actuales borra el contenido de las tablas antes de insertar
+        //Edificios, Plantas y Aulas
         if($delete) {
 
             Edificio::all()->each->delete();
@@ -85,11 +87,12 @@ class XMLController extends Controller
 
         $centro= Centro::all()->first();
 
-        $xmlPath = str_replace('storage', 'public', $centro->xml);
         //Lectura fichero XML del servidor
-        $contents = File::get(public_path().'/../storage/app'.$xmlPath);
+        $contents = File::get(storage_path('app/'.$centro->xml));
+
         //Conversion a array
         $xml = simplexml_load_string($contents);
+
         //Algoritmo de almacenamiento en BD
         foreach ($xml->edificio as $edificioXML) {
 
@@ -148,11 +151,12 @@ class XMLController extends Controller
 
         $centro= Centro::all()->first();
 
-        $xmlPath = str_replace('storage', 'public', $centro->xml);
         //Lectura fichero XML del servidor
-        $contents = File::get(public_path().'/../storage/app'.$xmlPath);
+        $contents = File::get(storage_path('app/'.$centro->xml));
+
         //Conversion a array
         $xml = simplexml_load_string($contents);
+
         //Algoritmo de almacenamiento en BD
         foreach ($xml->usuario as $usuarioXML) {
 
@@ -172,7 +176,35 @@ class XMLController extends Controller
     public function importarReservas($delete)
     {
 
-        return 'en proceso';
+        //Si marcas eliminar datos actuales borra el contenido de las tablas antes de insertar
+        if($delete) {
+
+            Reserva::all()->each->delete();
+
+        }
+
+        $centro= Centro::all()->first();
+
+        //Lectura fichero XML del servidor
+        $contents = File::get(storage_path('app/'.$centro->xml));
+
+        //Conversion a array
+        $xml = simplexml_load_string($contents);
+
+        //Algoritmo de almacenamiento en BD
+        foreach ($xml->reserva as $reservaXML) {
+
+            $reserva = new Reserva;
+            $reserva->profesor_id = $reservaXML->profesor_id;
+            $reserva->aula_id = $reservaXML->aula_id;
+            $reserva->fecha = $reservaXML->fecha;
+            $reserva->turno = $reservaXML->turno;
+            $reserva->hora = $reservaXML->hora;
+            $reserva->save();
+
+        }
+
+        return redirect()->back()->with('success',  'El fichero de reservas ha sido importado correctamente!');
 
     }
 
