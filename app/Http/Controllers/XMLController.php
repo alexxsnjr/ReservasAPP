@@ -33,8 +33,8 @@ class XMLController extends Controller
     {
 
         $this->validate(request(), [
-            'xml' => 'required|max:5000|mimes:xml'
-        ]);
+           'xml' => 'required'
+       ]);
 
         $xml = request()->file('xml')->store('import');
 

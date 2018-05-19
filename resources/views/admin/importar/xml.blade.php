@@ -70,7 +70,6 @@
             url: '/subir-xml',
             paramName: 'xml',
             acceptedFiles: '.xml',
-            maxFilesize: 5,
             maxFiles: '1',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
