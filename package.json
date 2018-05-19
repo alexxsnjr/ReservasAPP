@@ -17,7 +17,7 @@
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
-        "node-sass": "^4.8.3",
+        "node-sass": "^4.9.0",
         "popper.js": "^1.12",
         "sass-loader": "^7.0.0",
         "style-loader": "^0.20.3",
