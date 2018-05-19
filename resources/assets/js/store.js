@@ -83,6 +83,7 @@ const actions = {
                 commit('aulas', res.data.aulas);
 
 
+
             }).catch(error => {
             console.log(error);
 

@@ -64,6 +64,7 @@
 </template>
 
 
+
 <script>
     import Reservar from './pages/reservar';
     import Table from './pages/table';

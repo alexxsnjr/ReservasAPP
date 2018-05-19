@@ -23,7 +23,7 @@ Route::group([
     'middleware' => 'jwt.auth',
     ],
     function () {
-        //INFO
+        //INFO-
         Route::get('tipos' , 'GetInfoController@getTipo');
         Route::get('equipamiento' , 'GetInfoController@getEquipamiento');
         //RESERVAS

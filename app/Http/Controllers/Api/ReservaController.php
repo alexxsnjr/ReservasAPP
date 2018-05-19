@@ -31,10 +31,7 @@ class ReservaController extends Controller
         return response()->json(compact('aulas'));
     }
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -46,11 +43,7 @@ class ReservaController extends Controller
 
         $user = JWTAuth::toUser($request->token);
         $fecha= Carbon::parse($request->fecha)->addDay()->format('Y-m-d');
-<<<<<<< Updated upstream
-=======
 
-        
->>>>>>> Stashed changes
 
         $reserva = new Reserva;
         $reserva->profesor_id = $user->id;
@@ -62,9 +55,5 @@ class ReservaController extends Controller
 
         return response()->json($reserva,200);
     }
-<<<<<<< Updated upstream
 
-
-=======
->>>>>>> Stashed changes
 }
