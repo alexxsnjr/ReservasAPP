@@ -20,7 +20,7 @@
                     <md-input v-model="password" type="password"></md-input>
                 </md-field>
             </div>
-
+            <p v-if="idToken == 'error'" style="color: red"> Error de credenciales</p>
             <div class="actions md-layout md-alignment-center-space-between">
 
                 <md-button type="submit" class="md-raised md-primary">Log in</md-button>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex';
     export default {
         name: "App",
         data() {
@@ -40,6 +41,9 @@
                 email: "",
                 password: ""
             };
+        },
+        computed: {
+            ...mapState(['idToken'])
         },
         methods: {
             onSubmit() {

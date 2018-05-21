@@ -60,10 +60,18 @@ const actions = {
         })
             .then(res => {
 
-                commit('tokenUser', {
-                    token: res.data.token,
+                if(res.data.token){
+                    commit('tokenUser', {
+                        token: res.data.token,
 
-                });
+                    });
+                }else{
+                    commit('tokenUser', {
+                        token: 'error',
+
+                    });
+                }
+
                 dispatch('fetchUser');
 
             })
