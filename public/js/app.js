@@ -11852,6 +11852,12 @@ module.exports = g;
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(25);
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
@@ -11950,10 +11956,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11980,7 +11986,7 @@ var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_4__components_au
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({ mode: 'history', routes: routes }));
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12925,7 +12931,7 @@ var index_esm = {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -13307,7 +13313,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -13495,12 +13501,6 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(25);
 
 /***/ }),
 /* 13 */
@@ -13777,10 +13777,10 @@ module.exports = Cancel;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(9);
 
 
 
@@ -13884,7 +13884,7 @@ var actions = {
     updateUser: function updateUser(_ref5, data) {
         var state = _ref5.state;
 
-        console.log(data);
+
         __WEBPACK_IMPORTED_MODULE_2_axios___default.a.put('/user/' + state.user.id, data, {
             headers: { Authorization: 'Bearer ' + state.idToken }
         }).then(function (res) {
@@ -13950,6 +13950,9 @@ var actions = {
     }
 };
 var getters = {
+    getToken: function getToken(state) {
+        return state.idToken;
+    },
     isAuthenticated: function isAuthenticated(state) {
         if (state.idToken !== null) {
             return true;
@@ -14631,9 +14634,9 @@ module.exports = __webpack_require__(113);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_material__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_material___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vue_material__);
@@ -14947,7 +14950,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(12)))
 
 /***/ }),
 /* 25 */
@@ -14959,7 +14962,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(13);
 var Axios = __webpack_require__(27);
-var defaults = __webpack_require__(7);
+var defaults = __webpack_require__(8);
 
 /**
  * Create an instance of Axios
@@ -15042,7 +15045,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(7);
+var defaults = __webpack_require__(8);
 var utils = __webpack_require__(1);
 var InterceptorManager = __webpack_require__(36);
 var dispatchRequest = __webpack_require__(37);
@@ -15581,7 +15584,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(1);
 var transformData = __webpack_require__(38);
 var isCancel = __webpack_require__(16);
-var defaults = __webpack_require__(7);
+var defaults = __webpack_require__(8);
 var isAbsoluteURL = __webpack_require__(39);
 var combineURLs = __webpack_require__(40);
 
@@ -18597,8 +18600,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__pages_table__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_profile_profile_vue__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_profile_profile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__pages_profile_profile_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(10);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -18808,7 +18811,7 @@ exports.push([module.i, "\n.md-card[data-v-3aa99c97] {\n    margin-top: 15px;\n}
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(10);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -19645,6 +19648,8 @@ exports.push([module.i, "\nh1, h2, h3 {\n    font-weight: normal;\n    margin: 0
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
 //
@@ -19671,7 +19676,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var today = new Date();
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'app',
     data: function data() {
@@ -19683,19 +19688,31 @@ var today = new Date();
                 title: null,
                 desc: null
             },
-            Reservas: [{
-                date: today.getFullYear() + '/' + (today.getMonth() + 1) + '/15',
-                title: 'Title-1',
-                desc: 'longlonglong description'
-            }, {
-                date: today.getFullYear() + '/' + (today.getMonth() + 1) + '/24',
-                title: 'Title-2'
-            }, {
-                date: today.getFullYear() + '/' + (today.getMonth() === 11 ? 1 : today.getMonth() + 2) + '/06',
-                title: 'Title-3',
-                desc: 'description'
-            }]
+            Reservas: []
         };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        var token = this.$store.getters.getToken;
+
+        if (this.$store.getters.isAuthenticated) {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/reservas/', {
+
+                headers: { Authorization: 'Bearer' + token }
+            }).then(function (res) {
+                console.log(res);
+                for (var i = 0; i < res.data.length; i++) {
+                    _this.Reservas.push({
+                        title: res.data[i].aula_id,
+                        desc: res.data[i].turno,
+                        date: res.data[i].fecha
+                    });
+                }
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        }
     },
 
     methods: {
@@ -52467,7 +52484,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(10)(content, options);
+var update = __webpack_require__(11)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -52626,7 +52643,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(10)(content, options);
+var update = __webpack_require__(11)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -52690,7 +52707,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(10)(content, options);
+var update = __webpack_require__(11)(content, options);
 
 if(content.locals) module.exports = content.locals;
 

@@ -107,7 +107,7 @@ const actions = {
         })
     },
     updateUser({state} , data){
-        console.log(data)
+
         axios.put('/user/'+state.user.id, data, {
             headers: {Authorization: `Bearer ${state.idToken}`}
         }).then(res =>{
@@ -169,6 +169,11 @@ const actions = {
 
 };
 const getters = {
+
+    getToken(state){
+      return state.idToken
+    },
+
     isAuthenticated(state) {
         if (state.idToken !== null) {
             return true;

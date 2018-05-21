@@ -24,7 +24,7 @@
 </template>
 
 <script>
-    let today = new Date()
+    import axios from 'axios'
     export default {
         name: 'app',
         data () {
@@ -36,21 +36,33 @@
                     title: null,
                     desc: null,
                 },
-                Reservas: [{
-                    date: `${today.getFullYear()}/${today.getMonth() + 1}/15`,
-                    title: 'Title-1',
-                    desc: 'longlonglong description'
-                },{
-                    date: `${today.getFullYear()}/${today.getMonth() + 1}/24`,
-                    title: 'Title-2'
-                },{
-                    date: `${today.getFullYear()}/${today.getMonth() === 11 ? 1 : today.getMonth() + 2}/06`,
-                    title: 'Title-3',
-                    desc: 'description'
-                }]
+                Reservas: []
+            }
+        },
+        mounted(){
+
+            var token = this.$store.getters.getToken;
+
+            if(this.$store.getters.isAuthenticated) {
+                axios.get('/reservas/', {
+
+                    headers: {Authorization: 'Bearer' + token}
+                })
+                    .then(res => {
+                        console.log(res)
+                        for (var i = 0; i < res.data.length; i++) {
+                            this.Reservas.push({
+                                title: res.data[i].aula_id,
+                                desc: res.data[i].turno,
+                                date: res.data[i].fecha
+                            })
+                        }
+                    })
+                    .catch(error => console.log(error))
             }
         },
         methods: {
+
             openDrawer(event){
                 this.SelectReserva.date = event.date;
                 this.SelectReserva.title = event.title;

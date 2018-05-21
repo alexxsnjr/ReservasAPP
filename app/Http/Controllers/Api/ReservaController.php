@@ -30,6 +30,13 @@ class ReservaController extends Controller
         return response()->json(compact('aulas'));
     }
 
+
+    public function  index(){
+        $reservas = Reserva::all();
+
+        return $reservas;
+
+    }
     public function store(Request $request)
     {
         $this->validate($request, [

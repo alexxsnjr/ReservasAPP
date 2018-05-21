@@ -29,6 +29,7 @@ Route::group([
         //RESERVAS
         Route::post('reservar' , 'ReservaController@comprobarDisponibilidad');
         Route::post('doreserva' , 'ReservaController@store');
+        Route::get('reservas' , 'ReservaController@index');
         //USER
         Route::get('user/{token}' , 'UserController@index');
         Route::put('user/{id}' , 'UserController@update');
