@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 //LOGIN
 Route::post('login' , 'Api\AuthenticateController@authenticate');
-
+Route::get('checkemail/{email}', 'Api\GetInfoController@checkEmail');
 
 
 Route::group([

@@ -90,6 +90,7 @@
 </template>
 
 <script>
+    import axios from 'axios'
     import { validationMixin } from 'vuelidate'
     import {
         required,
@@ -128,8 +129,20 @@
                 },
                 email: {
                     required,
-                    email
-                }
+                    email,
+                    isUnique(email) {
+                        if (email === '') return true
+                        if(this.usu.email != this.user.email){
+                            return axios.get('/checkemail/'+this.usu.email)
+                                .then(res => {
+                                    return res.data //res.data has to return true or false after checking if the username exists in DB
+                                })
+                        }else{
+                            return true
+                        }
+
+                    }
+                },
             }
         },
         methods: {

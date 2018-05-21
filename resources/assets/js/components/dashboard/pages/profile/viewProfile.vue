@@ -60,6 +60,7 @@
 </template>
 
 <script>
+    import router from '../../../../router';
     export default {
         name: 'DialogCustom',
         data: () => ({
@@ -71,7 +72,9 @@
                 this.$emit('edit');
             },
             back() {
+                router.replace('/dashboard')
                 this.showDialog = false;
+
             }
         }
     }
