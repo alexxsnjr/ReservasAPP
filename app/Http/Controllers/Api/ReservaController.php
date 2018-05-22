@@ -32,11 +32,13 @@ class ReservaController extends Controller
 
 
     public function  index(){
+
         $reservas = Reserva::all();
 
         return $reservas;
 
     }
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -48,6 +50,8 @@ class ReservaController extends Controller
 
         $user = JWTAuth::toUser($request->token);
         $fecha= Carbon::parse($request->fecha)->addDay()->format('Y/m/d');
+
+        //dd($fecha);
 
         $reserva = new Reserva;
         $reserva->profesor_id = $user->id;
