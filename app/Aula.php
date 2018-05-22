@@ -24,6 +24,11 @@ class Aula extends Model
         return $this->hasMany(Reserva::class);
     }
 
+    public function horario()
+    {
+        return $this->hasMany(Horario::class);
+    }
+
     public function equipamiento()
     {
         return $this->hasMany(Equipamiento::class);
@@ -36,6 +41,8 @@ class Aula extends Model
         static::deleting(function ($aula) {
 
             $aula->equipamiento->each->delete();
+            $aula->reserva->each->delete();
+            $aula->horario->each->delete();
 
         });
     }

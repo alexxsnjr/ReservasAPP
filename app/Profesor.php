@@ -33,6 +33,11 @@ class Profesor extends Authenticatable
         return $this->hasMany(Reserva::class);
     }
 
+    public function horario()
+    {
+        return $this->hasMany(Horario::class);
+    }
+
     public static function boot()
     {
         parent::boot();
@@ -40,6 +45,7 @@ class Profesor extends Authenticatable
         static::deleting(function ($profesor) {
 
             $profesor->reserva->each->delete();
+            $profesor->horario->each->delete();
 
         });
     }

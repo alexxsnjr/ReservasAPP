@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Reserva extends Model
+class Horario extends Model
 {
 
-    protected $fillable = ['profesor_id','aula_id','fecha','hora','turno'];
+    protected $fillable = ['profesor_id','aula_id','dia_semana','hora','turno'];
 
     public function profesor()
     {
