@@ -1,12 +1,12 @@
 
 <template>
     <div>
-
+    <h1>Calendarios</h1>
         <vue-event-calendar :events="Reservas">
             <template :title="title" slot-scope="props">
                 <div v-for="(event, index) in props.showEvents" class="event-item">
                     <div @click="openDrawer(event)" class="reserva">
-                        {{event.title}} <br> {{event.date}}
+                        {{event.title}} <br> {{event.date}} -> {{event.hora}}º {{event.turno}}
                     </div>
 
                 </div>
@@ -42,19 +42,21 @@
         mounted(){
 
             var token = this.$store.getters.getToken;
+            var user = this.$store.getters.getUser;
 
             if(this.$store.getters.isAuthenticated) {
-                axios.get('/reservas/', {
+                axios.get('/reservas/'+ user.id, {
 
                     headers: {Authorization: 'Bearer' + token}
                 })
                     .then(res => {
                         console.log(res)
-                        for (var i = 0; i < res.data.length; i++) {
+                        for (var i = 0; i < res.data.reservas.length; i++) {
                             this.Reservas.push({
-                                title: res.data[i].aula_id,
-                                desc: res.data[i].turno,
-                                date: res.data[i].fecha
+                                title: res.data.reservas[i].nombre,
+                                date: res.data.reservas[i].fecha,
+                                hora: res.data.reservas[i].hora,
+                                turno: res.data.reservas[i].turno,
                             })
                         }
                     })

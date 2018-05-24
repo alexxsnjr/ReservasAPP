@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Aula;
 use App\Reserva;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -31,11 +32,14 @@ class ReservaController extends Controller
     }
 
 
-    public function  index(){
+    public function  index($user){
 
-        $reservas = Reserva::all();
+        $reservas = Reserva::where('profesor_id', '=' , $user)
+                    ->join('aulas', 'aulas.id', '=' , 'reservas.aula_id')
+                    ->get();
 
-        return $reservas;
+
+        return response()->json(compact('reservas'));
 
     }
 

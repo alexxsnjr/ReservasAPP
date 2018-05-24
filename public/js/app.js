@@ -19703,18 +19703,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         var token = this.$store.getters.getToken;
+        var user = this.$store.getters.getUser;
 
         if (this.$store.getters.isAuthenticated) {
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/reservas/', {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/reservas/' + user.id, {
 
                 headers: { Authorization: 'Bearer' + token }
             }).then(function (res) {
                 console.log(res);
-                for (var i = 0; i < res.data.length; i++) {
+                for (var i = 0; i < res.data.reservas.length; i++) {
                     _this.Reservas.push({
-                        title: res.data[i].aula_id,
-                        desc: res.data[i].turno,
-                        date: res.data[i].fecha
+                        title: res.data.reservas[i].nombre,
+                        date: res.data.reservas[i].fecha,
+                        hora: res.data.reservas[i].hora,
+                        turno: res.data.reservas[i].turno
                     });
                 }
             }).catch(function (error) {
@@ -19744,6 +19746,8 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("h1", [_vm._v("Calendarios")]),
+      _vm._v(" "),
       _c("vue-event-calendar", {
         attrs: { events: _vm.Reservas },
         scopedSlots: _vm._u([
@@ -19767,7 +19771,15 @@ var render = function() {
                         "\n                    " + _vm._s(event.title) + " "
                       ),
                       _c("br"),
-                      _vm._v(" " + _vm._s(event.date) + "\n                ")
+                      _vm._v(
+                        " " +
+                          _vm._s(event.date) +
+                          " -> " +
+                          _vm._s(event.hora) +
+                          "º " +
+                          _vm._s(event.turno) +
+                          "\n                "
+                      )
                     ]
                   )
                 ])
