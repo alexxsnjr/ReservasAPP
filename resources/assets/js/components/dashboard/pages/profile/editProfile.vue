@@ -59,29 +59,32 @@
         <div>
             <md-dialog :md-active.sync="activeChangePassword">
                 <md-dialog-title>Change password</md-dialog-title>
-                <div class="FormPassword">
-                    <md-field :md-toggle-password="false">
-                        <label>Old Password</label>
-                        <md-input v-model="password.old" type="password"></md-input>
-                    </md-field>
+                <form novalidate  @submit.prevent="changePassword">
+                    <div class="FormPassword">
+                        <md-field :md-toggle-password="false" :class="getValidationPassword('old')">
+                            <label>Old Password</label>
+                            <md-input v-model="password.old"  type="password"></md-input>
+                            <span class="md-error" v-if="!$v.password.old.required">La contraseña antigua es requerida</span>
+                            <span class="md-error" v-else>Contraseña antigua es incorrecta</span>
+                        </md-field>
 
-                    <md-field :md-toggle-password="false">
-                        <label>New Password</label>
-                        <md-input v-model="password.new" type="password"></md-input>
-                    </md-field>
+                        <md-field :md-toggle-password="false" :class="getValidationPassword('new')">
+                            <label>New Password</label>
+                            <md-input v-model="password.new"  type="password"></md-input>
+                        </md-field>
 
-                    <md-field :md-toggle-password="false">
-                        <label>Repeat Password</label>
-                        <md-input v-model="password.repeat" type="password"></md-input>
-                    </md-field>
+                        <md-field :md-toggle-password="false" :class="getValidationPassword('repeat')">
+                            <label>Repeat Password</label>
+                            <md-input v-model="password.repeat"  type="password"></md-input>
+                        </md-field>
 
 
-                    <md-dialog-actions>
-                        <md-button @click="cancel" class="md-dense md-primary">CANCEL</md-button>
-                        <md-button @click="activeChangePassword = false" class="md-dense md-primary">CHANGE</md-button>
-                    </md-dialog-actions>
-                </div>
-
+                        <md-dialog-actions>
+                            <md-button  @click="cancel" class="md-dense md-primary">CANCEL</md-button>
+                            <md-button type="submit"  class="md-dense md-primary">CHANGE</md-button>
+                        </md-dialog-actions>
+                    </div>
+                </form>
             </md-dialog>
 
         </div>
@@ -96,7 +99,7 @@
         required,
         email,
         minLength,
-        maxLength
+        sameAs,
     } from 'vuelidate/lib/validators'
     export default {
         mixins: [validationMixin],
@@ -108,8 +111,9 @@
                 name : '',
                 email: '',
             },
+            activeChangePassword: false,
             password: {
-                old: '',
+                old:'',
                 new: '',
                 repeat: '',
             },
@@ -143,11 +147,45 @@
 
                     }
                 },
-            }
+            },
+            password: {
+                old:{
+                    required,
+                    isCorrect(old) {
+                        let user = this.$store.getters.getUser;
+                        let token = this.$store.getters.getToken;
+                        if (old === '') return true
+                        return axios.post('/checkpassword', {password : this.password.old , email : user.email },{
+                            headers: {Authorization: 'Bearer' + token}
+                        })
+                            .then(res => {
+
+                                return res.data //res.data has to return true or false after checking if the username exists in DB
+                            })
+                    }
+                },
+                new:{
+                    required,
+                    minLength: minLength(6)
+                },
+                repeat: {
+                    required,
+                    sameAsnew: sameAs('new')
+                },
+            },
         },
         methods: {
             getValidationClass (fieldName) {
                 const field = this.$v.usu[fieldName]
+
+                if (field) {
+                    return {
+                        'md-invalid': field.$invalid && field.$dirty
+                    }
+                }
+            },
+            getValidationPassword (fieldName) {
+                const field = this.$v.password[fieldName]
 
                 if (field) {
                     return {
@@ -178,6 +216,26 @@
                 this.password.old = '';
                 this.password.new = '';
                 this.password.repeat = '';
+            },
+            changePassword(){
+
+                this.$v.$touch();
+                if (!this.$v.password.$invalid) {
+                    let token = this.$store.getters.getToken;
+                    let user = this.$store.getters.getUser;
+                    axios.put('/password/'+user.id, {new : this.password.new , password : this.password.old , email:user.email},{
+                        headers: {Authorization: 'Bearer' + token}
+                    })
+
+                        .then(function (response) {
+                            console.log(response)
+
+                        }).catch(function (error) {
+                        console.log(error)
+                    })
+
+                    this.activeChangePassword = false
+                }
             }
         }
     }

@@ -1,7 +1,7 @@
 
 <template>
     <div>
-    <h1>Calendarios</h1>
+    <h1>Reservas</h1>
         <vue-event-calendar :events="Reservas">
             <template :title="title" slot-scope="props">
                 <div v-for="(event, index) in props.showEvents" class="event-item">
@@ -16,8 +16,38 @@
 
         <md-drawer v-if="showSidepanel" class="md-right" :md-active.sync="showSidepanel">
             <md-toolbar class="md-transparent" md-elevation="0">
-                <span class="md-display-3">{{this.SelectReserva.title}}</span>
+                <h1 class="drawerTitle">{{this.SelectReserva.title}}</h1>
             </md-toolbar>
+
+            <md-list>
+                <md-list-item>
+                    <span class="md-list-item-text">Fecha : {{this.SelectReserva.date}}</span>
+                    <md-icon class="md-primary">date_range</md-icon>
+                </md-list-item>
+
+                <md-list-item>
+                    <span class="md-list-item-text">Turno : {{this.SelectReserva.turno}}</span>
+                    <md-icon class="md-primary">invert_colors</md-icon>
+                </md-list-item>
+
+                <md-list-item>
+                    <span class="md-list-item-text">Hora: {{this.SelectReserva.hora}}º hora</span>
+                    <md-icon class="md-primary">alarm</md-icon>
+                </md-list-item>
+
+                <md-list-item>
+                    <span class="md-list-item-text">Aforo: {{this.SelectReserva.aforo}} personas</span>
+                    <md-icon class="md-primary">accessibility</md-icon>
+                </md-list-item>
+            </md-list>
+            <md-divider></md-divider>
+            <br>
+
+            <md-button
+                    class="md-icon-button md-raised md-accent"
+                    style="width: 100px; height: 100px; margin-left: 37%">
+            <md-icon class="md-size-3x" >cancel</md-icon>
+            </md-button>
 
         </md-drawer>
     </div>
@@ -34,7 +64,9 @@
                 SelectReserva: {
                     date: null,
                     title: null,
-                    desc: null,
+                    hora:null,
+                    turno:null,
+                    aforo:null,
                 },
                 Reservas: []
             }
@@ -57,6 +89,7 @@
                                 date: res.data.reservas[i].fecha,
                                 hora: res.data.reservas[i].hora,
                                 turno: res.data.reservas[i].turno,
+                                aforo: res.data.reservas[i].aforo,
                             })
                         }
                     })
@@ -68,14 +101,16 @@
             openDrawer(event){
                 this.SelectReserva.date = event.date;
                 this.SelectReserva.title = event.title;
-                this.SelectReserva.desc = event.desc;
+                this.SelectReserva.hora = event.hora;
+                this.SelectReserva.turno = event.turno;
+                this.SelectReserva.aforo = event.aforo;
                 this.showSidepanel = true;
             }
         }
     }
 </script>
 
-<style>
+<style scoped>
 
     h1, h2, h3 {
         font-weight: normal;
@@ -104,5 +139,12 @@
     .reserva:hover{
         background-color: lightgray;
     }
+
+    .drawerTitle{
+        color: white;
+        font-size: 590%;
+        margin: 10% 20% 10% 15%;
+    }
+
 
 </style>

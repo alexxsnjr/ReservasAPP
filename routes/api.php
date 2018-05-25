@@ -33,6 +33,8 @@ Route::group([
         //USER
         Route::get('user/{token}' , 'UserController@index');
         Route::put('user/{id}' , 'UserController@update');
+        Route::post('checkpassword' ,'UserController@checkPassword');
+        Route::put('password/{id}' ,'UserController@updatePassword' );
 
 
     });
