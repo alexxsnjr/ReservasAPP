@@ -72,7 +72,7 @@
             }
         },
         mounted(){
-
+            console.log('descarga de reservas')
             var token = this.$store.getters.getToken;
             var user = this.$store.getters.getUser;
 
@@ -82,7 +82,7 @@
                     headers: {Authorization: 'Bearer' + token}
                 })
                     .then(res => {
-                        console.log(res)
+                        
                         for (var i = 0; i < res.data.reservas.length; i++) {
                             this.Reservas.push({
                                 title: res.data.reservas[i].nombre,

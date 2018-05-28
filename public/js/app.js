@@ -14697,7 +14697,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   store: __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */]
 });
 
-__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.baseURL = 'http://aulas.app/api';
+__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.baseURL = 'http://aulas.localhost/api';
 __WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.headers.get['Accepts'] = 'application/json';
 
 /***/ }),
@@ -19734,6 +19734,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var _this = this;
 
+        console.log('descarga de reservas');
         var token = this.$store.getters.getToken;
         var user = this.$store.getters.getUser;
 
@@ -19742,7 +19743,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 headers: { Authorization: 'Bearer' + token }
             }).then(function (res) {
-                console.log(res);
+
                 for (var i = 0; i < res.data.reservas.length; i++) {
                     _this.Reservas.push({
                         title: res.data.reservas[i].nombre,
