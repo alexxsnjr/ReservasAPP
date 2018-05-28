@@ -18,6 +18,7 @@ const state = {
     aulas: null,
     tipos: [],
     equipamientos: [],
+    reservas:[],
 };
 const mutations = {
     tokenUser(state, userData) {
@@ -47,6 +48,9 @@ const mutations = {
         state.tipos = []
         state.equipamientos = []
 
+    },
+    reservas(state , reservas){
+        state.reservas = reservas;
     }
 
 };
@@ -74,6 +78,7 @@ const actions = {
 
                 dispatch('fetchUser');
 
+
             })
     },
     logout({commit}) {
@@ -97,16 +102,15 @@ const actions = {
 
         })
     },
-    doReserva({commit, state}, data) {
-        console.log(data)
+    doReserva({commit, state, dispatch}, data) {
         axios.post('/doreserva', data, {
             headers: {Authorization: `Bearer ${state.idToken}`}
         })
             .then(res => {
                 console.log(res)
                 state.aulas = []
+                dispatch('fetchReservas');
 
-                //commit('aulas', data);
 
 
             }).catch(error => {
@@ -122,7 +126,7 @@ const actions = {
             console.log(res)
         }).catch(error => console.log(error))
     },
-    fetchUser({commit, state}) {
+    fetchUser({commit, state , dispatch}) {
 
 
         if (!state.idToken) {
@@ -141,8 +145,10 @@ const actions = {
                     userEmail: res.data.user.email,
                 })
                 router.replace('/dashboard')
+                dispatch('fetchReservas');
             })
             .catch(error => console.log(error))
+
     },
     fetchTipos({commit, state}) {
 
@@ -173,6 +179,31 @@ const actions = {
                 commit('equipamientos', data);
 
             })
+    },
+    fetchReservas({commit, state}){
+
+        axios.get('/reservas/'+ state.user.id, {
+
+            headers: {Authorization: `Bearer ${state.idToken}`}
+        })
+            .then(res => {
+                console.log('reservas')
+                console.log(res.data)
+                const data = [];
+                for (var i = 0; i < res.data.reservas.length; i++) {
+                    data.push({
+                        title: res.data.reservas[i].nombre,
+                        date: res.data.reservas[i].fecha,
+                        hora: res.data.reservas[i].hora,
+                        turno: res.data.reservas[i].turno,
+                        aforo: res.data.reservas[i].aforo,
+                    })
+                }
+
+                commit('reservas', data);
+            })
+            .catch(error => console.log(error))
+
     }
 
 };

@@ -2,7 +2,7 @@
 <template>
     <div>
     <h1>Reservas</h1>
-        <vue-event-calendar :events="Reservas">
+        <vue-event-calendar :events="reservas">
             <template :title="title" slot-scope="props">
                 <div v-for="(event, index) in props.showEvents" class="event-item">
                     <div @click="openDrawer(event)" class="reserva">
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import {mapState} from 'vuex';
     export default {
         name: 'app',
         data () {
@@ -68,34 +68,13 @@
                     turno:null,
                     aforo:null,
                 },
-                Reservas: []
+
             }
         },
-        mounted(){
-            console.log('descarga de reservas')
-            var token = this.$store.getters.getToken;
-            var user = this.$store.getters.getUser;
-
-            if(this.$store.getters.isAuthenticated) {
-                axios.get('/reservas/'+ user.id, {
-
-                    headers: {Authorization: 'Bearer' + token}
-                })
-                    .then(res => {
-                        
-                        for (var i = 0; i < res.data.reservas.length; i++) {
-                            this.Reservas.push({
-                                title: res.data.reservas[i].nombre,
-                                date: res.data.reservas[i].fecha,
-                                hora: res.data.reservas[i].hora,
-                                turno: res.data.reservas[i].turno,
-                                aforo: res.data.reservas[i].aforo,
-                            })
-                        }
-                    })
-                    .catch(error => console.log(error))
-            }
+        computed: {
+            ...mapState(['reservas'])
         },
+
         methods: {
 
             openDrawer(event){

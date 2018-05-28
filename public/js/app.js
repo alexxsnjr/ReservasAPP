@@ -11819,43 +11819,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(23).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(23).setImmediate))
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(25);
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_dashboard_vue__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_dashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_dashboard_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue__);
-
-
-
-
-
-
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
-
-var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue___default.a }, { path: '/signin', component: __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue___default.a }, { path: '/dashboard', component: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_dashboard_vue___default.a }];
-
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({ mode: 'history', routes: routes }));
-
-/***/ }),
-/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12800,7 +12767,34 @@ var index_esm = {
 
 
 /***/ }),
-/* 9 */
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_dashboard_vue__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_dashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_dashboard_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue__);
+
+
+
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
+var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue___default.a }, { path: '/signin', component: __WEBPACK_IMPORTED_MODULE_4__components_auth_signin_vue___default.a }, { path: '/dashboard', component: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_dashboard_vue___default.a }];
+
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({ mode: 'history', routes: routes }));
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports) {
 
 var g;
@@ -12825,6 +12819,12 @@ try {
 
 module.exports = g;
 
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(25);
 
 /***/ }),
 /* 10 */
@@ -13777,8 +13777,8 @@ module.exports = Cancel;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(7);
 
@@ -13798,7 +13798,8 @@ var state = {
     },
     aulas: null,
     tipos: [],
-    equipamientos: []
+    equipamientos: [],
+    reservas: []
 };
 var mutations = {
     tokenUser: function tokenUser(state, userData) {
@@ -13822,6 +13823,9 @@ var mutations = {
         state.aulas = null;
         state.tipos = [];
         state.equipamientos = [];
+    },
+    reservas: function reservas(state, _reservas) {
+        state.reservas = _reservas;
     }
 };
 var actions = {
@@ -13874,17 +13878,15 @@ var actions = {
     },
     doReserva: function doReserva(_ref4, data) {
         var commit = _ref4.commit,
-            state = _ref4.state;
+            state = _ref4.state,
+            dispatch = _ref4.dispatch;
 
-        console.log(data);
         __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/doreserva', data, {
             headers: { Authorization: 'Bearer ' + state.idToken }
         }).then(function (res) {
             console.log(res);
             state.aulas = [];
-
-            //commit('aulas', data);
-
+            dispatch('fetchReservas');
         }).catch(function (error) {
             console.log(error);
         });
@@ -13903,7 +13905,8 @@ var actions = {
     },
     fetchUser: function fetchUser(_ref6) {
         var commit = _ref6.commit,
-            state = _ref6.state;
+            state = _ref6.state,
+            dispatch = _ref6.dispatch;
 
 
         if (!state.idToken) {
@@ -13920,6 +13923,7 @@ var actions = {
                 userEmail: res.data.user.email
             });
             __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].replace('/dashboard');
+            dispatch('fetchReservas');
         }).catch(function (error) {
             return console.log(error);
         });
@@ -13954,6 +13958,33 @@ var actions = {
             }
 
             commit('equipamientos', data);
+        });
+    },
+    fetchReservas: function fetchReservas(_ref9) {
+        var commit = _ref9.commit,
+            state = _ref9.state;
+
+
+        __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/reservas/' + state.user.id, {
+
+            headers: { Authorization: 'Bearer ' + state.idToken }
+        }).then(function (res) {
+            console.log('reservas');
+            console.log(res.data);
+            var data = [];
+            for (var i = 0; i < res.data.reservas.length; i++) {
+                data.push({
+                    title: res.data.reservas[i].nombre,
+                    date: res.data.reservas[i].fecha,
+                    hora: res.data.reservas[i].hora,
+                    turno: res.data.reservas[i].turno,
+                    aforo: res.data.reservas[i].aforo
+                });
+            }
+
+            commit('reservas', data);
+        }).catch(function (error) {
+            return console.log(error);
         });
     }
 };
@@ -14642,7 +14673,7 @@ module.exports = __webpack_require__(113);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__(18);
@@ -14765,7 +14796,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
 /* 24 */
@@ -14958,7 +14989,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(12)))
 
 /***/ }),
 /* 25 */
@@ -18609,7 +18640,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_profile_profile_vue__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_profile_profile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__pages_profile_profile_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(6);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -18819,7 +18850,7 @@ exports.push([module.i, "\n.md-card[data-v-3aa99c97] {\n    margin-top: 15px;\n}
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(6);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -19656,8 +19687,9 @@ exports.push([module.i, "\nh1[data-v-522ef941], h2[data-v-522ef941], h3[data-v-5
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(6);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -19727,37 +19759,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 hora: null,
                 turno: null,
                 aforo: null
-            },
-            Reservas: []
+            }
+
         };
     },
-    mounted: function mounted() {
-        var _this = this;
 
-        console.log('descarga de reservas');
-        var token = this.$store.getters.getToken;
-        var user = this.$store.getters.getUser;
-
-        if (this.$store.getters.isAuthenticated) {
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/reservas/' + user.id, {
-
-                headers: { Authorization: 'Bearer' + token }
-            }).then(function (res) {
-
-                for (var i = 0; i < res.data.reservas.length; i++) {
-                    _this.Reservas.push({
-                        title: res.data.reservas[i].nombre,
-                        date: res.data.reservas[i].fecha,
-                        hora: res.data.reservas[i].hora,
-                        turno: res.data.reservas[i].turno,
-                        aforo: res.data.reservas[i].aforo
-                    });
-                }
-            }).catch(function (error) {
-                return console.log(error);
-            });
-        }
-    },
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])(['reservas'])),
 
     methods: {
         openDrawer: function openDrawer(event) {
@@ -19785,7 +19792,7 @@ var render = function() {
       _c("h1", [_vm._v("Reservas")]),
       _vm._v(" "),
       _c("vue-event-calendar", {
-        attrs: { events: _vm.Reservas },
+        attrs: { events: _vm.reservas },
         scopedSlots: _vm._u([
           {
             key: "default",
@@ -20457,7 +20464,7 @@ exports.push([module.i, "\n.md-dialog[data-v-3b166ce8] {\n  min-width: 290px;\n}
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuelidate__);
@@ -22056,7 +22063,7 @@ exports.push([module.i, "\n.centered-container {\n  display: -webkit-box;\n  dis
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(6);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
