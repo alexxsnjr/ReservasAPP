@@ -8,6 +8,12 @@
                     <div @click="openDrawer(event)" class="reserva">
                         {{event.title}} <br> {{event.date}} -> {{event.hora}}º {{event.turno}}
                     </div>
+                    <div v-if="index == 0">
+                        <md-button @click="$emit('new')"
+                                   style=" " class="md-fab md-primary add">
+                            <md-icon>add</md-icon>
+                        </md-button>
+                    </div>
 
                 </div>
             </template>
@@ -43,13 +49,23 @@
             <md-divider></md-divider>
             <br>
 
-            <md-button
+            <md-button @click="active = true"
                     class="md-icon-button md-raised md-accent"
                     style="width: 100px; height: 100px; margin-left: 37%">
             <md-icon class="md-size-3x" >cancel</md-icon>
             </md-button>
 
         </md-drawer>
+        <div>
+            <md-dialog-confirm
+                    :md-active.sync="active"
+                    md-title="¿ Desea cancelar la reserva?"
+                    md-content="Es posible que si cancela la reserva su aula por defecto para esa hora no este disponible."
+                    md-confirm-text="SI"
+                    md-cancel-text="NO"
+                    @md-confirm="onConfirm" />
+
+        </div>
     </div>
 </template>
 
@@ -68,6 +84,8 @@
                     turno:null,
                     aforo:null,
                 },
+                active: false,
+
 
             }
         },
@@ -84,7 +102,10 @@
                 this.SelectReserva.turno = event.turno;
                 this.SelectReserva.aforo = event.aforo;
                 this.showSidepanel = true;
-            }
+            },
+            onConfirm () {
+
+            },
         }
     }
 </script>
@@ -125,5 +146,51 @@
         margin: 10% 20% 10% 15%;
     }
 
+    .add{
+        position: fixed; padding: 10px;  bottom: 8%; right: 8%;
+    }
+    @media (min-width : 1400px)  {
+        .add {
+            display:none;
+        }
+    }
 
+    @media (min-height : 800px)  {
+        .add {
+            display:none;
+        }
+    }
+/*
+
+    @media (min-width : 600px) and (max-width: 767px) {
+        .add {
+            position: absolute;
+            top:88%;
+            left: 80%;
+        }
+    }
+    @media  (max-width: 599px) {
+        .add {
+            position: absolute;
+            top:88%;
+            left: 68%;
+        }
+    }
+    @media  (min-width: 769px) and (max-width: 1450px) {
+        .add {
+            position: absolute;
+            top:83%;
+            left: 85%;
+
+        }
+    }
+
+    @media  (min-width: 1451px)and (max-width: 1700px){
+        .add {
+            position: absolute;
+            top:83%;
+            left: 79%;
+
+        }
+    }*/
 </style>

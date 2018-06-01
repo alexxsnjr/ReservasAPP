@@ -72,7 +72,7 @@
                 this.$emit('edit');
             },
             back() {
-                router.replace('/dashboard')
+                this.$emit('back');
                 this.showDialog = false;
 
             }

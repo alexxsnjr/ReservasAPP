@@ -1,5 +1,5 @@
 <template>
-    <component :is="component" :user="user" @view="component = 'app-View'" @edit="component = 'app-Edit'"></component>
+    <component :is="component" :user="user" @view="component = 'app-View'" @back=" $emit('back' )" @edit="component = 'app-Edit'"></component>
 </template>
 <script>
     import View from './viewProfile.vue'

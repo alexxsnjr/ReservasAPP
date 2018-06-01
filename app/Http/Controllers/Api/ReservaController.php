@@ -35,6 +35,7 @@ class ReservaController extends Controller
     public function  index($user){
 
         $reservas = Reserva::where('profesor_id', '=' , $user)
+                    ->where('fecha' , '>=' , Carbon::now()->format('Y/m/d'))
                     ->join('aulas', 'aulas.id', '=' , 'reservas.aula_id')
                     ->get();
 
