@@ -34,9 +34,10 @@ class ReservaController extends Controller
 
     public function  index($user){
 
-        $reservas = Reserva::where('profesor_id', '=' , $user)
-                    ->where('fecha' , '>=' , Carbon::now()->format('Y/m/d'))
-                    ->join('aulas', 'aulas.id', '=' , 'reservas.aula_id')
+        $reservas = Reserva::join('aulas', 'aulas.id', '=' , 'reservas.aula_id')
+                    ->where('reservas.fecha' , '>=' , Carbon::now()->format('Y/m/d'))
+                    ->where('reservas.profesor_id', '=' , $user)
+                    ->select( 'reservas.*' , 'aulas.nombre' , 'aulas.aforo')
                     ->get();
 
 
@@ -67,6 +68,14 @@ class ReservaController extends Controller
         $reserva->save();
 
         return response()->json($reserva,200);
+    }
+
+    public function delete($id)
+    {
+        $reserva = Reserva::find($id);
+
+        $reserva->delete();
+        return response()->json('Delete', 200);
     }
 
 }

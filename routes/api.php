@@ -30,6 +30,8 @@ Route::group([
         Route::post('reservar' , 'ReservaController@comprobarDisponibilidad');
         Route::post('doreserva' , 'ReservaController@store');
         Route::get('reservas/{user}' , 'ReservaController@index');
+        Route::delete('reservas/{id}','ReservaController@delete');
+
         //USER
         Route::get('user/{token}' , 'UserController@index');
         Route::put('user/{id}' , 'UserController@update');

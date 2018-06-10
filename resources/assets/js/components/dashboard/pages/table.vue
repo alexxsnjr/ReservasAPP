@@ -71,6 +71,7 @@
 
 <script>
     import {mapState} from 'vuex';
+    import axios from 'axios'
     export default {
         name: 'app',
         data () {
@@ -83,6 +84,7 @@
                     hora:null,
                     turno:null,
                     aforo:null,
+                    id:null,
                 },
                 active: false,
 
@@ -101,9 +103,23 @@
                 this.SelectReserva.hora = event.hora;
                 this.SelectReserva.turno = event.turno;
                 this.SelectReserva.aforo = event.aforo;
+                this.SelectReserva.id = event.id;
                 this.showSidepanel = true;
             },
             onConfirm () {
+                console.log('CANCELAR RESERVA')
+                 var _self  = this;
+                axios.delete('/reservas/'+ this.SelectReserva.id, {
+
+                    headers: {Authorization: `Bearer `+ this.$store.getters.getToken}
+                })
+                    .then(res => {
+                        console.log(res)
+                        _self.showSidepanel=false;
+
+                    })
+                    .catch(error => console.log(error))
+                this.$store.dispatch('fetchReservas');
 
             },
         }

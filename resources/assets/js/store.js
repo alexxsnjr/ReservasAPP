@@ -197,6 +197,7 @@ const actions = {
                         hora: res.data.reservas[i].hora,
                         turno: res.data.reservas[i].turno,
                         aforo: res.data.reservas[i].aforo,
+                        id: res.data.reservas[i].id,
                     })
                 }
 
