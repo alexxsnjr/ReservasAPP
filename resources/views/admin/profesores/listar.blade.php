@@ -52,6 +52,8 @@
                                             @endif
                                         </td>
                                         <td>
+                                            <a href="{{ route('profesores.horario',$profesor->id) }}" class="btn btn-success"><span class="fa fa-eye"></span> Horario</a>
+
                                             <a href="{{ route('profesores.editar',$profesor->id) }}" class="btn btn-primary"><span class="fa fa-pencil"></span> Editar</a>
 
                                             {!! Form::open(['action' => ['ProfesorController@borrar', $profesor->id], 'method' => 'DELETE', 'style' => 'display:inline;']) !!}

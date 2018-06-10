@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>!!Enhorabuena, la aplicación ya esta lista para funcionar¡¡</h1>
+    <h1>¡¡Enhorabuena, la aplicación ya esta lista para funcionar!!</h1>
     <br><br>
     <div class="row">
         <div id="contenedor" class="col-md-6 col-md-offset-3">

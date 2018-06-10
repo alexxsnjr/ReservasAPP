@@ -64,6 +64,15 @@ Route::get('/profesores/{id}/editar','ProfesorController@editar')->name('profeso
 Route::put('/profesores/{id}', 'ProfesorController@update')->name('profesores.update');
 Route::delete('/profesores/{id}/borrar','ProfesorController@borrar')->name('profesores.borrar');
 Route::get('/profesores/{id}/restaurar','ProfesorController@restaurarClave')->name('profesores.restaurarClave');
+Route::get('/profesores/{id}/ver-horario','ProfesorController@ver')->name('profesores.horario');
+
+
+//Horarios
+Route::get('/profesores/{profesor_id}/horario-crear','HorariosController@crear')->name('horario.crear');
+Route::post('/profesores/{profesor_id}/horario-store','HorariosController@store')->name('horario.store');
+Route::get('/profesores/{id}/horario-editar','HorariosController@editar')->name('horario.editar');
+Route::put('/profesores/{id}/horario-editar', 'HorariosController@update')->name('horario.update');
+Route::delete('/profesores/{id}/horario-borrar','HorariosController@borrar')->name('horario.borrar');
 
 
 //Reservas

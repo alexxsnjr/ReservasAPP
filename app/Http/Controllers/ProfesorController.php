@@ -82,6 +82,14 @@ class ProfesorController extends Controller
 
     }
 
+    public function ver($id){
+
+        $profesor = Profesor::find($id);
+
+        return view('admin.profesores.ver')->with('profesor', $profesor);
+
+    }
+
     public function restaurarClave($id){
 
         $profesor = Profesor::find($id);

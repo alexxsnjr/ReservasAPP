@@ -21,7 +21,7 @@ class EquipamientosController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(Request $request,$aula_id)
     {
 
         $this->validate($request, [
@@ -30,13 +30,13 @@ class EquipamientosController extends Controller
         ]);
 
         $equipamiento = new Equipamiento;
-        $equipamiento->aula_id = $request->aula_id;
+        $equipamiento->aula_id = $aula_id;
         $equipamiento->cantidad = $request->cantidad;
         $equipamiento->nombre = $request->nombres[0];
 
         $equipamiento->save();
 
-        return redirect('/aulas/'.$request->aula_id.'/ver')->with('success', 'Equipamiento añadido con exito!');
+        return redirect('/aulas/'.$aula_id.'/ver')->with('success', 'Equipamiento añadido con exito!');
 
     }
 

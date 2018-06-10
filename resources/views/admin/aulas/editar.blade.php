@@ -19,7 +19,6 @@
 @endsection
 
 @section('content')
-
     <div class="col-md-6 col-md-offset-3">
         <div class="box box-info">
             <div class="box-header with-border">
@@ -80,10 +79,10 @@
                                     class="form-control"
                                     id="tipo"
                                     style="width: 100%;">
-                                <option selected value="">Selecciona un tipo</option>
+                                <option value="">Selecciona un tipo</option>
                                 @foreach($tipos as $tipo)
                                     <option value="{{ $tipo->tipo }}"
-                                            {{ old('tipo',$aula->tipo) == $tipo->id ? 'selected' : '' }}
+                                            {{ old('tipo',$aula->tipo) == $tipo->tipo ? 'selected' : '' }}
                                     >{{ $tipo->tipo }}</option>
                                 @endforeach
                             </select>
@@ -106,7 +105,6 @@
                     <button type="submit" class="btn btn-info pull-right">Guardar aula</button>
 
                 </div>
-
             </form>
         </div>
     </div>

@@ -54,8 +54,6 @@
                                    value="{{ old('cantidad') }}">
                         </div>
                     </div>
-                    <input type="hidden" name="aula_id" class="form-control"
-                           value="{{ $aula_id }}">
                 </div>
                 <div class="box-footer">
 

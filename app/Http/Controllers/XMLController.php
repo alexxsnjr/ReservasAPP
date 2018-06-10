@@ -7,6 +7,7 @@ use App\Aula;
 use App\Edificio;
 use App\Equipamiento;
 use App\Centro;
+use App\Horario;
 use App\Planta;
 use App\Profesor;
 use App\Reserva;
@@ -167,6 +168,32 @@ class XMLController extends Controller
             $profesor->remember_token = ' ';
             $profesor->save();
 
+            foreach ($usuarioXML->horario as $horarioXML) {
+
+                foreach ($horarioXML->reservas as $reservasXML) {
+
+                    foreach ($reservasXML->reserva as $reservaXML) {
+
+                        $horario = new Horario;
+                        $horario->profesor_id = $profesor->id;
+                        $horario->aula_id = $reservaXML->aula;
+                        $horario->dia_semana = $reservaXML[@dia];
+                        $horario->turno = $reservaXML->turno;
+                        $horario->hora = $reservaXML->hora;
+                        try {
+                            $horario->save();
+                        }
+                        catch (\Exception $e) {
+                            return redirect()->back()->with('danger','Ha fallado la importacion del fichero, compruebe que este 
+                            bien formateado y cumpla con la integridad de la base de datos.');
+                        }
+
+                    }
+
+                }
+
+            }
+
         }
 
         return redirect()->back()->with('success',  'El fichero de usuarios ha sido importado correctamente!');
@@ -200,7 +227,15 @@ class XMLController extends Controller
             $reserva->fecha = $reservaXML->fecha;
             $reserva->turno = $reservaXML->turno;
             $reserva->hora = $reservaXML->hora;
-            $reserva->save();
+            try {
+                $reserva->save();
+            }
+            catch (\Exception $e) {
+                //return $e->getMessage();
+
+                return redirect()->back()->with('danger','Ha fallado la importacion del fichero, compruebe que este
+                            bien formateado y cumpla con la integridad de la base de datos.');
+            }
 
         }
 

@@ -105,7 +105,6 @@
                                         <td>{{ $equipamiento->nombre }}</td>
                                         <td>{{ $equipamiento->cantidad }}</td>
                                         <td>
-
                                             <a href="{{ route('equipamiento.editar',$equipamiento->id) }}" class="btn btn-sm btn-primary"><span class="fa fa-pencil"></span></a>
 
                                             {!! Form::open(['action' => ['EquipamientosController@borrar', $equipamiento->id], 'method' => 'DELETE', 'style' => 'display:inline;']) !!}
