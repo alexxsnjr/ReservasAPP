@@ -95,7 +95,7 @@ class AulasController extends Controller
         $aula->aforo = $request->aforo;
         $aula->save();
 
-        return redirect('/aulas/listar')->with('success', 'Aula editada con exito!');
+        return redirect()->back()->with('success', 'Aula editada con exito!');
 
     }
 
