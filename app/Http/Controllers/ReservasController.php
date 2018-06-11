@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Aula;
+use App\Centro;
 use App\Profesor;
 use App\Reserva;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ReservasController extends Controller
 {
@@ -55,6 +57,19 @@ class ReservasController extends Controller
         $reserva->turno = $request->turno;
         $reserva->hora = $request->hora;
         $reserva->save();
+
+        $centro=Centro::all()->first();
+
+        $datos = [
+            'reserva' => $reserva,
+        ];
+
+        Mail::send('email.formato-reserva', $datos, function ($mensaje) use ($reserva,$centro) {
+
+            $mensaje->from($centro->email, 'Reserva de aulas - '.$centro->nombre);
+            $mensaje->to($reserva->profesor->email, $reserva->profesor->name)->subject('Reserva realizada!');
+
+        });
 
         return redirect()->back()->with('success','Reserva hecha con exito!');
 

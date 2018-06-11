@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Aula;
+use App\Centro;
 use App\Reserva;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ReservaController extends Controller
@@ -57,7 +59,8 @@ class ReservaController extends Controller
         $user = JWTAuth::toUser($request->token);
         $fecha= Carbon::parse($request->fecha)->addDay()->format('Y/m/d');
 
-        //dd($fecha);
+        //Comprobamos si tiene alguna reserva ya en ese horario y si es así la eliminamos
+        Reserva::where('profesor_id',$user->id)->where('fecha',$fecha)->where('turno',$request->turno)->where('hora',$request->hora)->delete();
 
         $reserva = new Reserva;
         $reserva->profesor_id = $user->id;
@@ -66,6 +69,19 @@ class ReservaController extends Controller
         $reserva->turno = $request->turno;
         $reserva->hora = $request->hora;
         $reserva->save();
+
+        $centro=Centro::all()->first();
+
+        $datos = [
+            'reserva' => $reserva,
+        ];
+
+        Mail::send('email.formato-reserva', $datos, function ($mensaje) use ($user,$centro) {
+
+            $mensaje->from($centro->email, 'Reserva de aulas - '.$centro->nombre);
+            $mensaje->to($user->email, $user->name)->subject('Reserva realizada!');
+
+        });
 
         return response()->json($reserva,200);
     }
