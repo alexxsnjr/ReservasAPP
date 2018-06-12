@@ -29,6 +29,11 @@ class Aula extends Model
         return $this->hasMany(Horario::class);
     }
 
+    public function excepcionHorario()
+    {
+        return $this->hasMany(ExcepcionHorario::class);
+    }
+
     public function equipamiento()
     {
         return $this->hasMany(Equipamiento::class);
