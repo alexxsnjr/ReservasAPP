@@ -174,6 +174,13 @@
                 },
             },
         },
+        watch:{
+            showDialog:function () {
+                if(this.showDialog == false){
+                    this.$emit('back');
+                }
+            }
+        },
         methods: {
             getValidationClass (fieldName) {
                 const field = this.$v.usu[fieldName]

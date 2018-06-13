@@ -60,19 +60,26 @@
 </template>
 
 <script>
-    import router from '../../../../router';
+
     export default {
         name: 'DialogCustom',
         data: () => ({
             showDialog: true
         }),
         props: ['user'],
+        watch:{
+          showDialog:function () {
+              if(this.showDialog == false){
+                  this.$emit('back');
+              }
+          }
+        },
         methods: {
             edit() {
                 this.$emit('edit');
             },
             back() {
-                this.$emit('back');
+
                 this.showDialog = false;
 
             }

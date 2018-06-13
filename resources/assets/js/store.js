@@ -87,12 +87,12 @@ const actions = {
         router.replace('/signin')
     },
     reservar({commit, state}, data) {
-        console.log(data)
+
         axios.post('/reservar', data, {
             headers: {Authorization: `Bearer ${state.idToken}`}
         })
             .then(res => {
-                console.log(res)
+
                 commit('aulas', res.data.aulas);
 
 
@@ -107,12 +107,8 @@ const actions = {
             headers: {Authorization: `Bearer ${state.idToken}`}
         })
             .then(res => {
-                console.log(res)
                 state.aulas = []
                 dispatch('fetchReservas');
-
-
-
             }).catch(error => {
             console.log(error);
 

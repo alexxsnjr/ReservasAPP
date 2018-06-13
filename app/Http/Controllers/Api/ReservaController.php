@@ -75,7 +75,7 @@ class ReservaController extends Controller
                                 ->where('turno',$request->turno)
                                 ->where('hora',$request->hora)->first();
 
-        if(count($aulaAsignada)>0){
+        if(isset($aulaAsignada) && !empty($aulaAsignada)){
 
             $excepcionHorario = new ExcepcionHorario;
             $excepcionHorario->aula_id = $aulaAsignada->aula_id;

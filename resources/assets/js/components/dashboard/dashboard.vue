@@ -49,7 +49,7 @@
 
             <md-app-content>
                 <div class="fondo">
-                    <component :is="mode" @back="back($event)" @new="mode = 'app-reservar'" :user="user"></component>
+                    <component :is="mode" @back="back()" @close="mode = 'app-table'" @new="mode = 'app-reservar'" :user="user"></component>
 
                     <md-snackbar   :md-active.sync="showSnackbar" md-persistent>
                         <span>Reserva Realizada correctamente</span>

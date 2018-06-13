@@ -8,18 +8,16 @@
                     <div @click="openDrawer(event)" class="reserva">
                         {{event.title}} <br> {{event.date}} -> {{event.hora}}º {{event.turno}}
                     </div>
-                    <div v-if="index == 0">
-                        <md-button @click="$emit('new')"
-                                   style=" " class="md-fab md-primary add">
-                            <md-icon>add</md-icon>
-                        </md-button>
-                    </div>
+
 
                 </div>
             </template>
         </vue-event-calendar>
 
-
+        <md-button @click="$emit('new')"
+                    class="md-fab md-primary add">
+            <md-icon>add</md-icon>
+        </md-button>
         <md-drawer v-if="showSidepanel" class="md-right" :md-active.sync="showSidepanel">
             <md-toolbar class="md-transparent" md-elevation="0">
                 <h1 class="drawerTitle">{{this.SelectReserva.title}}</h1>
@@ -66,6 +64,10 @@
                     @md-confirm="onConfirm" />
 
         </div>
+        <md-snackbar   :md-active.sync="showSnackbar" md-persistent>
+            <span>Reserva Cancelada correctamente</span>
+            <md-button class="md-primary" @click="showSnackbar = false">cerrar</md-button>
+        </md-snackbar>
     </div>
 </template>
 
@@ -78,6 +80,7 @@
             return {
                 title: 'Reservas pendientes',
                 showSidepanel: false,
+                showSnackbar:false,
                 SelectReserva: {
                     date: null,
                     title: null,
@@ -107,7 +110,7 @@
                 this.showSidepanel = true;
             },
             onConfirm () {
-                console.log('CANCELAR RESERVA')
+
                  var _self  = this;
                 axios.delete('/reservas/'+ this.SelectReserva.id, {
 
@@ -116,10 +119,11 @@
                     .then(res => {
                         console.log(res)
                         _self.showSidepanel=false;
-
+                        _self.$store.dispatch('fetchReservas');
+                        _self.showSnackbar = true;
                     })
                     .catch(error => console.log(error))
-                this.$store.dispatch('fetchReservas');
+
 
             },
         }
@@ -165,18 +169,8 @@
     .add{
         position: fixed; padding: 10px;  bottom: 8%; right: 8%;
     }
-    @media (min-width : 1400px)  {
-        .add {
-            display:none;
-        }
-    }
 
-    @media (min-height : 800px)  {
-        .add {
-            display:none;
-        }
-    }
-/*
+
 
     @media (min-width : 600px) and (max-width: 767px) {
         .add {
@@ -208,5 +202,5 @@
             left: 79%;
 
         }
-    }*/
+    }
 </style>
