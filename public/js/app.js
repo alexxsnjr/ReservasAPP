@@ -13884,6 +13884,7 @@ var actions = {
         __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/doreserva', data, {
             headers: { Authorization: 'Bearer ' + state.idToken }
         }).then(function (res) {
+            console.log(res.data);
             state.aulas = [];
             dispatch('fetchReservas');
         }).catch(function (error) {
@@ -20799,7 +20800,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         done: function done() {
             this.$v.$touch();
 
-            if (!this.$v.$invalid) {
+            if (!this.$v.usu.$invalid) {
                 this.user.name = this.usu.name;
                 this.user.email = this.usu.email;
                 this.$store.dispatch('updateUser', {

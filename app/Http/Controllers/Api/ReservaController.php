@@ -28,18 +28,51 @@ class ReservaController extends Controller
             'tipo'=>'required',
         ]);
 
+        $requerimientos = $this->generaRequerimientos($request->requerimientos);
+
         $fecha = Carbon::parse($request->fecha)->addDay()->format('Y/m/d');
 
         $dia_semana = Carbon::parse($fecha)->dayOfWeek;
 
-        $aulas = DB::select('SELECT aulas.id as ID, aulas.nombre as nombre from aulas, equipamientos where aulas.id = equipamientos.aula_id and aulas.tipo = "'.$request->tipo.'" and aulas.aforo >= "'.$request->aforo.'" and equipamientos.nombre = "'.$request->requerimientos[0].'" and aulas.id not in (SELECT aula_id FROM reservas WHERE fecha = "'.$fecha.'" AND turno = "'.$request->turno.'" AND hora = "'.$request->hora.'") and (aulas.id not in (SELECT aula_id FROM horarios WHERE dia_semana = "'.$dia_semana.'" AND turno = "'.$request->turno.'" AND hora = "'.$request->hora.'") OR aulas.id in (SELECT aula_id FROM excepcion_horarios WHERE fecha = "'.$fecha.'" AND turno = "'.$request->turno.'" AND hora = "'.$request->hora.'"))');
+        $aulas = DB::select('
+            SELECT aulas.id as ID, aulas.nombre as nombre 
+            from aulas, equipamientos
+             where aulas.id = equipamientos.aula_id 
+             and aulas.tipo = "'.$request->tipo.'" 
+             and aulas.aforo >= "'.$request->aforo.'" and
+             '.$requerimientos.'
+                aulas.id not in 
+                    (SELECT aula_id FROM reservas 
+                    WHERE fecha = "'.$fecha.'" 
+                    AND turno = "'.$request->turno.'" 
+                    AND hora = "'.$request->hora.'") 
+                    and (aulas.id not in 
+                            (SELECT aula_id FROM horarios WHERE dia_semana = "'.$dia_semana.'" 
+                            AND turno = "'.$request->turno.'" 
+                            AND hora = "'.$request->hora.'") 
+                            OR aulas.id in 
+                                        (SELECT aula_id FROM excepcion_horarios 
+                                        WHERE fecha = "'.$fecha.'"
+                                        AND turno = "'.$request->turno.'" 
+                                        AND hora = "'.$request->hora.'"))');
+
 
         return response()->json(compact('aulas'));
 
     }
 
+    private function generaRequerimientos($requerimientos)
+    {
+        $result = " ";
+        foreach ($requerimientos as $key => $requerimiento ){
+            $result.=  'equipamientos.nombre = "'. $requerimiento.'" and ';
+        }
+       return $result;
+    }
 
-    public function  index($user){
+
+    public function  index($user)
+    {
 
         $reservas = Reserva::join('aulas', 'aulas.id', '=' , 'reservas.aula_id')
                     ->where('reservas.fecha' , '>=' , Carbon::now()->format('Y/m/d'))

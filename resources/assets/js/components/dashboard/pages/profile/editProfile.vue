@@ -206,7 +206,7 @@
             done() {
                 this.$v.$touch()
 
-                if (!this.$v.$invalid) {
+                if (!this.$v.usu.$invalid) {
                     this.user.name = this.usu.name;
                     this.user.email = this.usu.email;
                     this.$store.dispatch('updateUser', {

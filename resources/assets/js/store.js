@@ -107,6 +107,7 @@ const actions = {
             headers: {Authorization: `Bearer ${state.idToken}`}
         })
             .then(res => {
+                console.log(res.data)
                 state.aulas = []
                 dispatch('fetchReservas');
             }).catch(error => {
