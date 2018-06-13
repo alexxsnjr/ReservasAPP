@@ -60,6 +60,7 @@
 
             </md-app-content>
         </md-app>
+
     </div>
 </template>
 
@@ -95,6 +96,11 @@
                 this.$store.dispatch('fetchTipos');
                 this.$store.dispatch('fetchEquipamiento');
             }
+        },
+        watch:{
+          mode:function () {
+              this.menuVisible = false;
+          }
         },
         methods: {
             logout() {
@@ -156,7 +162,8 @@
 
     .fondo {
         background: white;
-        padding: 20px;
+        min-height: 100%;
+        padding: 30px;
     }
 
     button {

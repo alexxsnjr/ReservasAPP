@@ -21,7 +21,7 @@
             </md-content>
         </div>
         <div v-else>
-            <md-steppers :md-active-step.sync="active" md-vertical md-linear>
+             <md-steppers :md-active-step.sync="active" md-vertical md-linear>
                 <md-step id="primer" md-label="Dia" :md-done.sync="primer">
                     <md-content class="md-elevation-20">
                         <div>

@@ -169,38 +169,20 @@
     .add{
         position: fixed; padding: 10px;  bottom: 8%; right: 8%;
     }
-
-
-
-    @media (min-width : 600px) and (max-width: 767px) {
+    @media (min-width : 1400px)  {
         .add {
-            position: absolute;
-            top:88%;
-            left: 80%;
-        }
-    }
-    @media  (max-width: 599px) {
-        .add {
-            position: absolute;
-            top:88%;
-            left: 68%;
-        }
-    }
-    @media  (min-width: 769px) and (max-width: 1450px) {
-        .add {
-            position: absolute;
-            top:83%;
-            left: 85%;
-
+            display:none;
         }
     }
 
-    @media  (min-width: 1451px)and (max-width: 1700px){
+    @media (min-height : 800px)  {
         .add {
-            position: absolute;
-            top:83%;
-            left: 79%;
-
+            display:none;
         }
     }
+
+
+
+
+
 </style>
