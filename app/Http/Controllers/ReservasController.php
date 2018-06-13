@@ -64,7 +64,7 @@ class ReservasController extends Controller
             ->where('turno',$request->turno)
             ->where('hora',$request->hora)->first();
 
-        if(count($aulaAsignada)>0){
+        if(isset($aulaAsignada) && !empty($aulaAsignada)){
 
             $excepcionHorario = new ExcepcionHorario;
             $excepcionHorario->aula_id = $aulaAsignada->aula_id;
@@ -89,14 +89,14 @@ class ReservasController extends Controller
             'reserva' => $reserva,
         ];
 
-        /*Mail::send('email.formato-reserva', $datos, function ($mensaje) use ($reserva,$centro) {
+        Mail::send('email.formato-reserva', $datos, function ($mensaje) use ($reserva,$centro) {
 
             $mensaje->from($centro->email, 'Reserva de aulas - '.$centro->nombre);
             $mensaje->to($reserva->profesor->email, $reserva->profesor->name)->subject('Reserva realizada!');
 
-        });*/
+        });
 
-        return redirect()->back()->with('success','Reserva hecha con exito!');
+        return redirect()->back()->with('success','Reserva realizada con exito!');
 
     }
 

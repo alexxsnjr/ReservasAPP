@@ -100,12 +100,12 @@ class ReservaController extends Controller
             'reserva' => $reserva,
         ];
 
-        /*Mail::send('email.formato-reserva', $datos, function ($mensaje) use ($user,$centro) {
+        Mail::send('email.formato-reserva', $datos, function ($mensaje) use ($user,$centro) {
 
             $mensaje->from($centro->email, 'Reserva de aulas - '.$centro->nombre);
             $mensaje->to($user->email, $user->name)->subject('Reserva realizada!');
 
-        });*/
+        });
 
         return response()->json($reserva,200);
     }

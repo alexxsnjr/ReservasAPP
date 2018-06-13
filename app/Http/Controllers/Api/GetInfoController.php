@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Aula;
 use App\Equipamiento;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,16 +19,21 @@ class GetInfoController extends Controller
         $tipos = Aula::select('tipo')->distinct()->get();
 
         return response()->json(compact('tipos'));
+
     }
 
     public function getEquipamiento()
     {
+
         $equipamientos = Equipamiento::select('nombre')->distinct()->get();
 
         return response()->json(compact('equipamientos'));
+
     }
 
-    public function checkEmail($email){
+    public function checkEmail($email)
+    {
+
         $user = User::where('email',$email)->get();
 
         if(count($user) > 0){
@@ -35,5 +41,20 @@ class GetInfoController extends Controller
         }else {
             return response('true', 200);
         }
+
     }
+
+    public function checkDate(Request $request)
+    {
+
+        $fecha = Carbon::parse($request->date)->format('Y/m/d');
+        
+        if(Carbon::parse($fecha)->isWeekend() || $fecha<Carbon::now()->format('Y/m/d')){
+            return response()->json('false');
+        }else{
+            return response()->json('true');
+        }
+
+    }
+
 }

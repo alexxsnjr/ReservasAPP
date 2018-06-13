@@ -26,6 +26,8 @@ Route::group([
         //INFO-
         Route::get('tipos' , 'GetInfoController@getTipo');
         Route::get('equipamiento' , 'GetInfoController@getEquipamiento');
+        Route::post('validar-fecha' , 'GetInfoController@checkDate');
+
         //RESERVAS
         Route::post('reservar' , 'ReservaController@comprobarDisponibilidad');
         Route::post('doreserva' , 'ReservaController@store');
@@ -40,6 +42,3 @@ Route::group([
 
 
     });
-
-
-
