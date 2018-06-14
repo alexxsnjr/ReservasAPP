@@ -30,8 +30,9 @@
 
                             </md-datepicker>
                         </div>
+                        <span v-if="correctDate == 'false'" style="color:red">Introduce fecha valida</span>
                         <md-button class="md-raised md-primary" @click="setDone('primer', 'segundo')"
-                                   v-if="formData.fecha ">Continue
+                                   v-if="correctDate == 'true' ">Continue
                         </md-button>
                     </md-content>
                 </md-step>
@@ -119,10 +120,11 @@
 
 <script>
     import {mapState} from 'vuex';
-
+    import axios from 'axios';
     export default {
         name: 'StepperLinear',
         data: () => ({
+            correctDate:null,
             active: 'primer',
             showResponse:false,
             primer: false,
@@ -142,6 +144,21 @@
 
 
         }),
+        watch:{
+          'formData.fecha':function(){
+
+                  axios.post('/validar-fecha',{date : this.formData.fecha}, {
+
+                      headers: {Authorization: `Bearer ` + this.$store.getters.getToken}
+                  })
+                      .then(res => {
+                          this.correctDate = res.data;
+
+                      })
+                      .catch(error => console.log(error))
+              }
+
+        },
         methods: {
             setDone(id, index) {
 

@@ -167,7 +167,7 @@
     }
 
     .add{
-        position: fixed; padding: 10px;  bottom: 8%; right: 8%;
+        position: absolute; padding: 10px;  bottom: 8%; right: 8%;
     }
     @media (min-width : 1400px)  {
         .add {
