@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Aula;
 use App\Equipamiento;
+use App\Profesor;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -34,8 +35,8 @@ class GetInfoController extends Controller
     public function checkEmail($email)
     {
 
-        $user = User::where('email',$email)->get();
-
+        $user = Profesor::where('email',$email)->get();
+        
         if(count($user) > 0){
             return response('false', 200);
         }else {
