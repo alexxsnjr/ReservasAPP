@@ -78,6 +78,10 @@ const actions = {
 
                 dispatch('fetchUser');
 
+                //cierra sesion a los 57 min
+                setTimeout(() => {
+                    dispatch('logout');
+                }, 60 * 57 * 1000)
 
             })
     },

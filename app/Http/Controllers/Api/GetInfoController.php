@@ -36,7 +36,7 @@ class GetInfoController extends Controller
     {
 
         $user = Profesor::where('email',$email)->get();
-        
+
         if(count($user) > 0){
             return response('false', 200);
         }else {
