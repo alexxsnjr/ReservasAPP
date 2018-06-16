@@ -11,6 +11,7 @@ use App\Horario;
 use App\Planta;
 use App\Profesor;
 use App\Reserva;
+use DOMDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -62,15 +63,60 @@ class XMLController extends Controller
 
         if($request->tipoFichero === 'aulas'){
 
-            return $this->importarAulas($request->confirmar);
+            if($this->validarXML(public_path('xsdschema/ValidarAulas.xsd'))) {
+
+                return $this->importarAulas($request->confirmar);
+
+            }else {
+
+                return redirect()->back()->with('danger','El fichero XML importado no es valido.');
+
+            }
 
         }elseif($request->tipoFichero === 'usuarios'){
 
-            return $this->importarUsuarios($request->confirmar);
+            if($this->validarXML(public_path('xsdschema/ValidarUsuarios.xsd'))) {
+
+                return $this->importarUsuarios($request->confirmar);
+
+            }else{
+
+                return redirect()->back()->with('danger','El fichero XML importado no es valido.');
+
+            }
 
         }elseif($request->tipoFichero === 'reservas'){
 
-            return $this->importarReservas($request->confirmar);
+            if($this->validarXML(public_path('xsdschema/ValidarReservas.xsd'))) {
+
+                return $this->importarReservas($request->confirmar);
+
+            }else{
+
+                return redirect()->back()->with('danger','El fichero XML importado no es valido.');
+
+            }
+
+        }
+
+    }
+
+    public function validarXML($xsd){
+
+        $centro= Centro::all()->first();
+
+        libxml_use_internal_errors(true);
+
+        $xml = new DOMDocument();
+        $xml->load(storage_path('app/'.$centro->xml));
+
+        if(!$xml->schemaValidate($xsd)){
+
+            return false;
+
+        }else {
+
+            return true;
 
         }
 
@@ -166,7 +212,13 @@ class XMLController extends Controller
             $profesor->email = $usuarioXML->email;
             $profesor->password = bcrypt('123456');
             $profesor->remember_token = ' ';
-            $profesor->save();
+            try {
+                $profesor->save();
+            }
+            catch (\Exception $e) {
+                return redirect()->back()->with('danger','Ha fallado la importacion del fichero, compruebe que este 
+                            bien formateado y cumpla con la integridad de la base de datos.');
+            }
 
             foreach ($usuarioXML->horario as $horarioXML) {
 

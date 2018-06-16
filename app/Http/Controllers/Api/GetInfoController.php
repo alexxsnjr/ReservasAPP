@@ -48,8 +48,8 @@ class GetInfoController extends Controller
     public function checkDate(Request $request)
     {
 
-        $fecha = Carbon::parse($request->date)->format('Y/m/d');
-        
+        $fecha = Carbon::parse($request->date)->addDay()->format('Y/m/d');
+
         if(Carbon::parse($fecha)->isWeekend() || $fecha<Carbon::now()->format('Y/m/d')){
             return response()->json('false');
         }else{

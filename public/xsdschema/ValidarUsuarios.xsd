@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="usuarios">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="usuario" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="usuario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="nombre" type="xs:string"/>
+        <xs:element name="email" type="xs:string"/>
+        <xs:element ref="horario" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="horario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="reservas" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="reservas">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="reserva" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="reserva">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="aula" type="xs:string"/>
+        <xs:element name="turno">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="tarde"/>
+            <xs:enumeration value="manana"/>
+          </xs:restriction>
+         </xs:simpleType>
+        </xs:element>
+        <xs:element name="hora">
+         <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="4"/>
+            <xs:enumeration value="5"/>
+            <xs:enumeration value="6"/>
+          </xs:restriction>
+         </xs:simpleType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="dia" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="4"/>
+            <xs:enumeration value="5"/>
+          </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

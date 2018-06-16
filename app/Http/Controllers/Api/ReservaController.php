@@ -35,7 +35,7 @@ class ReservaController extends Controller
         $dia_semana = Carbon::parse($fecha)->dayOfWeek;
 
         $aulas = DB::select('
-            SELECT aulas.id as ID, aulas.nombre as nombre 
+            SELECT DISTINCT aulas.id as ID, aulas.nombre as nombre 
             from aulas, equipamientos
              where aulas.id = equipamientos.aula_id 
              and aulas.tipo = "'.$request->tipo.'" 
@@ -65,7 +65,7 @@ class ReservaController extends Controller
     {
         $result = " ";
         foreach ($requerimientos as $key => $requerimiento ){
-            $result.=  'equipamientos.nombre = "'. $requerimiento.'" and ';
+            $result.=  'aulas.id IN (SELECT aula_id from equipamientos where nombre = "'.$requerimiento.'") and ';
         }
        return $result;
     }

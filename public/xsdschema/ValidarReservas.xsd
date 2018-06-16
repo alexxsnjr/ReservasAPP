@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="reservas">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="reserva" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="reserva">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="profesor_id" type="xs:integer"/>
+        <xs:element name="aula_id" type="xs:integer"/>
+        <xs:element name="fecha" type="xs:string"/>
+        <xs:element name="turno">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="tarde"/>
+              <xs:enumeration value="manana"/>
+            </xs:restriction>
+         </xs:simpleType>
+        </xs:element>
+        <xs:element name="hora">
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+              <xs:enumeration value="1"/>
+              <xs:enumeration value="2"/>
+              <xs:enumeration value="3"/>
+              <xs:enumeration value="4"/>
+              <xs:enumeration value="5"/>
+              <xs:enumeration value="6"/>
+            </xs:restriction>
+         </xs:simpleType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

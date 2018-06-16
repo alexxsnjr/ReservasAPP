@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="edificios">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="edificio" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="edificio">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="nombre" type="xs:string"/>
+        <xs:element ref="plantas"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="plantas">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="planta" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="planta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="piso" type="xs:integer"/>
+        <xs:element ref="aulas"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="aulas">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="aula" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="aula">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="nombre" type="xs:string"/>
+        <xs:element name="aforo" type="xs:integer"/>
+        <xs:element ref="equipamientos" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="tipo" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="equipamientos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="equipamiento" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="equipamiento">
+    <xs:complexType mixed="true">
+      <xs:attribute name="cantidad" type="xs:integer" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
