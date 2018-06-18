@@ -13,8 +13,8 @@ class UserTableSeeder extends Seeder
     {
 
         $user = [
-            'name' => 'Alex',
-            'email'  => 'alex@gmail.com',
+            'name' => 'Admin',
+            'email'  => 'admin@admin.com',
             'password' => bcrypt('123456'),
             'remember_token' => ' ',
         ];
