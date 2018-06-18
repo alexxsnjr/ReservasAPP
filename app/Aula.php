@@ -48,6 +48,7 @@ class Aula extends Model
             $aula->equipamiento->each->delete();
             $aula->reserva->each->delete();
             $aula->horario->each->delete();
+            $aula->excepcionHorario->each->delete();
 
         });
     }
