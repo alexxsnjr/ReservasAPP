@@ -78,7 +78,7 @@ class ProfesorController extends Controller
 
         $profesor->delete();
 
-        return redirect()->back()->with('success', 'Profesor eliminado!');
+        return redirect('/profesores/listar')->with('success', 'Profesor eliminado!');
 
     }
 
