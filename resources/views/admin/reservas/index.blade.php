@@ -309,7 +309,7 @@
                         $('#turno').text(json.turno);
                         $('#hora').text(json.hora);
 
-                        $('#ver-profesor').attr('href','/profesores/'+json.id+'/ver-horario');
+                        $('#ver-profesor').attr('href','/profesores/'+json.profesor.id+'/ver-horario');
                         $('#ver-aula').attr('href','/aulas/'+json.aula_id+'/ver');
 
                         var url = $('#formDelete').attr('action').replace(':ID', json.id);
