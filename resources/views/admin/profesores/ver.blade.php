@@ -4,11 +4,11 @@
 
     <h1>
         Ver
-        <small>Aula</small>
+        <small>Profesor</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-university"></i> Aulas</a></li>
-        <li><a href="{{ route('aulas.listar') }}">Listado</a></li>
+        <li><a href="#"><i class="fa fa-university"></i> Profesores</a></li>
+        <li><a href="{{ route('profesores.listar') }}">Listado</a></li>
         <li><a href="#">Ver</a></li>
     </ol>
 
