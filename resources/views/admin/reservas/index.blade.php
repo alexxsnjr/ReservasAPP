@@ -39,7 +39,7 @@
                             <label id="profesor"></label>
                         </div>
                         <div class="col-sm-6">
-                            <a class="btn btn-success btn-xs" href=""><span class="fa fa-eye"></span></a>
+                            <a id="ver-profesor" class="btn btn-success btn-xs" href=""><span class="fa fa-eye"></span></a>
                         </div>
                     </div>
                     <br>
@@ -50,7 +50,7 @@
                             <label id="aula"></label>
                         </div>
                         <div class="col-sm-6">
-                            <a class="btn btn-success btn-xs" href=""><span class="fa fa-eye"></span></a>
+                            <a id="ver-aula" class="btn btn-success btn-xs" href=""><span class="fa fa-eye"></span></a>
                         </div>
                     </div>
                     <br>
@@ -238,7 +238,7 @@
     <script src='/adminlte/bower_components/fullcalendar/dist/locale-all.js'></script>
     <!-- Page specific script -->
     <script>
-        $(function () {
+        $(document).ready(function () {
 
             $('#ocultarCajaInfo').click(function () {
 
@@ -279,6 +279,8 @@
                 ],
             })
 
+
+
             $('.fc-day-grid-event').click(function () {
 
                 var enlace = $(this).attr('href');
@@ -306,6 +308,9 @@
                         $('#fecha').text(json.fecha);
                         $('#turno').text(json.turno);
                         $('#hora').text(json.hora);
+
+                        $('#ver-profesor').attr('href','/profesores/'+json.id+'/ver-horario');
+                        $('#ver-aula').attr('href','/aulas/'+json.aula_id+'/ver');
 
                         var url = $('#formDelete').attr('action').replace(':ID', json.id);
 

@@ -62,6 +62,7 @@
                                                     onclick="return confirm('¿Seguro que quiere eliminar este profesor? Se eliminaran tambien sus reservas asociadas.')">
                                                 <span class="fa fa-trash"></span> Eliminar
                                             </button>
+                                            {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 @endforeach
