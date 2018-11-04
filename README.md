@@ -4,12 +4,12 @@
 
 
 <div>
-  <a size="18" href="http://vps607286.ovh.net/">DEMO spa</a>
-  user: user@user.com
-  pass: 123456
-  <a size="18" href="http://vps607286.ovh.net/admin">DEMO admin</a>
-  user: admin@admin.com
-  pass: 123456
+  <a size="18" href="http://vps607286.ovh.net/">DEMO spa</a></br>
+  <p>user: user@user.com</p></br>
+  <p>pass: 123456</p></br>
+  <a size="18" href="http://vps607286.ovh.net/admin">DEMO admin</a></br>
+  <p>user: admin@admin.com</p></br>
+  <p>pass: 123456</p></br>
 
 
 ## Technology
