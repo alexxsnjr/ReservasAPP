@@ -4,7 +4,12 @@
 
 
 <div>
-  <a size="18" href="http://vps607286.ovh.net/">DEMO</a>
+  <a size="18" href="http://vps607286.ovh.net/">DEMO spa</a>
+  user: user@user.com
+  pass: 123456
+  <a size="18" href="http://vps607286.ovh.net/admin">DEMO admin</a>
+  user: admin@admin.com
+  pass: 123456
 
 
 ## Technology
@@ -13,8 +18,8 @@
 * Laravel
 * tymon/jwt-auth
 
-
-
+## Description
+ReservasAPP is a SPA (single page aplication) that feeds on an api made in laravel and use a jwt (json web token) that feeds on an api made in laravel. It is also an administration panel to control reservations, in which you can load the different rooms to using an XML.
 ## Contact
 #### Developer/Projects spokesman
 * e-mail: alexxsnjr@gmail.com
